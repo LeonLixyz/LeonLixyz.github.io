@@ -33,73 +33,12 @@ body.sticky-bottom-footer {
 
 // Profile
 .profile {
-  margin-bottom: 2rem;
-  
   img {
     width: 100%;
-    margin-bottom: 1rem;
-  }
-
-  .more-info {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
-    text-align: center;
-  }
-
-  // Add social section styling within profile
-  .social {
-    .contact-icons {
-      text-align: center;
-      
-      a {
-        // Adjust the padding to control spacing between icons
-        padding: 3px;
-        
-        &:hover {
-          text-decoration: none;
-        }
-  
-        // Target Font Awesome icons
-        .fa-2x {
-          font-size: 1.15rem;  // Smaller size, default is 2em
-        }
-        
-        // Target Academicons
-        .ai-2x {
-          font-size: 1.15rem;  // Match Font Awesome size
-        }
-      }
-    }
-  
-    .contact-note {
-      font-size: 0.8rem;
-      text-align: center;
-      margin-top: 0.5rem;
-    }
-  }
-
-// Post header styling
-.post-header {
-  margin-bottom: 2rem;
-  text-align: center;
-
-  .chinese-name {
-    margin-top: 0.5rem;
-    margin-bottom: 1rem;
-    color: var(--global-text-color);
   }
 }
 
-// Responsive adjustments
-@media (max-width: 576px) {
-  .profile {
-    margin-bottom: 1rem;
-  }
-  
-  .post-header {
-    margin-bottom: 1rem;
-  }
-}
+// TODO: redefine content layout.
 
 /******************************************************************************
  * Publications
