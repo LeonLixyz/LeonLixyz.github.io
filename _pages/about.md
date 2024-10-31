@@ -1,8 +1,9 @@
 ---
 layout: about
 title: about
+title: Real Leon Li
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Motto. Etc.
+subtitle: <a href='https://www.columbia.edu'>Columbia University</a>. New York, NY.
 
 profile:
   align: right
