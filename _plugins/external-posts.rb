@@ -22,11 +22,37 @@ module ExternalPosts
       end
     end
 
+    # def fetch_from_rss(site, src)
+    #   xml = HTTParty.get(src['rss_url']).body
+    #   return if xml.nil?
+    #   feed = Feedjira.parse(xml)
+    #   process_entries(site, src, feed.entries)
+    # end
+    
     def fetch_from_rss(site, src)
-      xml = HTTParty.get(src['rss_url']).body
-      return if xml.nil?
-      feed = Feedjira.parse(xml)
-      process_entries(site, src, feed.entries)
+      begin
+        response = HTTParty.get(src['rss_url'])
+        puts "Response status: #{response.code}"
+        puts "Response body (first 500 chars): #{response.body[0..500]}"
+        
+        return if response.body.nil?
+        
+        feed = Feedjira::Feed.parse(response.body)
+        process_entries(site, src, feed.entries)
+      rescue Feedjira::NoParserAvailable => e
+        puts "Error parsing feed: #{e.message}"
+        puts "Feed URL: #{src['rss_url']}"
+        # Try parsing as generic RSS
+        begin
+          feed = Feedjira::Feed.parse_with(Feedjira::Parser::RSS2, response.body)
+          process_entries(site, src, feed.entries)
+        rescue => e2
+          puts "Second parsing attempt failed: #{e2.message}"
+        end
+      rescue => e
+        puts "Error fetching feed: #{e.message}"
+        puts "Feed URL: #{src['rss_url']}"
+      end
     end
 
     def process_entries(site, src, entries)
