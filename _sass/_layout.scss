@@ -48,43 +48,35 @@ body.sticky-bottom-footer {
 
   // Add social section styling within profile
   .social {
-    margin-top: 1rem;
-    padding-top: 1rem;
-    border-top: 1px solid var(--global-divider-color);
-    
     .contact-icons {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 0.3rem;  // Reduced gap between icons
-      margin-bottom: 0.5rem;
-
+      text-align: center;
+      
       a {
-        text-decoration: none;
-        color: var(--global-text-color);
+        // Adjust the padding to control spacing between icons
+        padding: 3px;
         
         &:hover {
-          color: var(--global-theme-color);
+          text-decoration: none;
         }
-
-        // Add icon size control
-        i.fas, i.fab, i.far, i.ai {
-          font-size: 0.9rem;  // Smaller icon size (default is usually 1rem)
-          width: 1.5rem;      // Fixed width for alignment
-          height: 1.5rem;     // Fixed height for alignment
-          line-height: 1.5rem; // Vertical centering
-          text-align: center;
+  
+        // Target Font Awesome icons
+        .fa-2x {
+          font-size: 1.15rem;  // Smaller size, default is 2em
+        }
+        
+        // Target Academicons
+        .ai-2x {
+          font-size: 1.15rem;  // Match Font Awesome size
         }
       }
     }
-    
+  
     .contact-note {
+      font-size: 0.8rem;
       text-align: center;
-      font-size: 0.75rem;     // Smaller text size
-      color: var(--global-text-color-light);
+      margin-top: 0.5rem;
     }
   }
-}
 
 // Post header styling
 .post-header {
