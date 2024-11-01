@@ -7,7 +7,7 @@ subtitle: <a href='https://www.columbia.edu'>Columbia University</a>. <a href='h
 profile:
   align: right
   image: profile_pic.jpg
-  image_circular: true # crops the image to make it circular
+  image_circular: false # crops the image to make it circular
   more_info: >
     <p>al4263[at]columbia[dot]edu</p>
 
