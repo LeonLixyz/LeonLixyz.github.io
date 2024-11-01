@@ -3,7 +3,7 @@ layout: about
 title: about
 permalink: /
 subtitle:
-  Department of Computer Science, <a href="https://www.columbia.edu/">Columbia University</a> 
+  <a href="https://www.cs.columbia.edu/">Department of Computer Science</a>, <a href="https://www.columbia.edu/">Columbia University</a> 
 
 profile:
   align: right
@@ -11,11 +11,12 @@ profile:
   image_circular: false # crops the image to make it circular
   more_info: >
     <p>al4263[at]columbia[dot]edu</p>
-    <p>
-      <a href="/assets/pdf/cv.pdf" target="_blank">CV</a> / 
-      <a href="https://scholar.google.com/citations?user=oyFNxyUAAAAJ&hl=en" target="_blank">Google Scholar</a> / 
-      <a href="https://substack.com/@realleonli" target="_blank">Blog</a> / 
-      <a href="https://x.com/iamleonli" target="_blank">X</a>
+    <p style="font-size: 2.5em; display: flex; gap: 20px; justify-content: center;">
+      <a href="/assets/pdf/cv.pdf" target="_blank" title="CV"><i class="fa-solid fa-file-pdf"></i></a>
+      <a href="https://www.linkedin.com/in/leon-li-18654a220/" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+      <a href="https://scholar.google.com/citations?user=oyFNxyUAAAAJ&hl=en" target="_blank" title="Google Scholar"><i class="ai ai-google-scholar"></i></a>
+      <a href="https://substack.com/@realleonli" target="_blank" title="Substack"><i class="fa-brands fa-blogger-b"></i></a>
+      <a href="https://x.com/iamleonli" target="_blank" title="X"><i class="fa-brands fa-x-twitter"></i></a>
     </p>
 
 news: true # includes a list of news items
