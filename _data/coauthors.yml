@@ -1,19 +1,23 @@
-"chen":
+"Chen":
   - firstname: ["Haozhe"]
     url: https://tonychen.xyz/
 
-"che":
+"Che":
   - firstname: ["Ethan"]
     url: https://ethche.github.io/
 
-"peng":
+"Peng":
   - firstname: ["Tianyi"]
     url: https://tianyipeng.github.io/
 
-"dong":
+"Dong":
   - firstname: ["Jing"]
     url: http://www.columbia.edu/~jd2736/
 
-"namkoong":
+"Namkoong":
   - firstname: ["Hongseok"]
     url: https://hsnamkoong.github.io/
+
+  "Zollo":
+  - firstname: ["Thomas"]
+    url: https://www.thomaszollo.com/

@@ -26,5 +26,8 @@ social: false # includes social icons at the bottom of the page
 
 I am a Master's student in Computer Science at Columbia University, advised by [Prof. Hongseok
 Namkoong](https://hsnamkoong.github.io/) and [Prof. Jing Dong](https://www.columbia.edu/~jd2736/), and [Prof. Tianyi
-Peng](https://tianyipeng.github.io/). I graduated magna cum laude from Columbia University with a B.S. in Computer Science in 2024.
+Peng](https://tianyipeng.github.io/) from [Decision, Risk, and
+Operations](https://business.columbia.edu/faculty/divisions/dro), Columbia Business School. I am also advised by [Prof.
+Micah Goldblum](https://goldblum.github.io/) from [Columbia Electrical Engineering](https://www.ee.columbia.edu/). I graduated magna cum laude
+from Columbia University with a B.S. in Computer Science in 2024.
 
