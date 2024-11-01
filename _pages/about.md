@@ -2,9 +2,10 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='https://www.cs.columbia.edu'>Department of Computer Science</a>. <br>
-<a href='https://www.columbia.edu'>Columbia University</a>. <br>
-New York, NY.
+subtitle: |+
+  Department of Computer Science, <br>
+  <a href="https://www.columbia.edu/">Columbia University</a> <br>
+  <br><br>
 
 profile:
   align: right
