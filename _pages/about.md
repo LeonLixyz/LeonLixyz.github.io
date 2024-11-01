@@ -7,9 +7,9 @@ subtitle: <a href='https://www.columbia.edu'>Columbia University</a>. <a href='h
 profile:
   align: right
   image: profile_pic.jpg
-  image_circular: false # crops the image to make it circular
+  image_circular: true # crops the image to make it circular
   more_info: >
-    <p>al4263@columbia.edu</p>
+    <p>al4263[at]columbia[dot]edu</p>
     <p>
       <a href="/assets/pdf/cv.pdf" target="_blank"><i class="fas fa-file-pdf"></i></a>
       <br>
@@ -22,7 +22,7 @@ profile:
 
 news: true # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
-social: true # includes social icons at the bottom of the page
+social: false # includes social icons at the bottom of the page
 ---
 
 I am a Master's student in Computer Science at Columbia University, advised by [Prof. Hongseok
