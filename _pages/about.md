@@ -2,10 +2,8 @@
 layout: about
 title: about
 permalink: /
-subtitle: |+
-  Department of Computer Science, <br>
-  <a href="https://www.columbia.edu/">Columbia University</a> <br>
-  <br><br>
+subtitle:
+  Department of Computer Science, <a href="https://www.columbia.edu/">Columbia University</a> 
 
 profile:
   align: right
