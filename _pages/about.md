@@ -10,7 +10,15 @@ profile:
   image_circular: false # crops the image to make it circular
   more_info: >
     <p>al4263@columbia.edu</p>
-
+    <p>
+      <a href="/assets/pdf/cv.pdf" target="_blank"><i class="fas fa-file-pdf"></i></a>
+      <br>
+      <a href="https://scholar.google.com/citations?user=oyFNxyUAAAAJ&hl=en" target="_blank"><i class="ai ai-google-scholar"></i></a>
+      <br>
+      <a href="https://substack.com/@realleonli" target="_blank"><i class="fab fa-substack"></i></a>
+      <br>
+      <a href="https://x.com/iamleonli" target="_blank"><i class="fab fa-x-twitter"></i></a>
+    </p>
 
 news: true # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
