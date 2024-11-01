@@ -2,10 +2,10 @@
 # Site settings
 # -----------------------------------------------------------------------------
 
-title: Leon Li # the website title (if blank, full name will be used instead)
-first_name: Leon (Ang)
+title: Leon Li - 李昂 # the website title (if blank, full name will be used instead)
+first_name: Leon Ang Li 李昂
 middle_name: 
-last_name: Li
+last_name:
 email: al4263@columbia.edu
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
 
