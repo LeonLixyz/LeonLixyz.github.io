@@ -1313,27 +1313,19 @@ ninja-keys::part(ninja-input-wrapper) {
   color: var(--global-text-color);
   font-size: 0.9rem;
   
-  &.reasoning {
-    background: rgba(106, 137, 255, 0.15);  // Light blue
-  }
-  
   &.foundation {
     background: rgba(255, 170, 127, 0.2);   // Light orange
   }
   
-  &.alignment {
-    background: rgba(255, 241, 184, 0.5);   // Light yellow
-  }
-
   &.rl {
     background: rgba(184, 255, 208, 0.5);   // Light green
   }
 
-  &.simulation {
+  &.ai-for-science {
     background: rgba(255, 208, 184, 0.5);   // Light red
   }
 
-  &.benchmarking {
+  &.ai-alignment {
     background: rgba(255, 241, 184, 0.5);   // Light yellow
   }
 }
