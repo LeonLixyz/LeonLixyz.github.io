@@ -190,6 +190,7 @@ collections:
       layout: post
     output: true
     permalink: /:collection/:title/
+
   # projects:
   #   output: false
   #   permalink: /:collection/:title/
@@ -361,7 +362,7 @@ filtered_bibtex_keywords:
     poster,
     preview,
     selected,
-    slides,
+    slides, 
     supp,
     video,
     website,

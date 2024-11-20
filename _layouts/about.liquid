@@ -52,13 +52,14 @@ layout: default
       {% include latest_posts.liquid %}
     {% endif %}
 
-    <!-- Selected papers -->
-    {% if page.selected_papers %}
-      <h2>
-        <a href="{{ '/publications/' | relative_url }}" style="color: inherit">Publications</a>
-      </h2>
-      {% include selected_papers.liquid %}
-    {% endif %}
+    <!-- Publications -->
+    {% include selected_papers_by_category.liquid category="publication" %}
+
+    <!-- Projects -->
+    {% include selected_papers_by_category.liquid category="project" %}
+
+    <!-- Preprints -->
+    {% include selected_papers_by_category.liquid category="preprint" %}
 
     {% if site.newsletter.enabled and site.footer_fixed %}
       {% include scripts/newsletter.liquid center=true %}

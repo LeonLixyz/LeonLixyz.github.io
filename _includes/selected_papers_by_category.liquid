@@ -1,0 +1,22 @@
+{% assign entries = site.data.bibliography | sort: 'year' | reverse %}
+
+{% if include.category == "publication" %}
+  <h2><a href="{{ '/publications/' | relative_url }}" style="color: inherit">Publications</a></h2>
+{% elsif include.category == "project" %}
+  <h2>Projects</h2>
+{% elsif include.category == "preprint" %}
+  <h2>Preprints & Work in Progress</h2>
+{% endif %}
+
+<div class="publications">
+  {% for entry in entries %}
+    {% if entry.category == include.category and entry.selected == true %}
+      <div class="publication-item">
+        {%- capture entry_html -%}
+          {% bibliography_entry entry %}
+        {%- endcapture -%}
+        {{ entry_html }}
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>
