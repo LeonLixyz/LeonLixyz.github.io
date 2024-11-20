@@ -1304,3 +1304,24 @@ ninja-keys::part(ninja-input-wrapper) {
   background-color: var(--global-theme-color);
   color: var(--global-text-color);
 }
+
+.tag {
+  background: rgba(0,0,0,0.05);
+  border-radius: 0.5rem;
+  padding: 0.2rem 0.5rem;
+  margin-right: 0.5rem;
+  color: var(--global-text-color);
+  font-size: 0.9rem;
+  
+  &.reasoning {
+    background: rgba(106, 137, 255, 0.15);  // Light blue
+  }
+  
+  &.foundation {
+    background: rgba(255, 170, 127, 0.2);   // Light orange
+  }
+  
+  &.rlhf {
+    background: rgba(255, 241, 184, 0.5);   // Light yellow
+  }
+}
