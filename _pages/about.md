@@ -3,7 +3,7 @@ layout: about
 title: about
 permalink: /
 subtitle:
-  <a href="https://www.cs.columbia.edu/">Department of Computer Science</a>, <a href="https://www.columbia.edu/">Columbia University</a> 
+  # <a href="https://www.cs.columbia.edu/">Department of Computer Science</a>, <a href="https://www.columbia.edu/">Columbia University</a> 
 
 profile:
   align: right
