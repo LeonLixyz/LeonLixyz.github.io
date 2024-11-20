@@ -1321,7 +1321,19 @@ ninja-keys::part(ninja-input-wrapper) {
     background: rgba(255, 170, 127, 0.2);   // Light orange
   }
   
-  &.rlhf {
+  &.alignment {
+    background: rgba(255, 241, 184, 0.5);   // Light yellow
+  }
+
+  &.rl {
+    background: rgba(184, 255, 208, 0.5);   // Light green
+  }
+
+  &.simulation {
+    background: rgba(255, 208, 184, 0.5);   // Light red
+  }
+
+  &.benchmarking {
     background: rgba(255, 241, 184, 0.5);   // Light yellow
   }
 }
