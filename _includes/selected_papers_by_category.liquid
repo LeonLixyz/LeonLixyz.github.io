@@ -12,10 +12,7 @@
   {% for entry in entries %}
     {% if entry.category == include.category and entry.selected == true %}
       <div class="publication-item">
-        {%- capture entry_html -%}
-          {% bibliography_entry entry %}
-        {%- endcapture -%}
-        {{ entry_html }}
+        {% reference entry.key %}
       </div>
     {% endif %}
   {% endfor %}
