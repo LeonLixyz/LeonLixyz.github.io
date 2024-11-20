@@ -1,17 +1,31 @@
 ---
 ---
-
-@article{zollo2024personalllmtailoringllmsindividual,
-  title={PersonalLLM: Tailoring LLMs to Individual Preferences},
-  author={Zollo*, Thomas and Siah*, Andrew and Ye, Naimeng and Li, Ang and Namkoong, Hongseok},
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%PREPRINTS%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@article{li2024selfuncertainty,
+  title={Self Uncertainty Quantification for Exploration in Online RLHF},
+  author={Li, Ang and Naimeng Ye and Andrew Siah and Hongseok Namkoong},
   year={2024},
-  journal={Pluralistic Alignment at NeurIPS 2024 Workshop},
-  arxiv={2410.06170},
+  journal={In preparation for ICML 2025},
   url={https://arxiv.org/abs/2410.06170},
-  abstract={As LLMs become capable of complex tasks, there is growing potential for personalized interactions tailored to the subtle and idiosyncratic preferences of the user. We present a public benchmark, PersonalLLM, focusing on adapting LLMs to provide maximal benefits for a particular user. Departing from existing alignment benchmarks that implicitly assume uniform preferences, we curate open-ended prompts paired with many high-quality answers over which users would be expected to display heterogeneous latent preferences. Instead of persona-prompting LLMs based on high-level attributes (e.g., user's race or response length), which yields homogeneous preferences relative to humans, we develop a method that can simulate a large user base with diverse preferences from a set of pre-trained reward models. Our dataset and generated personalities offer an innovative testbed for developing personalization algorithms that grapple with continual data sparsity--few relevant feedback from the particular user--by leveraging historical data from other (similar) users. We explore basic in-context learning and meta-learning baselines to illustrate the utility of PersonalLLM and highlight the need for future methodological development.},
+  abstract={RLHF-UQ},
   selected={true},
   category={preprint},
-  preview={personallm.png},
+  preview={qgym.png}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%PUBLICATIONS%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+@inproceedings{chen2024qgymscalablesimulationbenchmarking,
+  title={QGym: Scalable Simulation and Benchmarking of Queuing Network Controllers},
+  author={Chen*, Haozhe and Li*, Ang and Che*, Ethan and Peng, Tianyi and Dong, Jing and Namkoong, Hongseok},
+  year={2024},
+  booktitle={Advances in Neural Information Processing Systems 37, Datasets and Benchmark Track},
+  arxiv={2410.06170},
+  url={https://arxiv.org/abs/2410.06170},
+  abstract={Queuing network control determines the allocation of scarce resources to manage congestion, a fundamental problem in manufacturing, communications, and healthcare. Compared to standard RL problems, queueing problems are distinguished by unique challenges: i) a system operating in continuous time, ii) high stochasticity, and iii) long horizons over which the system can become unstable (exploding delays). To spur methodological progress tackling these challenges, we present an open-sourced queueing simulation framework, QGym, that benchmark queueing policies across realistic problem instances. Our modular framework allows the researchers to build on our initial instances, which provide a wide range of environments including parallel servers, criss-cross, tandem, and re-entrant networks, as well as a realistically calibrated hospital queuing system. QGym makes it easy to compare multiple policies, including both model-free RL methods and classical queuing policies. Our testbed complements the traditional focus on evaluating algorithms based on mathematical guarantees in idealized settings, and significantly expands the scope of empirical benchmarking in prior work.},
+  code={https://github.com/namkoong-lab/QGym},
+  selected={true},
+  category={publication},
+  preview={qgym.png}
 }
 
 @article{zollo2024personalllmtailoringllmsindividual,
@@ -27,27 +41,26 @@
   preview={personallm.png},
 }
 
-
-@inproceedings{chen2024qgymscalablesimulationbenchmarking,
-  title={QGym: Scalable Simulation and Benchmarking of Queuing Network Controllers},
-  author={Chen*, Haozhe and Li*, Ang and Che*, Ethan and Peng, Tianyi and Dong, Jing and Namkoong, Hongseok},
-  year={2024},
-  booktitle={Advances in Neural Information Processing Systems 37, Datasets and Benchmark Track},
-  arxiv={2410.06170},
-  url={https://arxiv.org/abs/2410.06170},
-  abstract={Queuing network control determines the allocation of scarce resources to manage congestion, a fundamental problem in manufacturing, communications, and healthcare. Compared to standard RL problems, queueing problems are distinguished by unique challenges: i) a system operating in continuous time, ii) high stochasticity, and iii) long horizons over which the system can become unstable (exploding delays). To spur methodological progress tackling these challenges, we present an open-sourced queueing simulation framework, QGym, that benchmark queueing policies across realistic problem instances. Our modular framework allows the researchers to build on our initial instances, which provide a wide range of environments including parallel servers, criss-cross, tandem, and re-entrant networks, as well as a realistically calibrated hospital queuing system. QGym makes it easy to compare multiple policies, including both model-free RL methods and classical queuing policies. Our testbed complements the traditional focus on evaluating algorithms based on mathematical guarantees in idealized settings, and significantly expands the scope of empirical benchmarking in prior work.},
-  code={https://github.com/namkoong-lab/QGym},
-  selected={true},
-  category={publication},
-  preview={qgym.png}
-}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%PROJECTS%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 @article{li2023metalearn_cfd,
-  title={MetaLearn-CFD: Meta-Learning for PDE-constrained Optimization},
+  title={Novel Memory Plasticity and Readout Methods for Continual Scene Detection},
   author={Li, Ang},
   year={2023},
   url={https://arxiv.org/abs/2410.06170},
-  abstract={Meta learning for continual farmilarity detection in CFD},
+  abstract={In this paper, we investigate the problem of continual scene detection with novel plasticity based meta learning method. Specifically, we introduce a set of new associative memory mechanisms and a set of novel readout mechanisms.},
+  code={https://github.com/LeonLixyz/MetaLearn_CFD},
+  selected={true},
+  category={project},
+  preview={neuro.png},
+}
+
+@article{li2023elbo_landscape,
+  title={Analysis of ELBO loss landscape},
+  author={Li*, Ang, and Wei*, Xinyu},
+  year={2023},
+  url={https://arxiv.org/abs/2410.06170},
+  abstract={We present a comprehensive empirical study of the Evidence Lower Bound (ELBO) loss landscape in variational inference, addressing fundamental questions about the geometric properties of its local minima and their connectivity. While prior work has suggested the existence of Maximum Energy Paths (MEPs) connecting local optima in the ELBO parameter space, systematic empirical validation remains incomplete. We adapt the string method to construct MEPs and introduce a novel visualization approach using random vector projection to analyze the ELBO landscape. Through extensive experiments on Latent Dirichlet Allocation with the AP dataset, we (1) provide the first empirical evidence for the existence of continuous high-energy paths between local minima, (2) demonstrate that these paths preserve semantic interpretability of topics, and (3) quantify the generalization performance of solutions along MEPs. Our findings reveal previously unknown geometric properties of the ELBO landscape and provide practical insights for initialization strategies in variational inference.},
   code={https://github.com/LeonLixyz/MetaLearn_CFD},
   selected={true},
   category={project},
