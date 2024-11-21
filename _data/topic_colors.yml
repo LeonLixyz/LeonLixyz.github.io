@@ -11,9 +11,8 @@
 "AI Agent": "#c62828"               # Dark red
 
 # World Model (Orange/Yellow family)
-"World Model": "#ff9800"      # Pure orange
-"Simulation": "#ffd54f"       # Amber/yellow
-"Model-Based RL": "#ff7043"   # Deep orange
+"Simulation": "#ff9800"      # Pure orange
+"Model-Based Learning": "#ff7043"   # Deep orange
 
 # AI for science (Green family)
 "AI for Science": "#2e7d32"    # Deep green
