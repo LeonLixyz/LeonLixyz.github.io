@@ -1,5 +1,5 @@
 # AI alignment and safety (Blue family)
-"AI Alignment": "#81D8D0"      # Tiffany blue
+"AI Alignment": "#0000FF"      # Normal blue
 "AI Safety": "#2196f3"         # Medium blue
 "Personalization": "#1A82F9"   # Very light blue
 
@@ -16,5 +16,6 @@
 
 # AI for science (Green family)
 "AI for Science": "#2e7d32"    # Deep green
-"Neural Network Understanding": "#4caf50"  # Normal green
+"AI for Social Science": "#66bb6a"  # Light green
+"Neural Network Understanding": "#388e3c"  # Forest green
 "Neuroscience": "#81c784"      # Medium green
