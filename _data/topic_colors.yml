@@ -1,21 +1,21 @@
 # AI alignment and safety (Blue family)
-"AI Alignment": "#0000FF"      # Normal blue
-"AI Safety": "#2196f3"         # Medium blue
-"Personalization": "#1A82F9"   # Very light blue
+"AI Alignment": "#2196f3"      # Light blue
+"AI Safety": "#2196f3"         # Light blue
+"Personalization": "#2196f3"   # Light blue
 
 # RL and foundation model (Red family)
 "RL": "#f44336"               # Standard red
-"Exploration": "#e57373"      # Light red
-"Foundation Model for Decision Making": "#d32f2f"  # Deep red
-"Uncertainty Quantification": "#ef5350"   # Medium red
-"AI Agent": "#c62828"               # Dark red
+"Exploration": "#f44336"      # Standard red
+"Foundation Model for Decision Making": "#f44336"  # Standard red
+"Uncertainty Quantification": "#f44336"   # Standard red
+"AI Agent": "#f44336"         # Standard red
 
 # World Model (Orange/Yellow family)
 "Simulation": "#ff9800"      # Pure orange
-"Model-Based Learning": "#ff7043"   # Deep orange
+"Model-Based Learning": "#ff9800"   # Pure orange
 
 # AI for science (Green family)
-"AI for Science": "#2e7d32"    # Deep green
-"AI for Social Science": "#66bb6a"  # Light green
+"AI for Science": "#388e3c"    # Forest green
+"AI for Social Science": "#388e3c"  # Forest green
 "Neural Network Understanding": "#388e3c"  # Forest green
-"Neuroscience": "#81c784"      # Medium green
+"Neuroscience": "#388e3c"      # Forest green
