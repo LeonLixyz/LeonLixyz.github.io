@@ -189,7 +189,7 @@
         {% for topic in topics %}
           {% assign topic_clean = topic | strip %}
           {% assign topic_color = site.data.topic_colors[topic_clean] | default: "#757575" %}
-          <span class="badge badge-pill" style="background-color: {{ topic_color }}20; color: {{ topic_color }}; margin: 0 3px; padding: 5px 10px; border-radius: 15px;">
+          <span class="badge badge-pill" style="background-color: {{ topic_color }}60; color: #000000; margin: 0 3px; padding: 5px 10px; border-radius: 15px;">
             {{ topic_clean }}
           </span>
         {% endfor %}
