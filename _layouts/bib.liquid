@@ -189,6 +189,14 @@
           {%- if entry.award_name %}{{ entry.award_name }}{% else %}Awarded{% endif -%}
         </a>
       {% endif %}
+      {% if entry.topics %}
+        {% assign topics = entry.topics | split: "," %}
+        {% for topic in topics %}
+          <span class="badge badge-pill" style="background-color: {% cycle '#e3f2fd', '#fff3e0', '#f3e5f5', '#e8f5e9' %}; color: {% cycle '#1565c0', '#ef6c00', '#6a1b9a', '#2e7d32' %}; margin: 0 3px;">
+            {{ topic | strip }}
+          </span>
+        {% endfor %}
+      {% endif %}
       {% if entry.abstract %}
         <a class="abstract btn btn-sm z-depth-0" role="button">Abs</a>
       {% endif %}
