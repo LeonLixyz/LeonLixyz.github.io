@@ -11,9 +11,9 @@
   url={https://arxiv.org/abs/2410.06170},
   abstract={RLHF-UQ},
   selected={true},
+  note={RL, Exploration, AI Alignment},
   category={preprint},
   preview={neuro.png},
-  tags={RL, Foundation Models for Decision-Making, AI Alignment}
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%PUBLICATIONS%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -27,9 +27,9 @@
   abstract={Queuing network control determines the allocation of scarce resources to manage congestion, a fundamental problem in manufacturing, communications, and healthcare. Compared to standard RL problems, queueing problems are distinguished by unique challenges: i) a system operating in continuous time, ii) high stochasticity, and iii) long horizons over which the system can become unstable (exploding delays). To spur methodological progress tackling these challenges, we present an open-sourced queueing simulation framework, QGym, that benchmark queueing policies across realistic problem instances. Our modular framework allows the researchers to build on our initial instances, which provide a wide range of environments including parallel servers, criss-cross, tandem, and re-entrant networks, as well as a realistically calibrated hospital queuing system. QGym makes it easy to compare multiple policies, including both model-free RL methods and classical queuing policies. Our testbed complements the traditional focus on evaluating algorithms based on mathematical guarantees in idealized settings, and significantly expands the scope of empirical benchmarking in prior work.},
   code={https://github.com/namkoong-lab/QGym},
   selected={true},
+  note={RL, Simulation},
   category={publication},
   preview={qgym.png},
-  tags={RL}
 }
 
 @article{zollo2024personalllmtailoringllmsindividual,
@@ -41,9 +41,10 @@
   url={https://arxiv.org/abs/2410.06170},
   abstract={As LLMs become capable of complex tasks, there is growing potential for personalized interactions tailored to the subtle and idiosyncratic preferences of the user. We present a public benchmark, PersonalLLM, focusing on adapting LLMs to provide maximal benefits for a particular user. Departing from existing alignment benchmarks that implicitly assume uniform preferences, we curate open-ended prompts paired with many high-quality answers over which users would be expected to display heterogeneous latent preferences. Instead of persona-prompting LLMs based on high-level attributes (e.g., user's race or response length), which yields homogeneous preferences relative to humans, we develop a method that can simulate a large user base with diverse preferences from a set of pre-trained reward models. Our dataset and generated personalities offer an innovative testbed for developing personalization algorithms that grapple with continual data sparsity--few relevant feedback from the particular user--by leveraging historical data from other (similar) users. We explore basic in-context learning and meta-learning baselines to illustrate the utility of PersonalLLM and highlight the need for future methodological development.},
   selected={true},
+  code={https://github.com/namkoong-lab/PersonalLLM},
   category={publication},
   preview={PersonalLLM.png},
-  tags={AI Alignment}
+  note={AI Alignment, Personalization},
 }
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%PROJECTS%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -52,13 +53,14 @@
   title={Novel Memory Plasticity and Readout Methods for Continual Scene Detection},
   author={Li, Ang},
   year={2023},
+  journal={Work done as a research assistant at Larry Abbott Lab, Center for Theoretical Neuroscience, Zuckerman Institute at Columbia.},
+  pdf={Neuroscience.pdf},
   abstract={In this paper, we introduce novel memory plasticity mechanisms called hybrid memory plasticity that can combine any sequences of multiplicative and additive plasticities, alongside innovative readout layers for effective memory storage retrieval, for addressing tasks that require temporal integration and classification. Our approach is applied to a continual scene detection task, where each scene comprises multiple frames requiring both memory integration and accurate classification. We have shown that our new biologically plausible neural network achieves SoTA result on the task we defined. Furthermore, we conduct a detailed neural network interpretability analysis to elucidate the mechanisms underlying the proposed memory plasticities. This framework provides valuable insights into biologically inspired architectures and their applications in continual learning, offering a deeper understanding of neuroscience principles.},
-  note={Work done as a research assistant at Larry Abbott Lab, Center for Theoretical Neuroscience, Zuckerman Institute at Columbia},
+  note={AI for Science, Neuroscience},
   selected={true},
   category={project},
+  code={https://github.com/LeonLixyz/MetaLearn_CFD},
   preview={neuro.png},
-  pdf={Neuroscience.pdf},
-  tags={AI for Science, Neural Network Understanding}
 }
 
 @article{li2023elbo_landscape,
@@ -67,8 +69,9 @@
   year={2023},
   url={https://arxiv.org/abs/2410.06170},
   abstract={We present a comprehensive empirical study of the Evidence Lower Bound (ELBO) loss landscape in variational inference, addressing fundamental questions about the geometric properties of its local minima and their connectivity. While prior work has suggested the existence of Maximum Energy Paths (MEPs) connecting local optima in the ELBO parameter space, systematic empirical validation remains incomplete. We adapt the string method to construct MEPs and introduce a novel visualization approach using random vector projection to analyze the ELBO landscape. Through extensive experiments on Latent Dirichlet Allocation with the AP dataset, we (1) provide the first empirical evidence for the existence of continuous high-energy paths between local minima, (2) demonstrate that these paths preserve semantic interpretability of topics, and (3) quantify the generalization performance of solutions along MEPs. Our findings reveal previously unknown geometric properties of the ELBO landscape and provide practical insights for initialization strategies in variational inference.},
-  code={https://github.com/LeonLixyz/MetaLearn_CFD},
+  code={https://github.com/LeonLixyz/6701_Project},
   selected={true},
   category={project},
+  note={Neural Network Understanding},
   preview={elbo.png},
 }
