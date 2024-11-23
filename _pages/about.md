@@ -42,11 +42,6 @@ societal systems, and general problem solving, while ensuring alignment and safe
   
   <p style="margin-bottom: 0.5em;">
     <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background-color: #ff9800; margin-right: 8px;"></span>
-    <strong>Simulation and World Models:</strong> LLM Driven Simulation, World Models, and Model-based Learning
-  </p>
-  
-  <p style="margin-bottom: 0.5em;">
-    <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background-color: #388e3c; margin-right: 8px;"></span>
     <strong>AI for Science:</strong> Applications in Operations Research, Social Science, and Neuroscience
   </p>
 </div>

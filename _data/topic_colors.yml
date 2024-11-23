@@ -11,14 +11,12 @@
 "Uncertainty Quantification": "#f44336"   # Standard red
 "AI Agent": "#f44336"         # Standard red
 "Planning": "#f44336"         # Standard red
+"Model-Based Learning": "#f44336"  # Standard red
 
-# World Model (Orange/Yellow family)
-"Simulation": "#ff9800"      # Pure orange
-"Model-Based Learning": "#ff9800"   # Pure orange
-
-# AI for science (Green family)
-"AI for Science": "#388e3c"    # Forest green
-"AI for Social Science": "#388e3c"  # Forest green
-"AI for Operations Research": "#388e3c"  # Forest green
-"Neural Network Understanding": "#388e3c"  # Forest green
-"Neuroscience": "#388e3c"      # Forest green
+# AI for science (Orange family)
+"AI for Science": "#ff9800"    # Orange
+"AI for Social Science": "#ff9800"  # Orange
+"AI for Operations Research": "#ff9800"  # Orange
+"Neural Network Understanding": "#ff9800"  # Orange
+"Neuroscience": "#ff9800"      # Orange
+"LLM Driven Simulation": "#ff9800"  # Orange
