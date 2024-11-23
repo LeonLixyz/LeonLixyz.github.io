@@ -26,8 +26,7 @@ social: false # includes social icons at the bottom of the page
 
 I am a Master's student in Computer Science at Columbia University, where I am fortunate to be advised by [Prof. Micah Goldblum](https://goldblum.github.io/), [Prof. Tianyi Peng](https://tianyipeng.github.io/), [Prof. Jing Dong](https://www.columbia.edu/~jd2736/), and [Prof. Hongseok Namkoong](https://hsnamkoong.github.io/). Previously, I graduated magna cum laude from Columbia University with a B.S. in Computer Science in 2024.
 
-My research goal is to develop AI systems that can expand the boundaries of decision making, with applications in science,
-societal systems, and general problem solving, while ensuring alignment and safety. Specifically, my interests include:
+My research goal is to develop AI systems that can expand the boundaries of decision making while ensuring alignment and safety. Specifically, my interests include:
 
 <div style="margin-top: 1em;">
   <p style="margin-bottom: 0.5em;">
@@ -42,6 +41,6 @@ societal systems, and general problem solving, while ensuring alignment and safe
   
   <p style="margin-bottom: 0.5em;">
     <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background-color: #ff9800; margin-right: 8px;"></span>
-    <strong>AI for Science:</strong> Applications in Operations Research, Social Science, and Neuroscience
+    <strong>AI + X:</strong> Applications in Operations Research, Societal Systems, and Scientific Discovery
   </p>
 </div>
