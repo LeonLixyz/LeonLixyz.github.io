@@ -32,7 +32,7 @@ societal systems, and general problem solving, while ensuring alignment and safe
 <div style="margin-top: 1em;">
   <p style="margin-bottom: 0.5em;">
     <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background-color: #f44336; margin-right: 8px;"></span>
-    <strong>Scalable Decision Making Algorithms:</strong> Reinforcement Learning, Exploration, AI Reasoning, Foundation Models for Decision Making
+    <strong>Scalable Decision Making Algorithms:</strong> Reinforcement Learning, Exploration, AI Reasoning, Planning, and Foundation Models for Decision Making
   </p>
   
   <p style="margin-bottom: 0.5em;">
@@ -42,7 +42,7 @@ societal systems, and general problem solving, while ensuring alignment and safe
   
   <p style="margin-bottom: 0.5em;">
     <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background-color: #ff9800; margin-right: 8px;"></span>
-    <strong>Simulation and World Models:</strong> LLM Driven Simulation, World Models, and Model-based Learning and Planning
+    <strong>Simulation and World Models:</strong> LLM Driven Simulation, World Models, and Model-based Learning
   </p>
   
   <p style="margin-bottom: 0.5em;">

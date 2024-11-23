@@ -10,6 +10,7 @@
 "Foundation Model for Decision Making": "#f44336"  # Standard red
 "Uncertainty Quantification": "#f44336"   # Standard red
 "AI Agent": "#f44336"         # Standard red
+"Planning": "#f44336"         # Standard red
 
 # World Model (Orange/Yellow family)
 "Simulation": "#ff9800"      # Pure orange
