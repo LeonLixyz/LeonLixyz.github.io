@@ -31,5 +31,28 @@ Operations](https://business.columbia.edu/faculty/divisions/dro), Columbia Busin
 Micah Goldblum](https://goldblum.github.io/) from [Columbia Electrical Engineering](https://www.ee.columbia.edu/). I graduated magna cum laude
 from Columbia University with a B.S. in Computer Science in 2024.
 
-My research interests are in the intersection of foundation models and decision making.
 
+My research goal is to develop AI systems that expand the boundaries of decision making with applications in science and
+societal systems, while ensuring alignment and safety. Specifically, my interests include:
+
+<div style="margin-top: 1em;">
+  <p style="margin-bottom: 0.5em;">
+    <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background-color: #f44336; margin-right: 8px;"></span>
+    <strong>Scalable Decision Making Algorithms:</strong> Reinforcement Learning, Exploration, AI Reasoning, Foundation Models for Decision Making
+  </p>
+  
+  <p style="margin-bottom: 0.5em;">
+    <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background-color: #2196f3; margin-right: 8px;"></span>
+    <strong>AI Alignment and Safety:</strong> Self-Alignment, Personalization, and Safety mechanisms for AI systems
+  </p>
+  
+  <p style="margin-bottom: 0.5em;">
+    <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background-color: #ff9800; margin-right: 8px;"></span>
+    <strong>Simulation and World Models:</strong> LLM driven simulation, world models, and model-based learning and planning
+  </p>
+  
+  <p style="margin-bottom: 0.5em;">
+    <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background-color: #388e3c; margin-right: 8px;"></span>
+    <strong>AI for Science:</strong> Applications in operations research, social science, and neuroscience
+  </p>
+</div>
