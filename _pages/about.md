@@ -26,17 +26,17 @@ social: false # includes social icons at the bottom of the page
 
 I am a Master's student in Computer Science at Columbia University, where I am fortunate to be advised by [Prof. Micah Goldblum](https://goldblum.github.io/), [Prof. Tianyi Peng](https://tianyipeng.github.io/), [Prof. Jing Dong](https://www.columbia.edu/~jd2736/), and [Prof. Hongseok Namkoong](https://hsnamkoong.github.io/). Previously, I graduated magna cum laude from Columbia University with a B.S. in Computer Science in 2024.
 
-My research goal is to develop AI systems that expand the boundaries of decision making while ensuring alignment and safety. Specifically, my interests include:
+My research goal is to develop AI systems that push the boundaries of reasoning and decision-making for real-world problems, while ensuring alignment and safety. Specifically, my interests include:
 
 <div style="margin-top: 1em;">
   <p style="margin-bottom: 0.5em;">
     <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background-color: #f44336; margin-right: 8px;"></span>
-    <strong>Scalable Decision Making Algorithms:</strong> Reinforcement Learning, Exploration, AI Reasoning, Planning, and Foundation Models for Decision Making
+    <strong>Reasoning and Decision Making:</strong> Reinforcement Learning, Exploration, Bayesian Inference, Test-Time Algorithm, In Context Learning, LLM Reasoning, and Foundation Models for Decision Making
   </p>
   
   <p style="margin-bottom: 0.5em;">
     <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background-color: #2196f3; margin-right: 8px;"></span>
-    <strong>AI Alignment and Safety:</strong> Self-Alignment, Weak-to-Strong, Personalization, and AI Safety
+    <strong>AI Alignment and Safety:</strong> Online Alignment, Self-Alignment, Weak-to-Strong Alignment, Personalization, and AI Safety
   </p>
   
   <p style="margin-bottom: 0.5em;">
