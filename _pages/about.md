@@ -31,7 +31,7 @@ My research goal is to develop AI systems that push the boundaries of reasoning 
 <div style="margin-top: 1em;">
   <p style="margin-bottom: 0.5em;">
     <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background-color: #f44336; margin-right: 8px;"></span>
-    <strong>Reasoning and Decision Making:</strong> Reinforcement Learning, Exploration, Bayesian Inference, Test-Time Algorithm, In Context Learning, LLM Reasoning, and Foundation Models for Decision Making
+    <strong>Reasoning and Decision Making:</strong> Reinforcement Learning, Exploration, Uncertainty Quantification, Bayesian Inference, Test-Time Algorithm, In Context Learning, LLM Reasoning, and Foundation Models for Decision Making
   </p>
   
   <p style="margin-bottom: 0.5em;">
