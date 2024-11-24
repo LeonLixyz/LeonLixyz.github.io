@@ -4,6 +4,8 @@
 "Self Alignment": "#2196f3"   # Light blue
 "Personalization": "#2196f3"   # Light blue
 "Online Alignment": "#2196f3"   # Light blue
+"AI Fairness": "#2196f3"       # Light blue
+"LLM Bias": "#2196f3"       # Light blue
 
 # RL and foundation model (Red family)
 "RL": "#f44336"               # Standard red

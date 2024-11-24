@@ -26,7 +26,7 @@ social: false # includes social icons at the bottom of the page
 
 I am a Master's student in Computer Science at Columbia University, where I am fortunate to be advised by [Prof. Micah Goldblum](https://goldblum.github.io/), [Prof. Tianyi Peng](https://tianyipeng.github.io/), [Prof. Jing Dong](https://www.columbia.edu/~jd2736/), and [Prof. Hongseok Namkoong](https://hsnamkoong.github.io/). Previously, I graduated magna cum laude from Columbia University with a B.S. in Computer Science in 2024.
 
-My research goal is to develop AI systems that push the boundaries of reasoning and decision-making for real-world problems, while ensuring alignment and safety. Specifically, my interests include:
+My research goal is to develop AI systems that push the boundaries of reasoning and decision-making for real-world problems, while ensuring alignment, safety, and fairness. Specifically, my interests include:
 
 <div style="margin-top: 1em;">
   <p style="margin-bottom: 0.5em;">
@@ -36,7 +36,7 @@ My research goal is to develop AI systems that push the boundaries of reasoning 
   
   <p style="margin-bottom: 0.5em;">
     <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background-color: #2196f3; margin-right: 8px;"></span>
-    <strong>AI Alignment and Safety:</strong> Online Alignment, Self-Alignment, Weak-to-Strong Alignment, Personalization, and AI Safety
+    <strong>AI Alignment, Safety, and Fairness:</strong> Online Alignment, Self-Alignment, Weak-to-Strong Alignment, Personalization, AI Safety, and AI Fairness.
   </p>
   
   <p style="margin-bottom: 0.5em;">
