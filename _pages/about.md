@@ -41,7 +41,7 @@ My research goal is to develop AI systems and algorithms that push the boundarie
   
   <p style="margin-bottom: 0.5em;">
     <span style="display: inline-block; width: 12px; height: 12px; border-radius: 50%; background-color: #2196f3; margin-right: 8px;"></span>
-    <strong>AI Alignment, Safety, and Fairness:</strong> Online Alignment, Self-Alignment, Weak-to-Strong Alignment, Personalization, AI Safety, and AI Fairness.
+    <strong>AI Alignment and Safety:</strong> Online Alignment, Self-Alignment, Weak-to-Strong Alignment, Personalization, AI Safety.
   </p>
   
   <p style="margin-bottom: 0.5em;">
