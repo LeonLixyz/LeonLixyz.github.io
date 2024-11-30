@@ -31,7 +31,8 @@ Operations](https://business.columbia.edu/faculty/divisions/dro), Columbia Busin
 Micah Goldblum](https://goldblum.github.io/) from [Columbia Electrical Engineering](https://www.ee.columbia.edu/). I graduated magna cum laude
 from Columbia University with a B.S. in Computer Science in 2024.
 
-My research goal is to develop AI systems and algorithms that push the boundaries of reasoning and decision-making for real-world problems, while ensuring alignment, safety, and fairness. Specifically, my interests include:
+My research goal is to develop AI systems and algorithms that push the boundaries of reasoning and decision-making for
+real-world problems, while ensuring alignment and safety. Specifically, my interests include:
 
 <div style="margin-top: 1em;">
   <p style="margin-bottom: 0.5em;">
