@@ -24,15 +24,10 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: false # includes social icons at the bottom of the page
 ---
 
-I am a Master's student in Computer Science at Columbia University, advised by [Prof. Hongseok
-Namkoong](https://hsnamkoong.github.io/) and [Prof. Jing Dong](https://www.columbia.edu/~jd2736/), and [Prof. Tianyi
-Peng](https://tianyipeng.github.io/) from [Decision, Risk, and
-Operations](https://business.columbia.edu/faculty/divisions/dro), Columbia Business School. I am also advised by [Prof.
-Micah Goldblum](https://goldblum.github.io/) from [Columbia Electrical Engineering](https://www.ee.columbia.edu/). I graduated magna cum laude
-from Columbia University with a B.S. in Computer Science in 2024.
+I am a Master's student in Computer Science at Columbia University, where I am fortunate to be advised by [Prof. Micah Goldblum](https://goldblum.github.io/), [Prof. Tianyi Peng](https://tianyipeng.github.io/), [Prof. Jing Dong](https://www.columbia.edu/~jd2736/), and [Prof. Hongseok Namkoong](https://hsnamkoong.github.io/). Previously, I graduated magna cum laude from Columbia University with a B.S. in Computer Science in 2024.
 
-My research goal is to develop AI systems and algorithms that push the boundaries of reasoning and decision-making for
-real-world problems, while ensuring alignment and safety. Specifically, my interests include:
+
+My research goal is to develop AI systems and algorithms that can push the boundaries of reasoning and decision-making, while ensuring alignment and safety. Specifically, my interests include:
 
 <div style="margin-top: 1em;">
   <p style="margin-bottom: 0.5em;">
