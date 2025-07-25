@@ -19,7 +19,7 @@ profile:
       <a href="https://x.com/iamleonli" target="_blank" title="X"><i class="fa-brands fa-x-twitter"></i></a>
     </p>
 
-news: false # includes a list of news items
+news: true # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: false # includes social icons at the bottom of the page
 ---
