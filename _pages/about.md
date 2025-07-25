@@ -11,8 +11,8 @@ profile:
   image_circular: false # crops the image to make it circular
   more_info: >
     <p>al6843[at]nyu[dot]edu</p>
-    <p style="font-size: 2.5em; display: flex; gap: 20px; justify-content: center;">
-      <a href="/assets/pdf/cv.pdf" target="_blank" title="CV"><i class="fa-solid fa-file-pdf"></i></a>
+    <p style="font-size: 1.5em; display: flex; gap: 20px; justify-content: center;">
+      <a href="/assets/pdf/cv.pdf" target="_blank" title="CV">CV</a>
       <a href="https://www.linkedin.com/in/leon-li-18654a220/" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
       <a href="https://scholar.google.com/citations?user=oyFNxyUAAAAJ&hl=en" target="_blank" title="Google Scholar"><i class="ai ai-google-scholar"></i></a>
       <a href="https://substack.com/@realleonli" target="_blank" title="Substack"><i class="fa-brands fa-blogger-b"></i></a>
