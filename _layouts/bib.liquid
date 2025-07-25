@@ -203,17 +203,11 @@
           {%- if entry.award_name %}{{ entry.award_name }}{% else %}Awarded{% endif -%}
         </a>
       {% endif %}
-      {% if entry.abstract %}
-        <a class="abstract btn btn-sm z-depth-0" role="button">Abs</a>
+      {% if entry.url %}
+        <a href="{{ entry.url }}" style="margin-right: 0.5rem; text-decoration: none;">📄 Paper</a>
       {% endif %}
       {% if entry.doi %}
         <a href="https://doi.org/{{ entry.doi }}" class="btn btn-sm z-depth-0" role="button">DOI</a>
-      {% endif %}
-      {% if entry.arxiv %}
-        <a href="http://arxiv.org/abs/{{ entry.arxiv }}" class="btn btn-sm z-depth-0" role="button">arXiv</a>
-      {% endif %}
-      {% if entry.bibtex_show %}
-        <a class="bibtex btn btn-sm z-depth-0" role="button">Bib</a>
       {% endif %}
       {% if entry.html %}
         {% if entry.html contains '://' %}
@@ -245,7 +239,7 @@
         <a href="{{ entry.blog }}" class="btn btn-sm z-depth-0" role="button">Blog</a>
       {% endif %}
       {% if entry.code %}
-        <a href="{{ entry.code }}" class="btn btn-sm z-depth-0" role="button">Code</a>
+        <a href="{{ entry.code }}" style="margin-right: 0.5rem; text-decoration: none;"><i class="fab fa-github"></i> Code</a>
       {% endif %}
       {% if entry.poster %}
         {% if entry.poster contains '://' %}
@@ -264,8 +258,11 @@
       {% if entry.website %}
         <a href="{{ entry.website }}" class="btn btn-sm z-depth-0" role="button">Website</a>
       {% endif %}
-      {% if entry.huggingface %}
-        <a href="{{ entry.huggingface }}" style="margin-right: 0.5rem; text-decoration: none;">🤗</a>
+      {% if entry.huggingface_models %}
+        <a href="{{ entry.huggingface_models }}" class="btn btn-sm z-depth-0" role="button">🤗 Model</a>
+      {% endif %}
+      {% if entry.huggingface_datasets %}
+        <a href="{{ entry.huggingface_datasets }}" class="btn btn-sm z-depth-0" role="button">🤗 Dataset</a>
       {% endif %}
     </div>
     {% if site.enable_publication_badges %}
@@ -360,21 +357,7 @@
       </div>
     {% endif %}
 
-    {% if entry.abstract %}
-      <!-- Hidden abstract block -->
-      <div class="abstract hidden">
-        <p>{{ entry.abstract }}</p>
-      </div>
-    {% endif %}
 
-    {% if entry.bibtex_show %}
-      <!-- Hidden bibtex block -->
-      <div class="bibtex hidden">
-        {% highlight bibtex %}
-        {{- entry.bibtex | hideCustomBibtex -}}
-        {% endhighlight %}
-      </div>
-    {% endif %}
 
     {% if entry.video and site.enable_video_embedding %}
       <!-- Hidden video block -->
