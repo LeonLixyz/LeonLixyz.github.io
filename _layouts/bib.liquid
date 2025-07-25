@@ -259,10 +259,10 @@
         <a href="{{ entry.website }}" class="btn btn-sm z-depth-0" role="button">Website</a>
       {% endif %}
       {% if entry.huggingface_models %}
-        <a href="{{ entry.huggingface_models }}" class="btn btn-sm z-depth-0" role="button">🤗 Model</a>
+        <a href="{{ entry.huggingface_models }}" style="margin-right: 0.5rem; text-decoration: none;">🤗 Model</a>
       {% endif %}
       {% if entry.huggingface_datasets %}
-        <a href="{{ entry.huggingface_datasets }}" class="btn btn-sm z-depth-0" role="button">🤗 Dataset</a>
+        <a href="{{ entry.huggingface_datasets }}" style="margin-right: 0.5rem; text-decoration: none;">🤗 Dataset</a>
       {% endif %}
     </div>
     {% if site.enable_publication_badges %}
