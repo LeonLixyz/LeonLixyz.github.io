@@ -27,18 +27,47 @@
       {% endif %}
       {% if entry.preview %}
         {% if entry.preview contains '://' %}
-          <img class="preview z-depth-1 rounded" src="{{ entry.preview }}">
+          {% if entry.preview contains '.mp4' or entry.preview contains '.webm' or entry.preview contains '.ogg' %}
+            {%
+              include video.liquid
+              path=entry.preview
+              class="preview z-depth-1 rounded"
+              width="120px"
+              height="auto"
+              controls=true
+              muted=true
+              loop=true
+              alt=entry.preview
+            %}
+          {% else %}
+            <img class="preview z-depth-1 rounded" src="{{ entry.preview }}">
+          {% endif %}
         {% else %}
           {% assign entry_path = entry.preview | prepend: '/assets/img/publication_preview/' %}
-          {%
-            include figure.liquid
-            loading="eager"
-            path=entry_path
-            sizes = "120px"
-            class="preview z-depth-1 rounded"
-            zoomable=true
-            alt=entry.preview
-          %}
+          {% assign extension = entry.preview | split: '.' | last %}
+          {% if extension == 'mp4' or extension == 'webm' or extension == 'ogg' %}
+            {%
+              include video.liquid
+              path=entry_path
+              class="preview z-depth-1 rounded"
+              width="120px"
+              height="auto"
+              controls=true
+              muted=true
+              loop=true
+              alt=entry.preview
+            %}
+          {% else %}
+            {%
+              include figure.liquid
+              loading="eager"
+              path=entry_path
+              sizes = "120px"
+              class="preview z-depth-1 rounded"
+              zoomable=true
+              alt=entry.preview
+            %}
+          {% endif %}
         {% endif %}
       {% endif %}
     </div>
