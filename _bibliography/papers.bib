@@ -10,7 +10,8 @@
   url={https://arxiv.org/abs/2507.16746},
   abstract={Humans often use visual aids, for example diagrams or sketches, when solving complex problems. Training multimodal models to do the same, known as Visual Chain of Thought (Visual CoT), is challenging due to: (1) poor off-the-shelf visual CoT performance, which hinders reinforcement learning, and (2) the lack of high-quality visual CoT training data. We introduce Zebra-CoT, a diverse large-scale dataset with 182,384 samples, containing logically coherent interleaved text-image reasoning traces. We focus on four categories of tasks where sketching or visual reasoning is especially natural, spanning scientific questions such as geometry, physics, and algorithms; 2D visual reasoning tasks like visual search and jigsaw puzzles; 3D reasoning tasks including 3D multi-hop inference, embodied and robot planning; visual logic problems and strategic games like chess. Fine-tuning the Anole-7B model on the Zebra-CoT training corpus results in an improvement of +12% in our test-set accuracy and yields up to +13% performance gain on standard VLM benchmark evaluations. Fine-tuning Bagel-7B yields a model that generates high-quality interleaved visual reasoning chains, underscoring Zebra-CoT's effectiveness for developing multimodal reasoning abilities. We open-source our dataset and models to support development and evaluation of visual CoT.},
   code={https://github.com/multimodal-reasoning-lab/Bagel-Zebra-CoT},
-  huggingface={https://huggingface.co/multimodal-reasoning-lab},
+  huggingface_datasets={https://huggingface.co/datasets/multimodal-reasoning-lab/Zebra-CoT},
+  huggingface_models={https://huggingface.co/multimodal-reasoning-lab/Bagel-Zebra-CoT},
   selected={true},
   category={preprint},
   preview={zebra-cot.png},
@@ -24,7 +25,7 @@
   url={https://arxiv.org/abs/2505.17479},
   abstract={LLM-based digital twin simulation, where large language models are used to emulate individual human behavior, holds great promise for research in AI, social science, and digital experimentation. However, progress in this area has been hindered by the scarcity of real, individual-level datasets that are both large and publicly available. This lack of high-quality ground truth limits both the development and validation of digital twin methodologies. To address this gap, we introduce a large-scale, public dataset designed to capture a rich and holistic view of individual human behavior. We survey a representative sample of N=2,058 participants (average 2.42 hours per person) in the US across four waves with 500 questions in total, covering a comprehensive battery of demographic, psychological, economic, personality, and cognitive measures, as well as replications of behavioral economics experiments and a pricing survey. The final wave repeats tasks from earlier waves to establish a test-retest accuracy baseline. Initial analyses suggest the data are of high quality and show promise for constructing digital twins that predict human behavior well at the individual and aggregate levels. By making the full dataset publicly available, we aim to establish a valuable testbed for the development and benchmarking of LLM-based persona simulations. Beyond LLM applications, due to its unique breadth and scale the dataset also enables broad social science research, including studies of cross-construct correlations and heterogeneous treatment effects.},
   code={https://github.com/tianyipeng-lab/Digital-Twin-Simulation},
-  huggingface={https://huggingface.co/datasets/LLM-Digital-Twin/Twin-2K-500},
+  huggingface_datasets={https://huggingface.co/datasets/LLM-Digital-Twin/Twin-2K-500},
   selected={true},
   category={preprint},
 }
@@ -47,7 +48,7 @@
   arxiv={2503.16527},
   url={https://arxiv.org/abs/2503.16527},
   abstract={The use of large language models (LLMs) to simulate human behavior has gained significant attention, particularly through personas that approximate individual characteristics. Persona-based simulations hold promise for transforming disciplines that rely on population-level feedback, including social science, economic analysis, marketing research, and business operations. Traditional methods to collect realistic persona data face significant challenges. They are prohibitively expensive and logistically challenging due to privacy constraints, and often fail to capture multi-dimensional attributes, particularly subjective qualities. Consequently, synthetic persona generation with LLMs offers a scalable, cost-effective alternative. However, current approaches rely on ad hoc and heuristic generation techniques that do not guarantee methodological rigor or simulation precision, resulting in systematic biases in downstream tasks. Through extensive large-scale experiments including presidential election forecasts and general opinion surveys of the U.S. population, we reveal that these biases can lead to significant deviations from real-world outcomes. Our findings underscore the need to develop a rigorous science of persona generation and outline the methodological innovations, organizational and institutional support, and empirical foundations required to enhance the reliability and scalability of LLM-driven persona simulations. To support further research and development in this area, we have open-sourced approximately one million generated personas, available for public access and analysis},
-  huggingface={https://huggingface.co/datasets/Tianyi-Lab/Personas},
+  huggingface_datasets={https://huggingface.co/datasets/Tianyi-Lab/Personas},
   selected={true},
   category={preprint},
 }
@@ -88,6 +89,7 @@
   abstract={As LLMs become capable of complex tasks, there is growing potential for personalized interactions tailored to the subtle and idiosyncratic preferences of the user. We present a public benchmark, PersonalLLM, focusing on adapting LLMs to provide maximal benefits for a particular user. Departing from existing alignment benchmarks that implicitly assume uniform preferences, we curate open-ended prompts paired with many high-quality answers over which users would be expected to display heterogeneous latent preferences. Instead of persona-prompting LLMs based on high-level attributes (e.g., user's race or response length), which yields homogeneous preferences relative to humans, we develop a method that can simulate a large user base with diverse preferences from a set of pre-trained reward models. Our dataset and generated personalities offer an innovative testbed for developing personalization algorithms that grapple with continual data sparsity--few relevant feedback from the particular user--by leveraging historical data from other (similar) users. We explore basic in-context learning and meta-learning baselines to illustrate the utility of PersonalLLM and highlight the need for future methodological development.},
   selected={true},
   code={https://github.com/namkoong-lab/PersonalLLM},
+  huggingface_datasets={https://huggingface.co/datasets/namkoong-lab/PersonalLLM},
   category={publication},
   preview={personallm_ds.png},
 }
