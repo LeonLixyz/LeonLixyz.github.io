@@ -2,29 +2,18 @@
 ---
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%PREPRINTS%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-@inproceedings{chen2024qgymscalablesimulationbenchmarking,
-  title={QGym: Scalable Simulation and Benchmarking of Queuing Network Controllers},
-  author={Chen*, Haozhe and Li*, Ang and Che*, Ethan and Peng, Tianyi and Dong, Jing and Namkoong, Hongseok},
-  year={2024},
-  booktitle={Neural Information Processing Systems},
-  arxiv={2410.06170},
-  url={https://arxiv.org/abs/2410.06170},
-  abstract={Queuing network control determines the allocation of scarce resources to manage congestion, a fundamental problem in manufacturing, communications, and healthcare. Compared to standard RL problems, queueing problems are distinguished by unique challenges: i) a system operating in continuous time, ii) high stochasticity, and iii) long horizons over which the system can become unstable (exploding delays). To spur methodological progress tackling these challenges, we present an open-sourced queueing simulation framework, QGym, that benchmark queueing policies across realistic problem instances. Our modular framework allows the researchers to build on our initial instances, which provide a wide range of environments including parallel servers, criss-cross, tandem, and re-entrant networks, as well as a realistically calibrated hospital queuing system. QGym makes it easy to compare multiple policies, including both model-free RL methods and classical queuing policies. Our testbed complements the traditional focus on evaluating algorithms based on mathematical guarantees in idealized settings, and significantly expands the scope of empirical benchmarking in prior work.},
-  code={https://github.com/namkoong-lab/QGym},
-  selected={true},
-  category={preprint},
-  preview={qgym.png},
-  bibtex_show={true},
-}
-
 @article{li2025commercial,
   title={Zebra-CoT: A Dataset for Interleaved Vision Language Reasoning},
   author={Li, Ang and Wang, Charles and Yue, Kaiyu and Cai, Zikui and Liu, Ollie and Fu, Deqing and Guo, Peng and Zhu, Wang Bill and Sharan, Vatsal and Jia, Robin and Neiswanger, Willie and Huang, Furong and Goldstein, Tom and Goldblum, Micah},
-  journal={arXiv preprint arXiv:2507.16746},
-  year={2025},
   arxiv={2507.16746},
-  bibtex_show={true},
+  url={https://arxiv.org/abs/2507.16746},
+  abstract={Humans often use visual aids, for example diagrams or sketches, when solving complex problems. Training multimodal models to do the same, known as Visual Chain of Thought (Visual CoT), is challenging due to: (1) poor off-the-shelf visual CoT performance, which hinders reinforcement learning, and (2) the lack of high-quality visual CoT training data. We introduce Zebra-CoT, a diverse large-scale dataset with 182,384 samples, containing logically coherent interleaved text-image reasoning traces. We focus on four categories of tasks where sketching or visual reasoning is especially natural, spanning scientific questions such as geometry, physics, and algorithms; 2D visual reasoning tasks like visual search and jigsaw puzzles; 3D reasoning tasks including 3D multi-hop inference, embodied and robot planning; visual logic problems and strategic games like chess. Fine-tuning the Anole-7B model on the Zebra-CoT training corpus results in an improvement of +12% in our test-set accuracy and yields up to +13% performance gain on standard VLM benchmark evaluations. Fine-tuning Bagel-7B yields a model that generates high-quality interleaved visual reasoning chains, underscoring Zebra-CoT's effectiveness for developing multimodal reasoning abilities. We open-source our dataset and models to support development and evaluation of visual CoT.},
+  code={https://github.com/multimodal-reasoning-lab/Bagel-Zebra-CoT},
+  huggingface={https://huggingface.co/multimodal-reasoning-lab},
+  selected={true},
   category={preprint},
+  preview={zebra-cot.png},
+  bibtex_show={true},
 }
 
 @article{toubia2025twin,
