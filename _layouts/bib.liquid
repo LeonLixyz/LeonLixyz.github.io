@@ -239,7 +239,7 @@
         <a href="{{ entry.blog }}" class="btn btn-sm z-depth-0" role="button">Blog</a>
       {% endif %}
       {% if entry.code %}
-        <a href="{{ entry.code }}" style="margin-right: 0.5rem; text-decoration: none;"><img src="{{ '/assets/img/github-mark.png' | relative_url }}" alt="GitHub" style="width: 16px; height: 16px; margin-right: 4px; vertical-align: text-top; margin-top: 1px;"> Code</a>
+        <a href="{{ entry.code }}" style="margin-right: 0.5rem; text-decoration: none;"><img src="{{ '/assets/img/github-mark.png' | relative_url }}" alt="GitHub" style="width: 16px; height: 16px; margin-right: 4px; vertical-align: bottom;"> Code</a>
       {% endif %}
       {% if entry.poster %}
         {% if entry.poster contains '://' %}
@@ -259,10 +259,10 @@
         <a href="{{ entry.website }}" class="btn btn-sm z-depth-0" role="button">Website</a>
       {% endif %}
       {% if entry.huggingface_models %}
-        <a href="{{ entry.huggingface_models }}" style="margin-right: 0.5rem; text-decoration: none;"><img src="{{ '/assets/img/hf-logo.png' | relative_url }}" alt="Hugging Face" style="width: 22px; height: 22px; margin-right: 4px; vertical-align: text-top; margin-top: 1px;"> Model</a>
+        <a href="{{ entry.huggingface_models }}" style="margin-right: 0.5rem; text-decoration: none;"><img src="{{ '/assets/img/hf-logo.png' | relative_url }}" alt="Hugging Face" style="width: 22px; height: 22px; margin-right: 4px; vertical-align: bottom;"> Model</a>
       {% endif %}
       {% if entry.huggingface_datasets %}
-        <a href="{{ entry.huggingface_datasets }}" style="margin-right: 0.5rem; text-decoration: none;"><img src="{{ '/assets/img/hf-logo.png' | relative_url }}" alt="Hugging Face" style="width: 22px; height: 22px; margin-right: 4px; vertical-align: text-top; margin-top: 1px;"> Dataset</a>
+        <a href="{{ entry.huggingface_datasets }}" style="margin-right: 0.5rem; text-decoration: none;"><img src="{{ '/assets/img/hf-logo.png' | relative_url }}" alt="Hugging Face" style="width: 22px; height: 22px; margin-right: 4px; vertical-align: bottom;"> Dataset</a>
       {% endif %}
     </div>
     {% if site.enable_publication_badges %}
