@@ -39,7 +39,7 @@ layout: default
     <!-- News -->
     {% if page.news and site.announcements.enabled %}
       <h2>
-        <a href="{{ '/news/' | relative_url }}" style="color: inherit">News</a>
+        <a href="{{ '/news/' | relative_url }}" style="color: inherit"><strong>News</strong></a>
       </h2>
       {% include news.liquid limit=true %}
     {% endif %}
@@ -47,20 +47,20 @@ layout: default
     <!-- Latest posts -->
     {% if site.latest_posts.enabled %}
       <h2>
-        <a href="{{ '/blog/' | relative_url }}" style="color: inherit">Recent Blog Posts</a>
+        <a href="{{ '/blog/' | relative_url }}" style="color: inherit"><strong>Recent Blog Posts</strong></a>
       </h2>
       {% include latest_posts.liquid %}
     {% endif %}
 
     <!-- Preprints -->
     <div style="margin-top: 3rem;"></div>
-    <h2>Preprints</h2>
+    <h2><strong>Preprints</strong></h2>
     <div class="publications mb-5">
       {% bibliography -f papers -q @*[selected=true,category=preprint] %}
     </div>
 
     <!-- Publications -->
-    <h2>Publications</h2>
+    <h2><strong>Publications</strong></h2>
     <div class="publications mb-5">
       {% bibliography -f papers -q @*[selected=true,category=publication] %}
     </div>
