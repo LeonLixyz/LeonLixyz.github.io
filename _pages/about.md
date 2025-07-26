@@ -29,5 +29,4 @@ social: false # includes social icons at the bottom of the page
 Hi, I am Leon (Ang Li 李昂). I am an incoming PhD student at New York University, advised by [Prof. Pavel Izmailov](https://izmailovpavel.github.io/) and [Prof. Micah Goldblum](https://goldblum.github.io/). Previously, I completed my B.S. and M.S. in Computer Science at Columbia University, where I was fortunate to work with [Prof. Micah Goldblum](https://goldblum.github.io/), [Prof. Tianyi Peng](https://tianyipeng.github.io/), [Prof. Jing Dong](https://www.columbia.edu/~jd2736/), and [Prof. Hongseok Namkoong](https://hsnamkoong.github.io/).
 
 
-My research interests are in developing AI systems and algorithms that can push the boundaries of reasoning and decision-making, while ensuring alignment and safety. Specifically, my interests include reinforcement learning, reasoning, test-time algorithm, and world models.
-
+My research interest was sparked by the [AlphaGo moment](https://deepmind.google/research/projects/alphago/), which inspired me to develop AI systems that push the boundaries of reasoning and decision-making. Specifically, I am interested in reinforcement learning, reasoning, test-time algorithm, and world models.
