@@ -43,38 +43,32 @@ layout: default
     color: var(--global-theme-color) !important;
   }
 
-  /* Global link styling - default theme color */
-  a:not(.btn):not(.navbar-brand):not(.nav-link) {
-    color: var(--global-theme-color) !important;
+  /* Publication link hover effects */
+  .publication-link {
+    display: inline-block;
     transition: all 0.2s ease;
     border-radius: 4px;
-    padding: 1px 4px;
-    margin: -1px -4px;
+    padding: 2px 6px;
   }
 
-  /* Global link hover effects - bubble effect for ALL links */
-  a:not(.btn):not(.navbar-brand):not(.nav-link):hover {
-    background-color: var(--global-hover-color);
-    color: white !important;
-    text-decoration: none !important;
+  .publication-link:hover {
     transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  /* Special hover colors for specific link types */
-  .code-link:hover {
-    background-color: rgba(0, 0, 0, 0.1) !important;
-    color: #333 !important;
+    text-decoration: none !important;
   }
 
   .paper-link:hover {
-    background-color: rgba(220, 53, 69, 0.1) !important;
-    color: #dc3545 !important;
+    background-color: rgba(87, 6, 140, 0.1);
+    color: var(--global-theme-color);
+  }
+
+  .code-link:hover {
+    background-color: rgba(51, 51, 51, 0.1);
+    color: #333;
   }
 
   .hf-link:hover {
-    background-color: rgba(255, 140, 0, 0.1) !important;
-    color: #ff8c00 !important;
+    background-color: rgba(255, 140, 0, 0.1);
+    color: #ff8c00;
   }
 
   /* Mobile fixes for news section */
