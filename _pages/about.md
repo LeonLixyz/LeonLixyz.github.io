@@ -10,7 +10,7 @@ profile:
   image: profile_pic.jpg
   image_circular: false # crops the image to make it circular
   more_info: >
-    <p>al6843[at]nyu[dot]edu</p>
+    <p style="text-align: center;">al6843[at]nyu[dot]edu</p>
     <p style="font-size: 1.5em; display: flex; gap: 20px; justify-content: center;">
       <a href="/assets/pdf/cv.pdf" target="_blank" title="CV">CV</a>
       <a href="https://www.linkedin.com/in/leon-li-18654a220/" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
