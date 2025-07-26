@@ -88,7 +88,7 @@ layout: default
   }
 
   /* Global link styling - default theme color */
-  a:not(.btn):not(.navbar-brand):not(.publication-link) {
+  a:not(.btn):not(.navbar-brand):not(.nav-link):not(.publication-link) {
     color: var(--global-theme-color) !important;
     transition: all 0.2s ease;
     border-radius: 4px;
@@ -96,8 +96,8 @@ layout: default
     margin: -1px -4px;
   }
 
-  /* Global link hover effects - subtle bubble for ALL other links including nav */
-  a:not(.btn):not(.navbar-brand):not(.publication-link):hover {
+  /* Global link hover effects - subtle bubble for ALL other links */
+  a:not(.btn):not(.navbar-brand):not(.nav-link):not(.publication-link):hover {
     background-color: rgba(0, 119, 200, 0.1);
     color: #0077c8 !important;
     text-decoration: none !important;
