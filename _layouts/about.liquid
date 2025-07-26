@@ -71,6 +71,24 @@ layout: default
     color: #ff8c00;
   }
 
+  /* Global link styling - default theme color */
+  a:not(.btn):not(.navbar-brand):not(.nav-link):not(.publication-link) {
+    color: var(--global-theme-color) !important;
+    transition: all 0.2s ease;
+    border-radius: 4px;
+    padding: 1px 4px;
+    margin: -1px -4px;
+  }
+
+  /* Global link hover effects - subtle bubble for ALL other links */
+  a:not(.btn):not(.navbar-brand):not(.nav-link):not(.publication-link):hover {
+    background-color: rgba(87, 6, 140, 0.1);
+    color: var(--global-theme-color) !important;
+    text-decoration: none !important;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
   /* Mobile fixes for news section */
   @media (max-width: 768px) {
     .news table,
