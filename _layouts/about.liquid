@@ -2,13 +2,46 @@
 layout: default
 ---
 <style>
+  /* Blue section titles - very specific selectors */
   .section-blue,
   .post .section-blue,
   article .section-blue,
   .post h2.section-blue,
-  article h2.section-blue {
+  article h2.section-blue,
+  .post .clearfix h2.section-blue,
+  article .clearfix h2.section-blue,
+  div.post h2.section-blue,
+  div.post h2.section-blue strong,
+  .section-blue strong {
     color: #007bff !important;
   }
+  
+  /* Target by content for extra specificity */
+  h2:has(strong:contains("News")),
+  h2:has(strong:contains("Preprints")),
+  h2:has(strong:contains("Publications")),
+  h2:has(strong:contains("Recent Blog Posts")) {
+    color: #007bff !important;
+  }
+  
+     h2 strong:contains("News"),
+   h2 strong:contains("Preprints"), 
+   h2 strong:contains("Publications"),
+   h2 strong:contains("Recent Blog Posts") {
+     color: #007bff !important;
+   }
+   
+   /* ID-based targeting - highest specificity */
+   #news-title,
+   #news-title strong,
+   #blog-title,
+   #blog-title strong,
+   #preprints-title, 
+   #preprints-title strong,
+   #publications-title,
+   #publications-title strong {
+     color: #007bff !important;
+   }
   
   /* Mobile fixes for news section */
   @media (max-width: 768px) {
@@ -95,7 +128,7 @@ layout: default
 
     <!-- News -->
     {% if page.news and site.announcements.enabled %}
-      <h2 class="section-blue">
+      <h2 id="news-title" class="section-blue">
         <strong>News</strong>
       </h2>
       {% include news.liquid limit=true %}
@@ -103,7 +136,7 @@ layout: default
 
     <!-- Latest posts -->
     {% if site.latest_posts.enabled %}
-      <h2 class="section-blue">
+      <h2 id="blog-title" class="section-blue">
         <strong>Recent Blog Posts</strong>
       </h2>
       {% include latest_posts.liquid %}
@@ -111,13 +144,13 @@ layout: default
 
     <!-- Preprints -->
     <div style="margin-top: 3rem;"></div>
-    <h2 class="section-blue"><strong>Preprints</strong></h2>
+    <h2 id="preprints-title" class="section-blue"><strong>Preprints</strong></h2>
     <div class="publications mb-5">
       {% bibliography -f papers -q @*[selected=true,category=preprint] %}
     </div>
 
     <!-- Publications -->
-    <h2 class="section-blue"><strong>Publications</strong></h2>
+    <h2 id="publications-title" class="section-blue"><strong>Publications</strong></h2>
     <div class="publications mb-5">
       {% bibliography -f papers -q @*[selected=true,category=publication] %}
     </div>
