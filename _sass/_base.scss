@@ -682,17 +682,19 @@ footer.sticky-bottom {
     color: #007bff !important;
   }
 
-  // Publication link hover effects - GLOBAL
+  // Global bubble effects for all pages
+
+  // Publication link hover effects
   .publication-link {
     display: inline-block;
     transition: all 0.2s ease;
     border-radius: 4px;
     padding: 2px 6px;
+  }
 
-    &:hover {
-      transform: translateY(-1px);
-      text-decoration: none !important;
-    }
+  .publication-link:hover {
+    transform: translateY(-1px);
+    text-decoration: none !important;
   }
 
   .paper-link:hover {
@@ -710,50 +712,51 @@ footer.sticky-bottom {
     color: #ff8c00;
   }
 
-  // Title links specific styling - GLOBAL
+  // Title links specific styling
   .title a {
     border-radius: 4px;
     padding: 2px 4px;
     margin: -2px -4px;
     transition: all 0.3s ease;
-
-    &:hover {
-      background-color: rgba(220, 53, 69, 0.1);
-      color: #dc3545;
-      transform: translateY(-1px);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
   }
 
-  // Content area links get bubble styling - GLOBAL (avoiding nav)
-  .content a:not(.btn):not(.navbar-brand):not(.nav-link):not(.publication-link),
-  .post a:not(.btn):not(.navbar-brand):not(.nav-link):not(.publication-link),
-  article a:not(.btn):not(.navbar-brand):not(.nav-link):not(.publication-link) {
+  // Title links hover effect - red bubble like paper links
+  .title a:hover {
+    background-color: rgba(220, 53, 69, 0.1);
+    color: #dc3545;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  // Global link styling - default theme color
+  a:not(.btn):not(.navbar-brand):not(.publication-link):not(.nav-link) {
+    color: var(--global-theme-color) !important;
+    transition: all 0.2s ease;
     border-radius: 4px;
     padding: 1px 4px;
     margin: -1px -4px;
-    transition: all 0.2s ease;
-
-    &:hover {
-      background-color: rgba(0, 119, 200, 0.1);
-      color: #0077c8 !important;
-      text-decoration: none !important;
-      transform: translateY(-1px);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
   }
 
-  // Navigation hover effects - separate to avoid spacing issues
-  .navbar-nav .nav-link {
-    transition: all 0.2s ease;
+  // Global link hover effects - subtle bubble for ALL other links
+  a:not(.btn):not(.navbar-brand):not(.publication-link):not(.nav-link):hover {
+    background-color: rgba(0, 119, 200, 0.1);
+    color: #0077c8 !important;
+    text-decoration: none !important;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
 
-    &:hover {
-      background-color: rgba(0, 119, 200, 0.1) !important;
-      color: #0077c8 !important;
-      border-radius: 4px;
-      transform: translateY(-1px);
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
+  // Nav link specific bubble effects without messing up spacing
+  .nav-link {
+    transition: all 0.2s ease;
+    border-radius: 4px;
+  }
+
+  .nav-link:hover {
+    background-color: rgba(0, 119, 200, 0.1) !important;
+    color: #0077c8 !important;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   }
 
   h2.bibliography {
