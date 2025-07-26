@@ -83,7 +83,7 @@
     <!-- Title -->
     <div class="title">
       {% if entry.url %}
-        <a href="{{ entry.url }}" style="text-decoration: none;">{{ entry.title }}</a>
+        <a href="{{ entry.url }}" style="text-decoration: none; color: #dc3545;" class="title-link">{{ entry.title }}</a>
       {% else %}
         {{ entry.title }}
       {% endif %}

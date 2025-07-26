@@ -432,18 +432,37 @@ a.hf-link:hover {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
 }
 
-/* Title links specific styling - high specificity */
+/* Title links specific styling - maximum specificity */
+.publications div.title a,
+div.publications div.title a,
+.container div.title a,
 div.title a,
 .title a {
   border-radius: 4px !important;
   padding: 2px 4px !important;
   margin: -2px -4px !important;
   transition: all 0.3s ease !important;
+}
+
+/* Make paper title links RED by default */
+.publications div.title a,
+div.publications div.title a,
+.container div.title a,
+div.title a,
+.title a,
+.title-link,
+a.title-link {
   color: #dc3545 !important;
 }
 
+/* Paper title hover effects */
+.publications div.title a:hover,
+div.publications div.title a:hover,
+.container div.title a:hover,
 div.title a:hover,
-.title a:hover {
+.title a:hover,
+.title-link:hover,
+a.title-link:hover {
   background-color: rgba(220, 53, 69, 0.1) !important;
   color: #dc3545 !important;
   text-decoration: none !important;
