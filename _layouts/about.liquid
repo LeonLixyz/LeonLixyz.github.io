@@ -9,6 +9,54 @@ layout: default
   article h2.section-blue {
     color: #007bff !important;
   }
+  
+  /* Mobile fixes for news section */
+  @media (max-width: 768px) {
+    .news table,
+    .news .table {
+      font-size: 0.9rem !important;
+    }
+    
+    .news td,
+    .news th {
+      color: var(--global-text-color) !important;
+      opacity: 1 !important;
+      visibility: visible !important;
+      font-size: inherit !important;
+      line-height: 1.4 !important;
+      padding: 0.5rem 0.25rem !important;
+    }
+    
+    .news .table-responsive {
+      border: none !important;
+      box-shadow: none !important;
+    }
+    
+    .news tr {
+      border: none !important;
+    }
+    
+    .news th {
+      font-weight: bold !important;
+      width: auto !important;
+      min-width: 80px !important;
+    }
+  }
+  
+  /* Additional mobile text visibility fixes */
+  @media (max-width: 576px) {
+    .news td,
+    .news th,
+    .news table,
+    .news .table {
+      color: var(--global-text-color) !important;
+      background-color: transparent !important;
+    }
+    
+    .news {
+      background-color: transparent !important;
+    }
+  }
 </style>
   <div class="post">
   <header class="post-header">
