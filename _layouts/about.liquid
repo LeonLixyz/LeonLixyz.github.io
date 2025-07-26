@@ -54,7 +54,7 @@ layout: default
 
   /* Global link hover effects - bubble effect for ALL links */
   a:not(.btn):not(.navbar-brand):not(.nav-link):hover {
-    background-color: var(--global-theme-color);
+    background-color: var(--global-hover-color);
     color: white !important;
     text-decoration: none !important;
     transform: translateY(-1px);
@@ -63,15 +63,18 @@ layout: default
 
   /* Special hover colors for specific link types */
   .code-link:hover {
-    background-color: #000000 !important;
+    background-color: rgba(0, 0, 0, 0.1) !important;
+    color: #333 !important;
   }
 
   .paper-link:hover {
-    background-color: #dc3545 !important;
+    background-color: rgba(220, 53, 69, 0.1) !important;
+    color: #dc3545 !important;
   }
 
   .hf-link:hover {
-    background-color: #ff8c00 !important;
+    background-color: rgba(255, 140, 0, 0.1) !important;
+    color: #ff8c00 !important;
   }
 
   /* Mobile fixes for news section */
