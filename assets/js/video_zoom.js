@@ -12,10 +12,10 @@ $(document).ready(function () {
       </div>
     </div>
   `;
-  
+
   // Add modal to body
-  $('body').append(videoModalHTML);
-  
+  $("body").append(videoModalHTML);
+
   // Add CSS styles
   const videoModalCSS = `
     <style>
@@ -112,52 +112,53 @@ $(document).ready(function () {
       }
     </style>
   `;
-  
-  $('head').append(videoModalCSS);
-  
+
+  $("head").append(videoModalCSS);
+
   // Handle video preview clicks
-  $(document).on('click', '.video-preview-container', function(e) {
+  $(document).on("click", ".video-preview-container", function (e) {
     e.preventDefault();
-    const videoSrc = $(this).find('video').attr('src');
+    const videoSrc = $(this).find("video").attr("src");
     openVideoModal(videoSrc);
   });
-  
+
   // Close modal with Escape key
-  $(document).keydown(function(e) {
-    if (e.keyCode === 27) { // Escape key
+  $(document).keydown(function (e) {
+    if (e.keyCode === 27) {
+      // Escape key
       closeVideoModal();
     }
   });
 });
 
 function openVideoModal(videoSrc) {
-  const modal = $('#video-zoom-modal');
-  const player = $('#video-zoom-player');
-  
-  player.attr('src', videoSrc);
-  modal.css('display', 'flex');
-  
+  const modal = $("#video-zoom-modal");
+  const player = $("#video-zoom-player");
+
+  player.attr("src", videoSrc);
+  modal.css("display", "flex");
+
   // Trigger animation after display is set
   setTimeout(() => {
-    modal.addClass('show');
+    modal.addClass("show");
   }, 10);
-  
+
   // Prevent body scroll
-  $('body').css('overflow', 'hidden');
+  $("body").css("overflow", "hidden");
 }
 
 function closeVideoModal() {
-  const modal = $('#video-zoom-modal');
-  const player = $('#video-zoom-player');
-  
-  modal.removeClass('show');
-  
+  const modal = $("#video-zoom-modal");
+  const player = $("#video-zoom-player");
+
+  modal.removeClass("show");
+
   setTimeout(() => {
     modal.hide();
-    player.attr('src', '');
+    player.attr("src", "");
     player[0].load(); // Reset video
   }, 300);
-  
+
   // Restore body scroll
-  $('body').css('overflow', 'auto');
-} 
+  $("body").css("overflow", "auto");
+}

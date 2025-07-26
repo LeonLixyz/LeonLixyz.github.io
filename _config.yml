@@ -4,7 +4,7 @@
 
 title: Leon # the website title (if blank, full name will be used instead)
 first_name: Leon Li
-middle_name: 
+middle_name:
 last_name:
 email: al4263@columbia.edu
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
@@ -131,7 +131,7 @@ bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 # -----------------------------------------------------------------------------
 
 blog_name: Think # blog_name will be displayed in your blog page
-blog_description:  <a href="https://substack.com/@realleonli" target="_blank">Read more on Substack</a> 
+blog_description: <a href="https://substack.com/@realleonli" target="_blank">Read more on Substack</a>
 permalink: /blog/:year/:title/
 lsi: false # produce an index for related posts
 
@@ -165,7 +165,6 @@ disqus_shortname: al-folio # put your disqus shortname
 # External sources.
 # If you have blog posts published on medium.com or other external sources,
 # you can display them in your blog by adding a link to the RSS feed.
-
 
 # external_sources:
 #   - name: Substack
@@ -362,7 +361,7 @@ filtered_bibtex_keywords:
     poster,
     preview,
     selected,
-    slides, 
+    slides,
     supp,
     video,
     website,

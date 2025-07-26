@@ -674,7 +674,7 @@ footer.sticky-bottom {
       font-size: 1.5rem;
     }
   }
-  
+
   // Blue section headings
   h2.section-blue,
   .post h2.section-blue,
@@ -1313,26 +1313,26 @@ ninja-keys::part(ninja-input-wrapper) {
 }
 
 .tag {
-  background: rgba(0,0,0,0.05);
+  background: rgba(0, 0, 0, 0.05);
   border-radius: 0.5rem;
   padding: 0.2rem 0.5rem;
   margin-right: 0.5rem;
   color: var(--global-text-color);
   font-size: 0.9rem;
-  
+
   &.foundation {
-    background: rgba(255, 170, 127, 0.2);   // Light orange
+    background: rgba(255, 170, 127, 0.2); // Light orange
   }
-  
+
   &.rl {
-    background: rgba(184, 255, 208, 0.5);   // Light green
+    background: rgba(184, 255, 208, 0.5); // Light green
   }
 
   &.ai-for-science {
-    background: rgba(255, 208, 184, 0.5);   // Light red
+    background: rgba(255, 208, 184, 0.5); // Light red
   }
 
   &.ai-alignment {
-    background: rgba(255, 241, 184, 0.5);   // Light yellow
+    background: rgba(255, 241, 184, 0.5); // Light yellow
   }
 }
