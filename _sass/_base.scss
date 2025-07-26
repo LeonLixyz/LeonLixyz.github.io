@@ -676,7 +676,9 @@ footer.sticky-bottom {
   }
   
   // Blue section headings
-  h2.section-blue {
+  h2.section-blue,
+  .post h2.section-blue,
+  article h2.section-blue {
     color: #007bff !important;
   }
 
