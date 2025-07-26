@@ -2,7 +2,7 @@
 layout: default
 ---
 <style>
-  /* Blue section titles - very specific selectors */
+    /* Section titles using theme color - very specific selectors */
   .section-blue,
   .post .section-blue,
   article .section-blue,
@@ -13,7 +13,7 @@ layout: default
   div.post h2.section-blue,
   div.post h2.section-blue strong,
   .section-blue strong {
-    color: #007bff !important;
+    color: var(--global-theme-color) !important;
   }
   
   /* Target by content for extra specificity */
@@ -21,27 +21,27 @@ layout: default
   h2:has(strong:contains("Preprints")),
   h2:has(strong:contains("Publications")),
   h2:has(strong:contains("Recent Blog Posts")) {
-    color: #007bff !important;
+    color: var(--global-theme-color) !important;
   }
   
-     h2 strong:contains("News"),
-   h2 strong:contains("Preprints"), 
-   h2 strong:contains("Publications"),
-   h2 strong:contains("Recent Blog Posts") {
-     color: #007bff !important;
-   }
-   
-   /* ID-based targeting - highest specificity */
-   #news-title,
-   #news-title strong,
-   #blog-title,
-   #blog-title strong,
-   #preprints-title, 
-   #preprints-title strong,
-   #publications-title,
-   #publications-title strong {
-     color: #007bff !important;
-   }
+      h2 strong:contains("News"),
+    h2 strong:contains("Preprints"), 
+    h2 strong:contains("Publications"),
+    h2 strong:contains("Recent Blog Posts") {
+      color: var(--global-theme-color) !important;
+    }
+    
+    /* ID-based targeting - highest specificity */
+    #news-title,
+    #news-title strong,
+    #blog-title,
+    #blog-title strong,
+    #preprints-title, 
+    #preprints-title strong,
+    #publications-title,
+    #publications-title strong {
+      color: var(--global-theme-color) !important;
+    }
   
   /* Mobile fixes for news section */
   @media (max-width: 768px) {
