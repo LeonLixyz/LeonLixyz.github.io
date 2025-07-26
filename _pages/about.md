@@ -1,6 +1,6 @@
 ---
 layout: about
-title: about
+title: Home
 permalink: /
 subtitle:
   # <a href="https://www.cs.columbia.edu/">Department of Computer Science</a>, <a href="https://www.columbia.edu/">Columbia University</a> 
