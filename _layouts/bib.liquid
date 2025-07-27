@@ -82,11 +82,7 @@
   <div id="{{ entry.key }}" class="{% if site.enable_publication_thumbnails %}col-sm-8{% else %}col-sm-10{% endif %}">
     <!-- Title -->
     <div class="title">
-      {% if entry.url %}
-        <a href="{{ entry.url }}" style="text-decoration: none; color: inherit;">{{ entry.title }}</a>
-      {% else %}
-        {{ entry.title }}
-      {% endif %}
+      {{ entry.title }}
     </div>
     <!-- Author -->
     <div class="author">

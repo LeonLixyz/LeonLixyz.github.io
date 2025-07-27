@@ -375,29 +375,98 @@ ul.task-list input[type="checkbox"] {
   }
 }
 
-/* Global bubble effects for all links */
-a:not(.btn):not(.navbar-brand):not(.nav-link):not(.publication-link) {
-  color: var(--global-theme-color) !important;
-  transition: all 0.2s ease;
-  border-radius: 4px;
-  padding: 1px 4px;
-  margin: -1px -4px;
+/* Content and text link hover effects - ENHANCED */
+p a:hover,
+div a:hover,
+span a:hover,
+.post a:hover,
+article a:hover,
+.content a:hover,
+.description a:hover,
+.clearfix a:hover,
+main a:hover,
+section a:hover,
+.container a:hover {
+  transform: translateY(-1px) !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
 }
 
-a:not(.btn):not(.navbar-brand):not(.nav-link):not(.publication-link):hover {
-  background-color: rgba(0, 119, 200, 0.1);
-  color: #0077c8 !important;
+/* Ensure ALL content links have proper styling */
+p a,
+div a,
+span a,
+.post a,
+article a,
+.content a,
+.description a,
+.clearfix a,
+main a,
+section a,
+.container a {
+  transition: all 0.2s ease;
+}
+
+/* Force hover effects on ANY link that doesn't have specific exclusions */
+a:not(.navbar-brand):not(.nav-link):not(.dropdown-item):hover {
+  transform: translateY(-1px) !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Author links specific hover enhancement */
+.author a:hover {
+  border-bottom-style: solid !important;
+  text-decoration: none !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* News title links */
+.news-title:hover {
+  transform: translateY(-1px) !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Global bubble effects for all links */
+a:not(.navbar-brand):not(.nav-link) {
+  transition: all 0.2s ease;
+  border-radius: 4px;
+}
+
+a:not(.navbar-brand):not(.nav-link):hover {
   text-decoration: none !important;
   transform: translateY(-1px);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Publication link specific hover effects */
+/* General links (not publication links) */
+a:not(.navbar-brand):not(.nav-link):not(.publication-link) {
+  color: var(--global-theme-color) !important;
+  padding: 1px 4px;
+  margin: -1px -4px;
+}
+
+a:not(.navbar-brand):not(.nav-link):not(.publication-link):hover {
+  background-color: rgba(0, 119, 200, 0.1);
+  color: #0077c8 !important;
+}
+
+/* Button hover effects - ensure all buttons get upward movement */
+.btn:not(.navbar-brand):not(.nav-link):hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+/* Publication link specific hover effects - applied globally */
 .publication-link {
   border-radius: 4px;
   padding: 2px 4px;
   margin: -2px -4px;
   transition: all 0.3s ease;
+  display: inline-block;
 }
 
 .publication-link:hover {
@@ -419,6 +488,116 @@ a:not(.btn):not(.navbar-brand):not(.nav-link):not(.publication-link):hover {
 .hf-link:hover {
   background-color: rgba(255, 140, 0, 0.1);
   color: #ff8c00 !important;
+}
+
+/* Social media icons with original brand colors */
+.social a i::before {
+  transition: all 0.2s ease;
+}
+
+.social a:hover {
+  transform: translateY(-1px);
+  transition: all 0.2s ease;
+}
+
+/* Original brand colors for social media icons */
+.social a .fa-linkedin::before,
+.social a:hover .fa-linkedin::before {
+  color: #0077b5 !important;
+}
+
+.social a .fa-github::before,
+.social a:hover .fa-github::before {
+  color: #24292e !important;
+}
+
+.social a .fa-x-twitter::before,
+.social a:hover .fa-x-twitter::before {
+  color: #000000 !important;
+}
+
+.social a .ai-google-scholar::before,
+.social a:hover .ai-google-scholar::before {
+  color: #4285f4 !important;
+}
+
+.social a .ai-cv::before,
+.social a:hover .ai-cv::before {
+  color: #2e8b57 !important;
+}
+
+.social a .ai-orcid::before,
+.social a:hover .ai-orcid::before {
+  color: #a6ce39 !important;
+}
+
+.social a .fa-envelope::before,
+.social a:hover .fa-envelope::before {
+  color: #d44638 !important;
+}
+
+/* Profile social icons (more_info section) with original brand colors for remaining icon fonts */
+.more-info a .fa-linkedin::before,
+.more-info a:hover .fa-linkedin::before {
+  color: #0077b5 !important;
+}
+
+.more-info a .fa-x-twitter::before,
+.more-info a:hover .fa-x-twitter::before {
+  color: #000000 !important;
+  font-size: 1em !important;
+}
+
+.more-info a .fa-github::before,
+.more-info a:hover .fa-github::before {
+  color: #24292e !important;
+}
+
+.more-info a .ai-google-scholar::before,
+.more-info a:hover .ai-google-scholar::before {
+  color: #4285f4 !important;
+}
+
+.more-info a .fa-blogger-b::before,
+.more-info a:hover .fa-blogger-b::before {
+  color: #ff5722 !important;
+}
+
+/* CV link styling */
+.more-info a[href*="cv.pdf"],
+.more-info a[href*="cv.pdf"]:hover {
+  color: #2e8b57 !important;
+  font-weight: bold;
+}
+
+/* Navbar social icons */
+.navbar-brand.social a:hover {
+  transform: translateY(-1px);
+}
+
+.navbar-brand.social a .fa-linkedin::before,
+.navbar-brand.social a:hover .fa-linkedin::before {
+  color: #0077b5 !important;
+}
+
+.navbar-brand.social a .fa-github::before,
+.navbar-brand.social a:hover .fa-github::before {
+  color: #24292e !important;
+}
+
+.navbar-brand.social a .fa-x-twitter::before,
+.navbar-brand.social a:hover .fa-x-twitter::before {
+  color: #000000 !important;
+}
+
+.navbar-brand.social a .ai-google-scholar::before,
+.navbar-brand.social a:hover .ai-google-scholar::before {
+  color: #4285f4 !important;
+}
+
+.navbar-brand.social a .ai-cv::before,
+.navbar-brand.social a:hover .ai-cv::before {
+  color: #2e8b57 !important;
 }
 
 /* Title links specific styling */
@@ -803,17 +982,27 @@ footer.sticky-bottom {
 
       .author {
         a {
-          border-bottom: 1px dashed var(--global-theme-color);
+          /* Remove ugly underlines from collaborator names */
+          border-bottom: none !important;
+          text-decoration: none !important;
+          color: var(--global-theme-color);
+          transition: all 0.2s ease;
 
           &:hover {
-            border-bottom-style: solid;
-            text-decoration: none;
+            text-decoration: none !important;
+            border-bottom: none !important;
+            color: var(--global-hover-color) !important;
+            transform: translateY(-1px) !important;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
           }
         }
 
+        /* Make user's own name bold instead of italic */
         > em {
-          border-bottom: 1px solid;
-          font-style: normal;
+          border-bottom: none !important;
+          font-style: normal !important;
+          font-weight: bold !important;
+          color: var(--global-text-color);
         }
 
         > span.more-authors {
@@ -824,6 +1013,8 @@ footer.sticky-bottom {
           &:hover {
             color: var(--global-text-color);
             border-bottom: 1px dashed var(--global-text-color);
+            transform: translateY(-1px);
+            transition: all 0.2s ease;
           }
         }
       }
@@ -1408,4 +1599,79 @@ ninja-keys::part(ninja-input-wrapper) {
   &.ai-alignment {
     background: rgba(255, 241, 184, 0.5); // Light yellow
   }
+}
+
+/* Social media PNG/SVG images styling - consistent across all icons */
+.more-info a img {
+  width: 28px !important;
+  height: 28px !important;
+  vertical-align: text-bottom;
+  transition: all 0.2s ease;
+  margin-top: -2px;
+}
+
+.more-info a:hover img {
+  transform: translateY(-1px) scale(1.05);
+  filter: brightness(1.1);
+}
+
+/* Specific spacing and sizing adjustments for better visual balance */
+.more-info a[title="CV"] {
+  margin-right: 8px;
+}
+
+.more-info a[title="LinkedIn"] {
+  margin-right: 4px;
+}
+
+.more-info a[title="Google Scholar"] {
+  margin-left: 2px;
+  margin-right: 2px;
+}
+
+.more-info a[title="GitHub"] {
+  margin-left: 2px;
+  margin-right: 4px;
+}
+
+.more-info a[title="HuggingFace"] {
+  margin-left: 2px;
+  margin-right: -8px;
+}
+
+.more-info a[title="Substack"] {
+  margin-left: -8px;
+  margin-right: -8px;
+}
+
+.more-info a[title="X"] {
+  margin-left: -8px;
+}
+
+/* Specific styling for different social media images */
+.more-info a[title="HuggingFace"] img {
+  width: 36px !important;
+  height: 36px !important;
+  vertical-align: middle !important;
+  margin-top: -4px !important;
+}
+
+.more-info a[title="Substack"] img {
+  width: 36px !important;
+  height: 36px !important;
+  vertical-align: middle !important;
+  margin-top: -4px !important;
+  filter: none; /* Keep original orange color */
+}
+
+.more-info a[title="GitHub"] img {
+  filter: none; /* Keep GitHub logo black */
+}
+
+.more-info a[title="GitHub"]:hover img {
+  filter: brightness(0.8); /* Darken on hover for GitHub */
+}
+
+.more-info a[title="Google Scholar"] img {
+  filter: none; /* Keep original colors */
 }

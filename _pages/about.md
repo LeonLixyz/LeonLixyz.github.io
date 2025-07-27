@@ -12,12 +12,13 @@ profile:
   more_info: >
     <div style="text-align: center;">
       <p>al6843[at]nyu[dot]edu</p>
-      <p style="font-size: 1.5em; display: flex; gap: 20px; justify-content: center;">
-      <a href="/assets/pdf/cv.pdf" target="_blank" title="CV">CV</a>
-      <a href="https://www.linkedin.com/in/leon-li-18654a220/" target="_blank" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-      <a href="https://scholar.google.com/citations?user=oyFNxyUAAAAJ&hl=en" target="_blank" title="Google Scholar"><i class="ai ai-google-scholar"></i></a>
-      <a href="https://substack.com/@realleonli" target="_blank" title="Substack"><i class="fa-brands fa-blogger-b"></i></a>
-      <a href="https://x.com/iamleonli" target="_blank" title="X"><i class="fa-brands fa-x-twitter"></i></a>
+      <p style="font-size: 1.5em; display: flex; gap: 20px; justify-content: center; align-items: center;">
+      <a href="/assets/pdf/Ang_Leon_Li_CV.pdf" target="_blank" title="CV" style="margin-left: -10px; margin-right: -6px; margin-top: 1px;">CV</a>
+      <a href="https://scholar.google.com/citations?user=oyFNxyUAAAAJ&hl=en" target="_blank" title="Google Scholar" style="margin-left: -10px; margin-right: -8px;"><img src="/assets/img/Google_Scholar_logo.svg" alt="Google Scholar" style="width: 28px; height: 28px; vertical-align: text-bottom; margin-top: -2px;"></a>
+      <a href="https://github.com/LeonLixyz" target="_blank" title="GitHub" style="margin-left: -6px; margin-right: -12px;"><img src="/assets/img/github-mark.png" alt="GitHub" style="width: 28px; height: 28px; vertical-align: text-bottom; margin-top: -2px;"></a>
+      <a href="https://huggingface.co/leonli66" target="_blank" title="HuggingFace" style="margin-left: -6px; margin-right: -10px;"><img src="/assets/img/hf-logo.png" alt="HuggingFace" style="width: 28px; height: 28px; vertical-align: text-bottom; margin-top: -2px;"></a>
+      <a href="https://substack.com/@iamleonli" target="_blank" title="Substack" style="margin-left: -12px; margin-right: -10px;"><img src="/assets/img/substack.png" alt="Substack" style="width: 28px; height: 28px; vertical-align: text-bottom; margin-top: -2px;"></a>
+      <a href="https://x.com/iamleonli" target="_blank" title="X" style="margin-left: -10px; margin-top: 2px;"><i class="fa-brands fa-x-twitter" style="font-size: 1.1em;"></i></a>
       </p>
     </div>
 

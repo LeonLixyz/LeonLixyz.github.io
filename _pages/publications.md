@@ -4,7 +4,7 @@ permalink: /publications/
 title: Publications
 description:
 nav: true
-nav_order: 2
+nav_order: 4
 ---
 
 See my <a href="https://scholar.google.com/citations?user=oyFNxyUAAAAJ&hl=en">Google Scholar</a> for the most up-to-date list of papers.

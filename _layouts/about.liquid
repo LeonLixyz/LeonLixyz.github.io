@@ -43,15 +43,31 @@ layout: default
     color: var(--global-theme-color) !important;
   }
 
-  /* Publication link hover effects */
-  .publication-link {
-    display: inline-block;
-    transition: all 0.2s ease;
-    border-radius: 4px;
-    padding: 2px 6px;
+  /* Mobile fixes for news section */
+  .news {
+    color: var(--global-text-color) !important;
   }
 
-  /* Mobile fixes for news section */
+  .news table {
+    color: var(--global-text-color) !important;
+  }
+
+  .news .news-title {
+    color: var(--global-theme-color) !important;
+  }
+
+  .news th,
+  .news td {
+    color: var(--global-text-color) !important;
+  }
+
+  /* Ensure news content is visible */
+  .news p,
+  .news span,
+  .news div {
+    color: var(--global-text-color) !important;
+  }
+
   @media (max-width: 768px) {
     .news table,
     .news .table {
@@ -150,17 +166,11 @@ layout: default
       {% include latest_posts.liquid %}
     {% endif %}
 
-    <!-- Preprints -->
-    <div style="margin-top: 3rem;"></div>
-    <h2 id="preprints-title" class="section-blue"><strong>Preprints</strong></h2>
-    <div class="publications mb-5">
-      {% bibliography -f papers -q @*[selected=true,category=preprint] %}
-    </div>
-
     <!-- Publications -->
+    <div style="margin-top: 4rem;"></div>
     <h2 id="publications-title" class="section-blue"><strong>Publications</strong></h2>
     <div class="publications mb-5">
-      {% bibliography -f papers -q @*[selected=true,category=publication] %}
+      {% bibliography -f papers -q @*[selected=true] %}
     </div>
 
     {% if site.newsletter.enabled and site.footer_fixed %}
