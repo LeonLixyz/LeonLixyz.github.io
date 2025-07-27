@@ -617,6 +617,77 @@ a:not(.navbar-brand):not(.nav-link):not(.publication-link):hover {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Section title links (News, Publications) hover effects */
+.section-blue a {
+  border-radius: 4px;
+  padding: 2px 6px;
+  margin: -2px -6px;
+  transition: all 0.3s ease;
+  color: inherit !important;
+  display: inline-block;
+}
+
+.section-blue a:hover {
+  background-color: rgba(0, 119, 200, 0.1);
+  text-decoration: none !important;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Specific styling for news and publications page */
+.post .news {
+  color: var(--global-text-color) !important;
+}
+
+.post .news table {
+  color: var(--global-text-color) !important;
+}
+
+.post .news th,
+.post .news td {
+  color: var(--global-text-color) !important;
+}
+
+.post .news .news-title {
+  color: var(--global-theme-color) !important;
+}
+
+.post .news p,
+.post .news span,
+.post .news div {
+  color: var(--global-text-color) !important;
+}
+
+/* Additional coverage for article wrapper */
+.post article .news {
+  color: var(--global-text-color) !important;
+}
+
+.post article .news table {
+  color: var(--global-text-color) !important;
+}
+
+.post article .news th,
+.post article .news td {
+  color: var(--global-text-color) !important;
+}
+
+/* Extra specific targeting for news page text visibility */
+div.post article .news,
+div.post article .news table,
+div.post article .news th,
+div.post article .news td,
+div.post article .news p,
+div.post article .news span,
+div.post article .news div {
+  color: var(--global-text-color) !important;
+}
+
+/* Ensure news titles remain theme colored */
+div.post article .news .news-title {
+  color: var(--global-theme-color) !important;
+}
+
 #light-toggle,
 #search-toggle {
   padding: 0;
