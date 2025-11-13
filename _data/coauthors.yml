@@ -32,7 +32,7 @@
 
 "ye":
   - firstname: ["Naimeng"]
-    url: https://scholar.google.com/citations?user=eb3G6B0AAAAJ&hl=en
+    url: https://naimengye.github.io/
 
 "cai":
   - firstname: ["Zikui"]
@@ -105,3 +105,31 @@
 "zhu":
   - firstname: ["Wang Bill"]
     url: https://billzhu.me/
+
+"mcleish":
+  - firstname: ["Sean"]
+    url: https://mcleish7.github.io/
+
+"kirchenbauer":
+  - firstname: ["John"]
+    url: https://www.cs.umd.edu/people/jkirchen
+
+"kalra":
+  - firstname: ["Dayal Singh"]
+    url: https://dayal-kalra.github.io/
+
+"bartoldson":
+  - firstname: ["Brian R."]
+    url: https://brianbartoldson.wordpress.com/
+
+"kailkhura":
+  - firstname: ["Bhavya"]
+    url: https://people.llnl.gov/kailkhura1
+
+"schwarzschild":
+  - firstname: ["Avi"]
+    url: https://www.avischwarzschild.com/
+
+"geiping":
+  - firstname: ["Jonas"]
+    url: https://jonasgeiping.github.io/
