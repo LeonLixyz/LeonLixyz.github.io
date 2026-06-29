@@ -28,7 +28,7 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: false # includes social icons at the bottom of the page
 ---
 
-Hi, I am Leon (Ang Li 李昂), a first year PhD student at New York University, advised by [Prof. Pavel Izmailov](https://izmailovpavel.github.io/) and [Prof. Micah Goldblum](https://goldblum.github.io/). Previously, I completed my B.S. and M.S. in Computer Science at Columbia University, where I was fortunate to work with [Prof. Micah Goldblum](https://goldblum.github.io/), [Prof. Tianyi Peng](https://tianyipeng.github.io/), [Prof. Jing Dong](https://www.columbia.edu/~jd2736/), and [Prof. Hongseok Namkoong](https://hsnamkoong.github.io/).
+Hi, I am Leon (Ang Li 李昂), a second year PhD student at New York University, advised by [Prof. Pavel Izmailov](https://izmailovpavel.github.io/) and [Prof. Micah Goldblum](https://goldblum.github.io/). Previously, I completed my B.S. and M.S. in Computer Science at Columbia University, where I was fortunate to work with [Prof. Micah Goldblum](https://goldblum.github.io/), [Prof. Tianyi Peng](https://tianyipeng.github.io/), [Prof. Jing Dong](https://www.columbia.edu/~jd2736/), and [Prof. Hongseok Namkoong](https://hsnamkoong.github.io/).
 
 My research interests center on three themes:
 
