@@ -32,6 +32,6 @@ Hi, I am Leon (Ang Li 李昂), a first year PhD student at New York University, 
 
 My research interests center on three themes:
 
-- **Learning and Memory** — continual learning, memory consolidation, and end-to-end memory modules.
-- **Long Context** — context/KV-cache compression, test-time training, and long-horizon reasoning.
-- **Science of LLMs** — pretraining, synthetic data, and scaling laws.
+- **Learning and Memory** continual learning, memory consolidation, and end-to-end memory modules.
+- **Long Context** context/KV-cache compression, test-time training, and long-horizon reasoning.
+- **Science of LLMs** pretraining, synthetic data, and scaling laws.
