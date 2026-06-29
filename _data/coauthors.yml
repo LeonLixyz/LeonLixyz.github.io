@@ -46,10 +46,6 @@
   - firstname: ["Tom"]
     url: https://www.cs.umd.edu/~tomg/
 
-"guetta":
-  - firstname: ["Daniel"]
-    url: PLACEHOLDER_URL
-
 "gui":
   - firstname: ["George Z"]
     url: https://www.georgegui.com/
