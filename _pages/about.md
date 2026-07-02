@@ -30,8 +30,4 @@ social: false # includes social icons at the bottom of the page
 
 Hi, I am Leon (Ang Li 李昂), a second year PhD student at New York University, advised by [Prof. Pavel Izmailov](https://izmailovpavel.github.io/) and [Prof. Micah Goldblum](https://goldblum.github.io/). Previously, I completed my B.S. and M.S. in Computer Science at Columbia University, where I was fortunate to work with [Prof. Micah Goldblum](https://goldblum.github.io/), [Prof. Tianyi Peng](https://tianyipeng.github.io/), [Prof. Jing Dong](https://www.columbia.edu/~jd2736/), and [Prof. Hongseok Namkoong](https://hsnamkoong.github.io/).
 
-My research focuses on three directions:
-
-- **Learning and Memory:** continual learning, memory consolidation, and end-to-end memory modules.
-- **Long Context:** context/KV-cache compression, test-time training, and long-horizon reasoning.
-- **Science of LLMs:** pretraining, synthetic data, and scaling laws.
+My research interest was sparked by the [AlphaGo moment](https://deepmind.google/research/projects/alphago/). I am interested in self-improving models, continual learning and long context, and the science of pretraining and post-training.
