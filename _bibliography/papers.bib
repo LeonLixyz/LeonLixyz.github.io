@@ -67,7 +67,7 @@
   arxiv={2502.08586},
   url={https://arxiv.org/abs/2502.08586},
   abstract={A high volume of recent ML security literature focuses on attacks against aligned large language models (LLMs). These attacks may extract private information or coerce the model into producing harmful outputs. In real-world deployments, LLMs are often part of a larger agentic pipeline including memory systems, retrieval, web access, and API calling. Such additional components introduce vulnerabilities that make these LLM-powered agents much easier to attack than isolated LLMs, yet relatively little work focuses on the security of LLM agents. In this paper, we analyze security and privacy vulnerabilities that are unique to LLM agents. We first provide a taxonomy of attacks categorized by threat actors, objectives, entry points, attacker observability, attack strategies, and inherent vulnerabilities of agent pipelines. We then conduct a series of illustrative attacks on popular open-source and commercial agents, demonstrating the immediate practical implications of their vulnerabilities. Notably, our attacks are trivial to implement and require no understanding of machine learning.},
-  selected={true},
+  selected={false},
   category={preprint},
   preview={data-stealing-agent.mp4},
 }
@@ -94,7 +94,7 @@
   arxiv={2503.01215},
   url={https://arxiv.org/abs/2503.01215},
   abstract={Autoregressive models have emerged as a powerful framework for modeling exchangeable sequences - i.i.d. observations when conditioned on some latent factor - enabling direct modeling of uncertainty from missing data (rather than a latent). Motivated by the critical role posterior inference plays as a subroutine in decision-making (e.g., active learning, bandits), we study the inferential and architectural inductive biases that are most effective for exchangeable sequence modeling. For the inference stage, we highlight a fundamental limitation of the prevalent single-step generation approach: inability to distinguish between epistemic and aleatoric uncertainty. Instead, a long line of works in Bayesian statistics advocates for multi-step autoregressive generation; we demonstrate this "correct approach" enables superior uncertainty quantification that translates into better performance on downstream decision-making tasks. This naturally leads to the next question: which architectures are best suited for multi-step inference? We identify a subtle yet important gap between recently proposed Transformer architectures for exchangeable sequences (Muller et al., 2022; Nguyen & Grover, 2022; Ye & Namkoong, 2024), and prove that they in fact cannot guarantee exchangeability despite introducing significant computational overhead. We illustrate our findings using controlled synthetic settings, demonstrating how custom architectures can significantly underperform standard causal masks, underscoring the need for new architectural innovations.},
-  selected={true},
+  selected={false},
   category={publication},
   preview={permutation-invariant-overall.png},
 }
@@ -109,7 +109,7 @@
   url={https://arxiv.org/abs/2410.06170},
   abstract={Queuing network control determines the allocation of scarce resources to manage congestion, a fundamental problem in manufacturing, communications, and healthcare. Compared to standard RL problems, queueing problems are distinguished by unique challenges: i) a system operating in continuous time, ii) high stochasticity, and iii) long horizons over which the system can become unstable (exploding delays). To spur methodological progress tackling these challenges, we present an open-sourced queueing simulation framework, QGym, that benchmark queueing policies across realistic problem instances. Our modular framework allows the researchers to build on our initial instances, which provide a wide range of environments including parallel servers, criss-cross, tandem, and re-entrant networks, as well as a realistically calibrated hospital queuing system. QGym makes it easy to compare multiple policies, including both model-free RL methods and classical queuing policies. Our testbed complements the traditional focus on evaluating algorithms based on mathematical guarantees in idealized settings, and significantly expands the scope of empirical benchmarking in prior work.},
   code={https://github.com/namkoong-lab/QGym},
-  selected={true},
+  selected={false},
   category={publication},
   preview={qgym.png},
 }

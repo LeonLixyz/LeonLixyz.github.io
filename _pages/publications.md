@@ -1,13 +1,11 @@
 ---
 layout: page
 permalink: /publications/
-title: Publications
+title: Selected Work
 description:
-nav: true
+nav: false
 nav_order: 4
 ---
-
-See my <a href="https://scholar.google.com/citations?user=oyFNxyUAAAAJ&hl=en">Google Scholar</a> for the most up-to-date list of papers.
 
 <div class="publications">
 

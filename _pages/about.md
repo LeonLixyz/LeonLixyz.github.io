@@ -18,7 +18,6 @@ profile:
       <a href="https://www.linkedin.com/in/leon-li-18654a220/" target="_blank" title="LinkedIn" style="margin-left: -7px; margin-right: -8px;"><img src="/assets/img/linkedin.png" alt="LinkedIn" style="width: 28px; height: 28px; vertical-align: text-bottom; margin-top: -2px;"></a>
       <a href="https://github.com/LeonLixyz" target="_blank" title="GitHub" style="margin-left: -6px; margin-right: -12px;"><img src="/assets/img/github-mark.png" alt="GitHub" style="width: 28px; height: 28px; vertical-align: text-bottom; margin-top: -1px;"></a>
       <a href="https://huggingface.co/leonli66" target="_blank" title="HuggingFace" style="margin-left: -6px; margin-right: -10px;"><img src="/assets/img/hf-logo.png" alt="HuggingFace" style="width: 28px; height: 28px; vertical-align: text-bottom; margin-top: -2px;"></a>
-      <a href="https://substack.com/@iamleonli" target="_blank" title="Substack" style="margin-left: -12px; margin-right: -10px;"><img src="/assets/img/substack.png" alt="Substack" style="width: 28px; height: 28px; vertical-align: text-bottom; margin-top: -2px;"></a>
       <a href="https://x.com/iamleonli" target="_blank" title="X" style="margin-left: -10px; margin-top: 2px;"><i class="fa-brands fa-x-twitter" style="font-size: 1.1em;"></i></a>
       </p>
     </div>
@@ -30,4 +29,4 @@ social: false # includes social icons at the bottom of the page
 
 Hi, I am Leon (Ang Li 李昂), a second year PhD student at New York University, advised by [Prof. Pavel Izmailov](https://izmailovpavel.github.io/) and [Prof. Micah Goldblum](https://goldblum.github.io/). Previously, I completed my B.S. and M.S. in Computer Science at Columbia University, where I was fortunate to work with [Prof. Micah Goldblum](https://goldblum.github.io/), [Prof. Tianyi Peng](https://tianyipeng.github.io/), [Prof. Jing Dong](https://www.columbia.edu/~jd2736/), and [Prof. Hongseok Namkoong](https://hsnamkoong.github.io/).
 
-My research interest was sparked by the [AlphaGo moment](https://deepmind.google/research/projects/alphago/). I am interested in self-improving models, continual learning and long context, and the science of pretraining and post-training.
+I am interested in self-improving models, continual learning and long context, and the science of pretraining and post-training.
