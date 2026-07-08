@@ -171,10 +171,10 @@ layout: default
     <h2 id="publications-title" class="section-blue">
       <strong>Selected Work</strong>
     </h2>
-    <div class="publications">
+    <p>See my <a href="https://scholar.google.com/citations?user=oyFNxyUAAAAJ&hl=en" target="_blank">Google Scholar</a> for the full list of papers.</p>
+    <div class="publications mb-5">
       {% bibliography -f papers -q @*[selected=true] %}
     </div>
-    <p class="mb-5">See my <a href="https://scholar.google.com/citations?user=oyFNxyUAAAAJ&hl=en" target="_blank">Google Scholar</a> for the full list of papers.</p>
 
     {% if site.newsletter.enabled and site.footer_fixed %}
       {% include scripts/newsletter.liquid center=true %}
