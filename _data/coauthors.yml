@@ -50,10 +50,6 @@
   - firstname: ["George Z"]
     url: https://www.georgegui.com/
 
-"huang":
-  - firstname: ["Furong"]
-    url: https://furong-huang.com/
-
 "jia":
   - firstname: ["Robin"]
     url: https://robinjia.github.io/
@@ -62,17 +58,9 @@
   - firstname: ["Ollie"]
     url: https://ollieliu.com/
 
-"merlau":
-  - firstname: ["Daniel J"]
-    url: https://business.columbia.edu/faculty/people/daniel-merlau
-
 "mittal":
   - firstname: ["Daksh"]
     url: https://sites.google.com/view/dakshmittal/home
-
-"neiswanger":
-  - firstname: ["Willie"]
-    url: https://willieneis.github.io/
 
 "raghuram":
   - firstname: ["Vethavikashini Chithrra"]
@@ -111,16 +99,8 @@
     url: https://www.cs.umd.edu/people/jkirchen
 
 "kalra":
-  - firstname: ["Dayal Singh"]
-    url: https://dayal-kalra.github.io/
-
-"bartoldson":
-  - firstname: ["Brian R."]
-    url: https://brianbartoldson.wordpress.com/
-
-"kailkhura":
-  - firstname: ["Bhavya"]
-    url: https://people.llnl.gov/kailkhura1
+  - firstname: ["Nimit"]
+    url: https://nimit.io/
 
 "schwarzschild":
   - firstname: ["Avi"]
@@ -133,3 +113,11 @@
 "izmailov":
   - firstname: ["Pavel"]
     url: https://izmailovpavel.github.io/
+
+"shen":
+  - firstname: ["Jingyan"]
+    url: https://scholar.google.com/citations?user=YBNEBucAAAAJ&hl=en
+
+"lotfi":
+  - firstname: ["Sanae"]
+    url: https://sanaelotfi.github.io/
