@@ -30,4 +30,4 @@ social: false # includes social icons at the bottom of the page
 
 Hi, I am Leon (Ang Li 李昂), a second year PhD student at New York University, advised by [Prof. Pavel Izmailov](https://izmailovpavel.github.io/) and [Prof. Micah Goldblum](https://goldblum.github.io/). Previously, I completed my B.S. and M.S. in Computer Science at Columbia University, where I was fortunate to work with [Prof. Micah Goldblum](https://goldblum.github.io/), [Prof. Tianyi Peng](https://tianyipeng.github.io/), [Prof. Jing Dong](https://www.columbia.edu/~jd2736/), and [Prof. Hongseok Namkoong](https://hsnamkoong.github.io/).
 
-I am interested in self-improving models, continual learning and long context, and the science of pretraining and post-training.
+I am interested in recursive self-improvement (RSI), continual learning, and the science of LLMs.
