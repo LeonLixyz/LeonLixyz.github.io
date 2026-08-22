@@ -33,5 +33,5 @@ Hi, I am Leon (Ang Li 李昂), a second year PhD student at New York University,
 The three holy grails of my research:
 
 1. Unifying training and inference
-2. New pretraining and post-training paradigms
-3. Recursive self-improvement (RSI)
+2. Science and new paradigms of pretraining and post-training
+3. Automated AI research and RSI
