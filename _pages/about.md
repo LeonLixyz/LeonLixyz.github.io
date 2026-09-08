@@ -30,8 +30,8 @@ social: false # includes social icons at the bottom of the page
 
 Hi, I am Leon (Ang Li 李昂), a second year PhD student at New York University, advised by [Prof. Pavel Izmailov](https://izmailovpavel.github.io/) and [Prof. Micah Goldblum](https://goldblum.github.io/). I am also a researcher at [Modal](https://modal.com/). Previously, I completed my B.S. and M.S. in Computer Science at Columbia University, where I graduated magna cum laude.
 
-The three holy grails of my research:
+I study how AI systems reason, learn, and improve themselves. Specifically, I am interested in:
 
-1. Unifying training and inference
-2. Science and new paradigms of pretraining and post-training
-3. Automated AI research and RSI
+- New paradigms for reasoning
+- Science of post-training
+- Automated R&D and RSI
