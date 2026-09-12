@@ -16,21 +16,6 @@ layout: default
     color: var(--global-theme-color) !important;
   }
 
-  /* Target by content for extra specificity */
-  h2:has(strong:contains('News')),
-  h2:has(strong:contains('Preprints')),
-  h2:has(strong:contains('Publications')),
-  h2:has(strong:contains('Recent Blog Posts')) {
-    color: var(--global-theme-color) !important;
-  }
-
-  h2 strong:contains('News'),
-  h2 strong:contains('Preprints'),
-  h2 strong:contains('Publications'),
-  h2 strong:contains('Recent Blog Posts') {
-    color: var(--global-theme-color) !important;
-  }
-
   /* ID-based targeting - highest specificity */
   #news-title,
   #news-title strong,
@@ -161,7 +146,7 @@ layout: default
     <!-- Latest posts -->
     {% if site.latest_posts.enabled %}
       <h2 id="blog-title" class="section-blue">
-        <strong>Recent Blog Posts</strong>
+        <strong><a href="{{ '/blog/' | relative_url }}" style="color: inherit; text-decoration: none;">Blog post</a></strong>
       </h2>
       {% include latest_posts.liquid %}
     {% endif %}
@@ -171,7 +156,9 @@ layout: default
     <h2 id="publications-title" class="section-blue">
       <strong>Selected Work</strong>
     </h2>
-    <p>See my <a href="https://scholar.google.com/citations?user=9vxvbt0AAAAJ&hl=en" target="_blank">Google Scholar</a> for the full list of papers.</p>
+    <p>
+      See my <a href="https://scholar.google.com/citations?user=9vxvbt0AAAAJ&hl=en" target="_blank">Google Scholar</a> for the full list of papers.
+    </p>
     <div class="publications mb-5">
       {% bibliography -f papers -q @*[selected=true] %}
     </div>
