@@ -130,8 +130,12 @@ bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 # Blog
 # -----------------------------------------------------------------------------
 
-blog_name: # blog_name will be displayed in your blog page
+blog_name: Beyond the Cave # blog_name will be displayed in your blog page
 blog_description:
+blog_quote: "Will he not fancy that the shadows which he formerly saw are truer than the objects which are now shown to him?"
+blog_quote_source: "Plato, The Republic, Book VII, 515d"
+blog_quote_translation: "Translated by Benjamin Jowett"
+blog_quote_url: https://classics.mit.edu/Plato/republic.8.vii.html
 permalink: /blog/:year/:title/
 lsi: false # produce an index for related posts
 

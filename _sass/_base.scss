@@ -842,6 +842,31 @@ footer.sticky-bottom {
     color: var(--global-theme-color);
     font-size: 5rem;
   }
+
+  .blog-epigraph {
+    max-width: 38rem;
+    margin: 1.5rem auto 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+
+    p {
+      font-size: 1.2rem;
+      font-style: italic;
+      line-height: 1.6;
+      margin-bottom: 0.75rem;
+    }
+
+    footer {
+      font-size: 0.85rem;
+      line-height: 1.6;
+
+      span {
+        display: block;
+        color: var(--global-text-color-light);
+      }
+    }
+  }
 }
 
 .tag-category-list {

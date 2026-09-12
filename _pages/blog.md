@@ -1,7 +1,7 @@
 ---
 layout: default
 permalink: /blog/
-title: blog
+title: Blog
 nav: true
 nav_order: 4
 pagination:
@@ -25,7 +25,18 @@ pagination:
 
   <div class="header-bar">
     <h1>{{ site.blog_name }}</h1>
-    <h2>{{ site.blog_description }}</h2>
+    {% if site.blog_quote %}
+      <blockquote class="blog-epigraph" cite="{{ site.blog_quote_url }}">
+        <p>“{{ site.blog_quote | escape }}”</p>
+        <footer>
+          <a href="{{ site.blog_quote_url }}">{{ site.blog_quote_source | escape }}</a>
+          <span>{{ site.blog_quote_translation | escape }}</span>
+        </footer>
+      </blockquote>
+    {% endif %}
+    {% if blog_description_size > 0 %}
+      <h2>{{ site.blog_description }}</h2>
+    {% endif %}
   </div>
   {% endif %}
 
