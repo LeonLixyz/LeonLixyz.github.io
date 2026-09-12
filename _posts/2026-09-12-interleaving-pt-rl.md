@@ -1,6 +1,6 @@
 ---
 layout: distill
-title: "Interleaving pretraining and RL: what carries through?"
+title: "Beyond pretraining then posttraining: an exploration of interleaving NTP and RL"
 description: Experiments in chess and math track pretraining loss, intermediate gains, and what survives final reinforcement learning.
 date: 2026-09-12
 permalink: /blog/2026/interleaving-pt-rl/
