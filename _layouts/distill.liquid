@@ -2,6 +2,9 @@
 <html>
   <head>
     {% include head.liquid %}
+    {% for stylesheet in page.custom_stylesheets %}
+      <link rel="stylesheet" href="{{ stylesheet | relative_url }}">
+    {% endfor %}
     {% if site.enable_medium_zoom %}
       <!-- Medium Zoom JS -->
       <script
@@ -108,7 +111,9 @@
         <d-citation-list></d-citation-list>
       </d-appendix>
 
-      <d-bibliography src="{{ page.bibliography | prepend: '/assets/bibliography/' | relative_url }}"></d-bibliography>
+      {% if page.bibliography %}
+        <d-bibliography src="{{ page.bibliography | prepend: '/assets/bibliography/' | relative_url }}"></d-bibliography>
+      {% endif %}
 
       {% if site.disqus_shortname and page.disqus_comments %}{% include disqus.liquid %}{% endif %}
       {% if site.giscus.repo and page.giscus_comments %}

@@ -1,0 +1,23 @@
+<figure class="fig l-body-outset" id="fig-deltanet-ttt">
+  <div class="fig-head">
+    <span class="fig-tag">Figure</span>
+    <p class="fig-title">The same rank-one update: context state vs fast weights</p>
+  </div>
+  <div class="fig-body">
+    <svg
+      class="dctxsvg"
+      id="dctx-svg"
+      viewBox="0 0 660 300"
+      role="img"
+      aria-label="Animation: DeltaNet writes a rank-one correction into sequence-local context state while TTT-Linear writes the same correction into fast weights"
+    ></svg>
+    <div class="controls">
+      <button class="btn" id="dctx-toggle">&#9208; pause</button><span class="readout" id="dctx-status" style="margin-left:8px">running&hellip;</span>
+    </div>
+  </div>
+  <figcaption>
+    DeltaNet and TTT-Linear are the clean identity. DeltaNet stores the correction in a sequence-local recurrent state $S$; TTT-Linear stores the same
+    correction in a temporary linear weight matrix $W$. The math is the same rank-one write, but the storage location is different, and both are
+    normally wiped unless another system saves and consolidates the result.
+  </figcaption>
+</figure>

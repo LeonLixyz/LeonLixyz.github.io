@@ -10,6 +10,12 @@
   --global-text-color: #{$black-color};
   --global-text-color-light: #{$grey-color};
   --global-theme-color: #{$columbia-blue-3-color};
+  --global-hf-color: #ff8c00;
+  --global-paper-link-color: #b31b1b;
+  --global-code-link-color: #24292f;
+  --global-modal-link-color: #16803c;
+  --global-profile-link-color: #0a66c2;
+  --global-substack-link-color: #bd4900;
   --global-hover-color: #{$columbia-blue-color};
   --global-hover-text-color: #{$white-color};
   --global-footer-bg-color: #{$white-color};
@@ -75,6 +81,12 @@ html[data-theme="dark"] {
   --global-text-color: #{$grey-color-light};
   --global-text-color-light: #{$grey-color};
   --global-theme-color: #{$cyan-color};
+  --global-hf-color: #ff8c00;
+  --global-paper-link-color: #ff8585;
+  --global-code-link-color: #e6edf3;
+  --global-modal-link-color: #59d68c;
+  --global-profile-link-color: #7cb9ff;
+  --global-substack-link-color: #ff9b64;
   --global-hover-color: #{$cyan-color};
   --global-hover-text-color: #{$white-color};
   --global-footer-bg-color: #{$white-color};

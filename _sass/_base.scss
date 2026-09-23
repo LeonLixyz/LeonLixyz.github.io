@@ -37,10 +37,10 @@ table {
 
 a,
 table.table a {
-  color: var(--global-theme-color);
+  color: var(--link-color, var(--global-theme-color));
 
   &:hover {
-    color: var(--global-theme-color);
+    color: var(--link-color, var(--global-theme-color));
     text-decoration: underline;
   }
 
@@ -441,16 +441,22 @@ a:not(.navbar-brand):not(.nav-link):hover {
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* General links (not publication links) */
+/* Shared link colors also apply to inline links in news and blog posts. */
 a:not(.navbar-brand):not(.nav-link):not(.publication-link) {
-  color: var(--global-theme-color) !important;
+  color: var(--link-color, var(--global-theme-color)) !important;
   padding: 1px 4px;
   margin: -1px -4px;
+
+  &:hover,
+  &:focus-visible {
+    background-color: var(--link-hover-bg, rgba(0, 119, 200, 0.1));
+    color: var(--link-color, var(--global-theme-color)) !important;
+  }
 }
 
-a:not(.navbar-brand):not(.nav-link):not(.publication-link):hover {
-  background-color: rgba(0, 119, 200, 0.1);
-  color: #0077c8 !important;
+a:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 3px;
 }
 
 /* Button hover effects - ensure all buttons get upward movement */
@@ -469,25 +475,67 @@ a:not(.navbar-brand):not(.nav-link):not(.publication-link):hover {
   display: inline-block;
 }
 
-.publication-link:hover {
+.publication-link:hover,
+.publication-link:focus-visible {
+  background-color: var(--link-hover-bg, rgba(0, 119, 200, 0.1));
+  color: var(--link-color, var(--global-theme-color));
   transform: translateY(-1px);
   text-decoration: none !important;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.paper-link:hover {
-  background-color: rgba(220, 53, 69, 0.1);
-  color: #dc3545 !important;
+/* Set the palette by resource so new links inherit it automatically. */
+.paper-link,
+a[href^="https://arxiv.org/"],
+a[href^="http://arxiv.org/"],
+a[href^="https://doi.org/"],
+a[href^="https://alphaxiv.org/"],
+a[href^="https://www.alphaxiv.org/"]
+{
+  --link-color: var(--global-paper-link-color);
+  --link-hover-bg: rgba(179, 27, 27, 0.1);
+
+  .news & {
+    --link-color: var(--global-theme-color);
+    --link-hover-bg: rgba(0, 119, 200, 0.1);
+  }
 }
 
-.code-link:hover {
-  background-color: rgba(51, 51, 51, 0.1);
-  color: #333 !important;
+.code-link,
+a[href^="https://github.com/"],
+a[href^="https://gist.github.com/"],
+a[href^="https://x.com/"],
+a[href^="https://twitter.com/"]
+{
+  --link-color: var(--global-code-link-color);
+  --link-hover-bg: rgba(127, 127, 127, 0.12);
 }
 
-.hf-link:hover {
-  background-color: rgba(255, 140, 0, 0.1);
-  color: #ff8c00 !important;
+.hf-link,
+a[href^="https://huggingface.co/"]
+{
+  --link-color: var(--global-hf-color);
+  --link-hover-bg: rgba(255, 140, 0, 0.12);
+}
+
+a[href^="https://modal.com/"],
+a[title="CV"] {
+  --link-color: var(--global-modal-link-color);
+  --link-hover-bg: rgba(22, 128, 60, 0.1);
+}
+
+a[href^="https://linkedin.com/"],
+a[href^="https://www.linkedin.com/"],
+a[href^="https://scholar.google.com/"]
+{
+  --link-color: var(--global-profile-link-color);
+  --link-hover-bg: rgba(10, 102, 194, 0.1);
+}
+
+a[href^="https://substack.com/"],
+a[href*=".substack.com/"] {
+  --link-color: var(--global-substack-link-color);
+  --link-hover-bg: rgba(255, 103, 25, 0.1);
 }
 
 /* Social media icons with original brand colors */
@@ -606,12 +654,12 @@ a:not(.navbar-brand):not(.nav-link):not(.publication-link):hover {
   padding: 2px 4px;
   margin: -2px -4px;
   transition: all 0.3s ease;
-  color: #dc3545 !important;
+  color: var(--link-color, var(--global-paper-link-color)) !important;
 }
 
 .title a:hover {
-  background-color: rgba(220, 53, 69, 0.1);
-  color: #dc3545 !important;
+  background-color: var(--link-hover-bg, rgba(179, 27, 27, 0.1));
+  color: var(--link-color, var(--global-paper-link-color)) !important;
   text-decoration: none !important;
   transform: translateY(-1px);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -649,7 +697,7 @@ a:not(.navbar-brand):not(.nav-link):not(.publication-link):hover {
 }
 
 .post .news .news-title {
-  color: var(--global-theme-color) !important;
+  color: var(--link-color, var(--global-theme-color)) !important;
 }
 
 .post .news p,
@@ -685,7 +733,7 @@ div.post article .news div {
 
 /* Ensure news titles remain theme colored */
 div.post article .news .news-title {
-  color: var(--global-theme-color) !important;
+  color: var(--link-color, var(--global-theme-color)) !important;
 }
 
 #light-toggle,
@@ -1081,13 +1129,13 @@ footer.sticky-bottom {
           /* Remove ugly underlines from collaborator names */
           border-bottom: none !important;
           text-decoration: none !important;
-          color: var(--global-theme-color);
+          color: var(--link-color, var(--global-theme-color));
           transition: all 0.2s ease;
 
           &:hover {
             text-decoration: none !important;
             border-bottom: none !important;
-            color: var(--global-hover-color) !important;
+            color: var(--link-color, var(--global-hover-color)) !important;
             transform: translateY(-1px) !important;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) !important;
           }

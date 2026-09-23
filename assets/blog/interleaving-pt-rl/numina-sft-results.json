@@ -1,0 +1,750 @@
+{
+  "task_name": "Numina-Llama3.2-3B-RL-3000",
+  "generated_at": "2026-09-19T15:13:55.956888+00:00",
+  "matrix_version": "numina-llama32-3b-chat8k-20260913",
+  "evaluation_version": "numina-llama32-3b-eval-20260918-exp1-v3",
+  "aggregate": {
+    "experiments_complete": 5,
+    "experiments_total": 5,
+    "stages_running": 0,
+    "stages_authenticating": 0,
+    "evaluations_complete": 13,
+    "evaluations_total": 13
+  },
+  "experiments": [
+    {
+      "key": "1",
+      "label": "Full SFT → full RL 3,000",
+      "stage_keys": ["sft_a", "sft_full", "exp1_final_rl"],
+      "final_stage_keys": ["exp1_final_rl"]
+    },
+    {
+      "key": "2",
+      "label": "SFT A → RL A 1,500 → SFT B (continue RL weights) → RL B 1,500",
+      "stage_keys": ["sft_a", "rl_a", "exp2_sft_b", "exp2_final_rl"],
+      "final_stage_keys": ["exp2_final_rl"]
+    },
+    {
+      "key": "3",
+      "label": "SFT A → RL A 1,500 → SFT B + chronological successful traces (reset to SFT A) → RL B 1,500",
+      "stage_keys": ["sft_a", "rl_a", "exp3_sft_b", "exp3_final_rl"],
+      "final_stage_keys": ["exp3_final_rl"]
+    },
+    {
+      "key": "4",
+      "label": "SFT A → RL full 1,500 → SFT B (continue RL weights) → RL full 1,500",
+      "stage_keys": ["sft_a", "rl_full", "exp4_sft_b", "exp4_final_rl"],
+      "final_stage_keys": ["exp4_final_rl"]
+    },
+    {
+      "key": "5",
+      "label": "SFT A → RL full 1,500 → SFT B + chronological successful traces (reset to SFT A) → RL full 1,500",
+      "stage_keys": ["sft_a", "rl_full", "exp5_sft_b", "exp5_final_rl"],
+      "final_stage_keys": ["exp5_final_rl"]
+    }
+  ],
+  "stages": [
+    {
+      "key": "sft_a",
+      "label": "Shared SFT A",
+      "state": "complete",
+      "metrics": {
+        "endpoint_validation_ce": 0.47701005349929637,
+        "endpoint_validation_ppl": 1.6112496426699632,
+        "endpoint_validation_records": 1036,
+        "benchmarks": {
+          "gsm8k": {
+            "correct": 866,
+            "invalid_references": 0,
+            "mean_response_tokens": 289.2228961334344,
+            "pass_at_1": 0.6565579984836998,
+            "scorable": 1319,
+            "state": "complete",
+            "total": 1319,
+            "truncated": 15,
+            "unparseable": 25,
+            "valid_reference_pass_at_1": 0.6565579984836998,
+            "length_limited": 15,
+            "missing_final_answer": 25
+          },
+          "math": {
+            "correct": 166,
+            "invalid_references": 0,
+            "mean_response_tokens": 898.826,
+            "pass_at_1": 0.332,
+            "scorable": 500,
+            "state": "complete",
+            "total": 500,
+            "truncated": 37,
+            "unparseable": 11,
+            "valid_reference_pass_at_1": 0.332,
+            "length_limited": 37,
+            "missing_final_answer": 11
+          },
+          "polaris_heldout": {
+            "correct": 80,
+            "invalid_references": 42,
+            "mean_response_tokens": 2093.06640625,
+            "pass_at_1": 0.078125,
+            "scorable": 982,
+            "state": "complete",
+            "total": 1024,
+            "truncated": 201,
+            "unparseable": 29,
+            "valid_reference_pass_at_1": 0.0814663951120163,
+            "length_limited": 201,
+            "missing_final_answer": 29
+          }
+        }
+      }
+    },
+    {
+      "key": "sft_full",
+      "label": "Baseline · complete SFT",
+      "state": "complete",
+      "metrics": {
+        "endpoint_validation_ce": 0.4454599068652727,
+        "endpoint_validation_ppl": 1.5612080410452387,
+        "endpoint_validation_records": 1036,
+        "benchmarks": {
+          "gsm8k": {
+            "correct": 931,
+            "invalid_references": 0,
+            "mean_response_tokens": 251.61182714177406,
+            "pass_at_1": 0.7058377558756633,
+            "scorable": 1319,
+            "state": "complete",
+            "total": 1319,
+            "truncated": 8,
+            "unparseable": 27,
+            "valid_reference_pass_at_1": 0.7058377558756633,
+            "length_limited": 8,
+            "missing_final_answer": 27
+          },
+          "math": {
+            "correct": 195,
+            "invalid_references": 0,
+            "mean_response_tokens": 881.292,
+            "pass_at_1": 0.39,
+            "scorable": 500,
+            "state": "complete",
+            "total": 500,
+            "truncated": 34,
+            "unparseable": 8,
+            "valid_reference_pass_at_1": 0.39,
+            "length_limited": 34,
+            "missing_final_answer": 8
+          },
+          "polaris_heldout": {
+            "correct": 78,
+            "invalid_references": 42,
+            "mean_response_tokens": 1835.796875,
+            "pass_at_1": 0.076171875,
+            "scorable": 982,
+            "state": "complete",
+            "total": 1024,
+            "truncated": 167,
+            "unparseable": 25,
+            "valid_reference_pass_at_1": 0.07942973523421588,
+            "length_limited": 167,
+            "missing_final_answer": 25
+          }
+        }
+      }
+    },
+    {
+      "key": "rl_a",
+      "label": "Shared first RL · A",
+      "state": "complete",
+      "metrics": {
+        "endpoint_validation_ce": 0.6346026517475917,
+        "endpoint_validation_ppl": 1.886272485455688,
+        "endpoint_validation_records": 1036,
+        "benchmarks": {
+          "gsm8k": {
+            "correct": 901,
+            "invalid_references": 0,
+            "mean_response_tokens": 258.27217589082636,
+            "pass_at_1": 0.6830932524639879,
+            "scorable": 1319,
+            "state": "complete",
+            "total": 1319,
+            "truncated": 10,
+            "unparseable": 17,
+            "valid_reference_pass_at_1": 0.6830932524639879,
+            "length_limited": 10,
+            "missing_final_answer": 17
+          },
+          "math": {
+            "correct": 159,
+            "invalid_references": 0,
+            "mean_response_tokens": 562.89,
+            "pass_at_1": 0.318,
+            "scorable": 500,
+            "state": "complete",
+            "total": 500,
+            "truncated": 17,
+            "unparseable": 4,
+            "valid_reference_pass_at_1": 0.318,
+            "length_limited": 17,
+            "missing_final_answer": 4
+          },
+          "polaris_heldout": {
+            "correct": 148,
+            "invalid_references": 42,
+            "mean_response_tokens": 708.67578125,
+            "pass_at_1": 0.14453125,
+            "scorable": 982,
+            "state": "complete",
+            "total": 1024,
+            "truncated": 27,
+            "unparseable": 8,
+            "valid_reference_pass_at_1": 0.15071283095723015,
+            "length_limited": 27,
+            "missing_final_answer": 8
+          }
+        }
+      }
+    },
+    {
+      "key": "rl_full",
+      "label": "Shared first RL · full",
+      "state": "complete",
+      "metrics": {
+        "endpoint_validation_ce": 0.6161238100806785,
+        "endpoint_validation_ppl": 1.8517364307394346,
+        "endpoint_validation_records": 1036,
+        "benchmarks": {
+          "gsm8k": {
+            "correct": 930,
+            "invalid_references": 0,
+            "mean_response_tokens": 301.5231235784685,
+            "pass_at_1": 0.7050796057619408,
+            "scorable": 1319,
+            "state": "complete",
+            "total": 1319,
+            "truncated": 11,
+            "unparseable": 8,
+            "valid_reference_pass_at_1": 0.7050796057619408,
+            "length_limited": 11,
+            "missing_final_answer": 8
+          },
+          "math": {
+            "correct": 153,
+            "invalid_references": 0,
+            "mean_response_tokens": 875.478,
+            "pass_at_1": 0.306,
+            "scorable": 500,
+            "state": "complete",
+            "total": 500,
+            "truncated": 33,
+            "unparseable": 6,
+            "valid_reference_pass_at_1": 0.306,
+            "length_limited": 33,
+            "missing_final_answer": 6
+          },
+          "polaris_heldout": {
+            "correct": 143,
+            "invalid_references": 42,
+            "mean_response_tokens": 1158.9208984375,
+            "pass_at_1": 0.1396484375,
+            "scorable": 982,
+            "state": "complete",
+            "total": 1024,
+            "truncated": 79,
+            "unparseable": 12,
+            "valid_reference_pass_at_1": 0.14562118126272913,
+            "length_limited": 79,
+            "missing_final_answer": 12
+          }
+        }
+      }
+    },
+    {
+      "key": "exp1_final_rl",
+      "label": "Baseline · final RL",
+      "state": "complete",
+      "metrics": {
+        "endpoint_validation_ce": 0.7439527446261511,
+        "endpoint_validation_ppl": 2.104236607578429,
+        "endpoint_validation_records": 1036,
+        "benchmarks": {
+          "gsm8k": {
+            "correct": 1006,
+            "invalid_references": 0,
+            "mean_response_tokens": 286.8362395754359,
+            "pass_at_1": 0.7626990144048522,
+            "scorable": 1319,
+            "state": "complete",
+            "total": 1319,
+            "truncated": 1,
+            "unparseable": 3,
+            "valid_reference_pass_at_1": 0.7626990144048522,
+            "length_limited": 1,
+            "missing_final_answer": 3
+          },
+          "math": {
+            "correct": 186,
+            "invalid_references": 0,
+            "mean_response_tokens": 467.488,
+            "pass_at_1": 0.372,
+            "scorable": 500,
+            "state": "complete",
+            "total": 500,
+            "truncated": 4,
+            "unparseable": 4,
+            "valid_reference_pass_at_1": 0.372,
+            "length_limited": 4,
+            "missing_final_answer": 4
+          },
+          "polaris_heldout": {
+            "correct": 171,
+            "invalid_references": 42,
+            "mean_response_tokens": 711.6357421875,
+            "pass_at_1": 0.1669921875,
+            "scorable": 982,
+            "state": "complete",
+            "total": 1024,
+            "truncated": 12,
+            "unparseable": 2,
+            "valid_reference_pass_at_1": 0.17413441955193482,
+            "length_limited": 12,
+            "missing_final_answer": 2
+          }
+        }
+      }
+    },
+    {
+      "key": "exp2_sft_b",
+      "label": "Direct continuation · A/B · SFT B",
+      "state": "complete",
+      "metrics": {
+        "endpoint_validation_ce": 0.44411332693299405,
+        "endpoint_validation_ppl": 1.5591071644436472,
+        "endpoint_validation_records": 1036,
+        "benchmarks": {
+          "gsm8k": {
+            "correct": 917,
+            "invalid_references": 0,
+            "mean_response_tokens": 243.85064442759668,
+            "pass_at_1": 0.6952236542835482,
+            "scorable": 1319,
+            "state": "complete",
+            "total": 1319,
+            "truncated": 7,
+            "unparseable": 27,
+            "valid_reference_pass_at_1": 0.6952236542835482,
+            "length_limited": 7,
+            "missing_final_answer": 27
+          },
+          "math": {
+            "correct": 194,
+            "invalid_references": 0,
+            "mean_response_tokens": 790.33,
+            "pass_at_1": 0.388,
+            "scorable": 500,
+            "state": "complete",
+            "total": 500,
+            "truncated": 30,
+            "unparseable": 8,
+            "valid_reference_pass_at_1": 0.388,
+            "length_limited": 30,
+            "missing_final_answer": 8
+          },
+          "polaris_heldout": {
+            "correct": 101,
+            "invalid_references": 42,
+            "mean_response_tokens": 1689.6513671875,
+            "pass_at_1": 0.0986328125,
+            "scorable": 982,
+            "state": "complete",
+            "total": 1024,
+            "truncated": 147,
+            "unparseable": 20,
+            "valid_reference_pass_at_1": 0.10285132382892057,
+            "length_limited": 147,
+            "missing_final_answer": 20
+          }
+        }
+      }
+    },
+    {
+      "key": "exp2_final_rl",
+      "label": "Direct continuation · A/B · final RL",
+      "state": "complete",
+      "metrics": {
+        "endpoint_validation_ce": 0.624620601080612,
+        "endpoint_validation_ppl": 1.867537281378787,
+        "endpoint_validation_records": 1036,
+        "benchmarks": {
+          "gsm8k": {
+            "correct": 987,
+            "invalid_references": 0,
+            "mean_response_tokens": 209.10159211523882,
+            "pass_at_1": 0.7482941622441244,
+            "scorable": 1319,
+            "state": "complete",
+            "total": 1319,
+            "truncated": 2,
+            "unparseable": 21,
+            "valid_reference_pass_at_1": 0.7482941622441244,
+            "length_limited": 2,
+            "missing_final_answer": 21
+          },
+          "math": {
+            "correct": 200,
+            "invalid_references": 0,
+            "mean_response_tokens": 381.094,
+            "pass_at_1": 0.4,
+            "scorable": 500,
+            "state": "complete",
+            "total": 500,
+            "truncated": 6,
+            "unparseable": 3,
+            "valid_reference_pass_at_1": 0.4,
+            "length_limited": 6,
+            "missing_final_answer": 3
+          },
+          "polaris_heldout": {
+            "correct": 165,
+            "invalid_references": 42,
+            "mean_response_tokens": 666.4130859375,
+            "pass_at_1": 0.1611328125,
+            "scorable": 982,
+            "state": "complete",
+            "total": 1024,
+            "truncated": 17,
+            "unparseable": 2,
+            "valid_reference_pass_at_1": 0.1680244399185336,
+            "length_limited": 17,
+            "missing_final_answer": 2
+          }
+        }
+      }
+    },
+    {
+      "key": "exp3_sft_b",
+      "label": "SFT + traces · A/B · SFT B",
+      "state": "complete",
+      "metrics": {
+        "endpoint_validation_ce": 0.45337327922139914,
+        "endpoint_validation_ppl": 1.5736114733619284,
+        "endpoint_validation_records": 1036,
+        "benchmarks": {
+          "gsm8k": {
+            "correct": 943,
+            "invalid_references": 0,
+            "mean_response_tokens": 246.86429112964368,
+            "pass_at_1": 0.7149355572403336,
+            "scorable": 1319,
+            "state": "complete",
+            "total": 1319,
+            "truncated": 7,
+            "unparseable": 26,
+            "valid_reference_pass_at_1": 0.7149355572403336,
+            "length_limited": 7,
+            "missing_final_answer": 26
+          },
+          "math": {
+            "correct": 198,
+            "invalid_references": 0,
+            "mean_response_tokens": 729.114,
+            "pass_at_1": 0.396,
+            "scorable": 500,
+            "state": "complete",
+            "total": 500,
+            "truncated": 27,
+            "unparseable": 9,
+            "valid_reference_pass_at_1": 0.396,
+            "length_limited": 27,
+            "missing_final_answer": 9
+          },
+          "polaris_heldout": {
+            "correct": 163,
+            "invalid_references": 42,
+            "mean_response_tokens": 774.2861328125,
+            "pass_at_1": 0.1591796875,
+            "scorable": 982,
+            "state": "complete",
+            "total": 1024,
+            "truncated": 32,
+            "unparseable": 8,
+            "valid_reference_pass_at_1": 0.1659877800407332,
+            "length_limited": 32,
+            "missing_final_answer": 8
+          }
+        }
+      }
+    },
+    {
+      "key": "exp3_final_rl",
+      "label": "SFT + traces · A/B · final RL",
+      "state": "complete",
+      "metrics": {
+        "endpoint_validation_ce": 0.5363311016264217,
+        "endpoint_validation_ppl": 1.7097225427132205,
+        "endpoint_validation_records": 1036,
+        "benchmarks": {
+          "gsm8k": {
+            "correct": 961,
+            "invalid_references": 0,
+            "mean_response_tokens": 245.4518574677786,
+            "pass_at_1": 0.7285822592873389,
+            "scorable": 1319,
+            "state": "complete",
+            "total": 1319,
+            "truncated": 6,
+            "unparseable": 20,
+            "valid_reference_pass_at_1": 0.7285822592873389,
+            "length_limited": 6,
+            "missing_final_answer": 20
+          },
+          "math": {
+            "correct": 203,
+            "invalid_references": 0,
+            "mean_response_tokens": 424.548,
+            "pass_at_1": 0.406,
+            "scorable": 500,
+            "state": "complete",
+            "total": 500,
+            "truncated": 6,
+            "unparseable": 2,
+            "valid_reference_pass_at_1": 0.406,
+            "length_limited": 6,
+            "missing_final_answer": 2
+          },
+          "polaris_heldout": {
+            "correct": 177,
+            "invalid_references": 42,
+            "mean_response_tokens": 731.1083984375,
+            "pass_at_1": 0.1728515625,
+            "scorable": 982,
+            "state": "complete",
+            "total": 1024,
+            "truncated": 24,
+            "unparseable": 9,
+            "valid_reference_pass_at_1": 0.18024439918533605,
+            "length_limited": 24,
+            "missing_final_answer": 9
+          }
+        }
+      }
+    },
+    {
+      "key": "exp4_sft_b",
+      "label": "Direct continuation · full/full · SFT B",
+      "state": "complete",
+      "metrics": {
+        "endpoint_validation_ce": 0.4439604469329316,
+        "endpoint_validation_ppl": 1.558868826359277,
+        "endpoint_validation_records": 1036,
+        "benchmarks": {
+          "gsm8k": {
+            "correct": 929,
+            "invalid_references": 0,
+            "mean_response_tokens": 227.81046247156937,
+            "pass_at_1": 0.7043214556482184,
+            "scorable": 1319,
+            "state": "complete",
+            "total": 1319,
+            "truncated": 4,
+            "unparseable": 26,
+            "valid_reference_pass_at_1": 0.7043214556482184,
+            "length_limited": 4,
+            "missing_final_answer": 26
+          },
+          "math": {
+            "correct": 197,
+            "invalid_references": 0,
+            "mean_response_tokens": 769.948,
+            "pass_at_1": 0.394,
+            "scorable": 500,
+            "state": "complete",
+            "total": 500,
+            "truncated": 29,
+            "unparseable": 10,
+            "valid_reference_pass_at_1": 0.394,
+            "length_limited": 29,
+            "missing_final_answer": 10
+          },
+          "polaris_heldout": {
+            "correct": 96,
+            "invalid_references": 42,
+            "mean_response_tokens": 1537.8037109375,
+            "pass_at_1": 0.09375,
+            "scorable": 982,
+            "state": "complete",
+            "total": 1024,
+            "truncated": 125,
+            "unparseable": 20,
+            "valid_reference_pass_at_1": 0.09775967413441955,
+            "length_limited": 125,
+            "missing_final_answer": 20
+          }
+        }
+      }
+    },
+    {
+      "key": "exp4_final_rl",
+      "label": "Direct continuation · full/full · final RL",
+      "state": "complete",
+      "metrics": {
+        "endpoint_validation_ce": 0.6218239539901107,
+        "endpoint_validation_ppl": 1.8623217350949202,
+        "endpoint_validation_records": 1036,
+        "benchmarks": {
+          "gsm8k": {
+            "correct": 977,
+            "invalid_references": 0,
+            "mean_response_tokens": 250.6292645943897,
+            "pass_at_1": 0.7407126611068992,
+            "scorable": 1319,
+            "state": "complete",
+            "total": 1319,
+            "truncated": 6,
+            "unparseable": 21,
+            "valid_reference_pass_at_1": 0.7407126611068992,
+            "length_limited": 6,
+            "missing_final_answer": 21
+          },
+          "math": {
+            "correct": 198,
+            "invalid_references": 0,
+            "mean_response_tokens": 504.122,
+            "pass_at_1": 0.396,
+            "scorable": 500,
+            "state": "complete",
+            "total": 500,
+            "truncated": 8,
+            "unparseable": 2,
+            "valid_reference_pass_at_1": 0.396,
+            "length_limited": 8,
+            "missing_final_answer": 2
+          },
+          "polaris_heldout": {
+            "correct": 160,
+            "invalid_references": 42,
+            "mean_response_tokens": 917.529296875,
+            "pass_at_1": 0.15625,
+            "scorable": 982,
+            "state": "complete",
+            "total": 1024,
+            "truncated": 23,
+            "unparseable": 4,
+            "valid_reference_pass_at_1": 0.1629327902240326,
+            "length_limited": 23,
+            "missing_final_answer": 4
+          }
+        }
+      }
+    },
+    {
+      "key": "exp5_sft_b",
+      "label": "SFT + traces · full/full · SFT B",
+      "state": "complete",
+      "metrics": {
+        "endpoint_validation_ce": 0.4519866294032084,
+        "endpoint_validation_ppl": 1.571430937467733,
+        "endpoint_validation_records": 1036,
+        "benchmarks": {
+          "gsm8k": {
+            "correct": 918,
+            "invalid_references": 0,
+            "mean_response_tokens": 248.28809704321455,
+            "pass_at_1": 0.6959818043972706,
+            "scorable": 1319,
+            "state": "complete",
+            "total": 1319,
+            "truncated": 7,
+            "unparseable": 23,
+            "valid_reference_pass_at_1": 0.6959818043972706,
+            "length_limited": 7,
+            "missing_final_answer": 23
+          },
+          "math": {
+            "correct": 192,
+            "invalid_references": 0,
+            "mean_response_tokens": 876.982,
+            "pass_at_1": 0.384,
+            "scorable": 500,
+            "state": "complete",
+            "total": 500,
+            "truncated": 34,
+            "unparseable": 6,
+            "valid_reference_pass_at_1": 0.384,
+            "length_limited": 34,
+            "missing_final_answer": 6
+          },
+          "polaris_heldout": {
+            "correct": 156,
+            "invalid_references": 42,
+            "mean_response_tokens": 1314.9912109375,
+            "pass_at_1": 0.15234375,
+            "scorable": 982,
+            "state": "complete",
+            "total": 1024,
+            "truncated": 102,
+            "unparseable": 10,
+            "valid_reference_pass_at_1": 0.15885947046843177,
+            "length_limited": 102,
+            "missing_final_answer": 10
+          }
+        }
+      }
+    },
+    {
+      "key": "exp5_final_rl",
+      "label": "SFT + traces · full/full · final RL",
+      "state": "complete",
+      "metrics": {
+        "endpoint_validation_ce": 0.5426770493582548,
+        "endpoint_validation_ppl": 1.720606851706342,
+        "endpoint_validation_records": 1036,
+        "benchmarks": {
+          "gsm8k": {
+            "correct": 953,
+            "invalid_references": 0,
+            "mean_response_tokens": 244.33206974981047,
+            "pass_at_1": 0.7225170583775588,
+            "scorable": 1319,
+            "state": "complete",
+            "total": 1319,
+            "truncated": 5,
+            "unparseable": 23,
+            "valid_reference_pass_at_1": 0.7225170583775588,
+            "length_limited": 5,
+            "missing_final_answer": 23
+          },
+          "math": {
+            "correct": 197,
+            "invalid_references": 0,
+            "mean_response_tokens": 651.176,
+            "pass_at_1": 0.394,
+            "scorable": 500,
+            "state": "complete",
+            "total": 500,
+            "truncated": 19,
+            "unparseable": 3,
+            "valid_reference_pass_at_1": 0.394,
+            "length_limited": 19,
+            "missing_final_answer": 3
+          },
+          "polaris_heldout": {
+            "correct": 156,
+            "invalid_references": 42,
+            "mean_response_tokens": 1384.6337890625,
+            "pass_at_1": 0.15234375,
+            "scorable": 982,
+            "state": "complete",
+            "total": 1024,
+            "truncated": 109,
+            "unparseable": 7,
+            "valid_reference_pass_at_1": 0.15885947046843177,
+            "length_limited": 109,
+            "missing_final_answer": 7
+          }
+        }
+      }
+    }
+  ]
+}

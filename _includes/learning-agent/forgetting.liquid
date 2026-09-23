@@ -1,0 +1,34 @@
+<figure class="fig l-body-outset static">
+  <div class="fig-head">
+    <span class="fig-tag">Figure</span>
+    <p class="fig-title">Where decay belongs: long-term store, not working memory</p>
+  </div>
+  <div class="fig-body">
+    <div class="fbox-grid">
+      <div class="fbox ok">
+        <span class="mark">&#10003;</span>
+        <div class="tag">Working memory</div>
+        <h5>Keep everything</h5>
+        <p>Working memory should be lossless: full recall of the current context. This is what attention does, and it's correct.</p>
+      </div>
+      <div class="fbox ok">
+        <span class="mark">&#10003;</span>
+        <div class="tag">Long-term</div>
+        <h5>Forget the details</h5>
+        <p>
+          Consolidation into knowledge <em>should</em> drop particulars to form concepts. Forgetting here is abstraction, the point, not the cost.
+        </p>
+      </div>
+      <div class="fbox bad">
+        <span class="mark">&#10007;</span>
+        <div class="tag">The error</div>
+        <h5>Decay in working memory</h5>
+        <p>Mamba / SSM / linear attention / TTT bake forgetting into the working-memory state. Right idea, wrong layer.</p>
+      </div>
+    </div>
+  </div>
+  <figcaption>
+    Forgetting-as-abstraction belongs in the slow long-term store. Compressed-state models misapply it to working memory, where attention's refusal to
+    forget is exactly what you want.
+  </figcaption>
+</figure>

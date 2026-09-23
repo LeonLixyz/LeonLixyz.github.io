@@ -1,7 +1,7 @@
 ---
 layout: distill
-title: "Beyond pretraining then posttraining: an exploration of interleaving NTP and RL"
-description: Experiments in chess and math track pretraining loss, intermediate gains, and what survives final reinforcement learning.
+title: "Beyond Pretraining Followed by Post-Training: An Exploration of Interleaving NTP and RL"
+description: Can earlier RL help a model learn from the data it sees next? We test this in five chess and math studies, before and after final RL.
 date: 2026-09-12
 permalink: /blog/2026/interleaving-pt-rl/
 tags: pretraining reinforcement-learning research
@@ -12,15 +12,27 @@ authors:
     affiliations:
       name: New York University
       url: https://www.nyu.edu/
+  - name: Jingyan Shen
+    url: https://jy-evangeline.github.io/
+    affiliations:
+      name: New York University
+      url: https://www.nyu.edu/
+  - name: Pavel Izmailov
+    url: https://izmailovpavel.github.io/
+    affiliations:
+      name: New York University
+      url: https://www.nyu.edu/
 toc:
-  - name: What we compare
-  - name: First chess study
-  - name: Second chess study
-  - name: Math
-  - name: What the experiments tell us
-  - name: Evaluation and limits
-  - name: Complete results
-  - name: Data and results
+  - name: "Why bring RL earlier?"
+  - name: "What we compare"
+  - name: "Chess: interleaving pretraining and RL"
+  - name: "Math: interleaving pretraining and RL"
+  - name: "Chess: interleaving SFT and RL"
+  - name: "Llama: interleaving SFT and RL"
+  - name: "What did we learn?"
+  - name: "Evaluation and limits"
+  - name: "Complete results"
+  - name: "Data and results"
 bibliography: interleaving-pt-rl.bib
 _styles: |
   d-article .interleave-table { overflow-x: auto; max-width: 100%; margin: 1.5rem 0; }
@@ -35,103 +47,149 @@ _styles: |
   d-article details summary { cursor: pointer; font-weight: 600; }
   d-article details .interleave-table { margin-bottom: 0; }
   d-article h2 { scroll-margin-top: 80px; }
+  d-article .interleave-text-table td { white-space: normal !important; text-align: left !important; }
+  d-article mjx-container[display="true"] { overflow-x: auto; overflow-y: hidden; max-width: 100%; padding: 0.7rem 0; }
 ---
 
-Pretraining and reinforcement learning optimize different objectives. Pretraining rewards predicting the training data; RL rewards successful behavior on a task. A natural question is whether alternating them can make the two stages work better together.
+People learn from both demonstrations and trial and error, often alternating between the two. We might study a worked example, try a problem ourselves, and then return to the example with a better sense of what we missed. Our attempts can shape what we learn from the explanations and examples that follow.
 
-We studied this in chess, first through a broad set of continuation and trace-training experiments, then through a second study with different rollout settings and RL data schedules. We also tested the main approaches in math.
+Language-model training, on the other hand, commonly follows a fixed sequence: pretraining, supervised fine-tuning (SFT), and then reinforcement learning (RL). Pretraining and SFT use next-token prediction (NTP) to learn from provided sequences, including worked solutions. RL then trains on the model’s sampled responses using reward feedback. In this sequence, the model finishes most of its learning from provided data before RL begins.
 
-**We have not found a consistent improvement in final task performance from interleaving.** But the intermediate checkpoints are informative: an approach can improve pretraining loss, retain more single-attempt success, or solve more problems within sixteen attempts without improving all three. Some of these gains also disappear by the end of final RL.
+This raises a question about the order of training: **can earlier RL help a model learn from the data it sees next?** Both NTP and RL can improve problem-solving performance. We ask whether progress through RL also helps subsequent NTP training, and whether alternating the two produces a better final model.
 
-We organize the experiments around two questions:
+We test this by inserting RL before pretraining or SFT is finished. The model then returns to NTP on the remaining data, sometimes mixed with successful responses generated during RL. We call these responses **traces**. A final RL stage completes each run.
 
-1. Does inserting RL help the subsequent pretraining stage?
-2. After all training is complete, is the model better than ordinary pretraining followed by RL?
+Across five studies in chess and math, **interleaving improves some intermediate checkpoints but does not consistently improve the final model**. Traces often raise intermediate pass@1, but the baseline usually catches up or finishes ahead after final RL. There are also positive final results: in Llama 3.2 3B, interleaving improves MATH-500 accuracy and Numina loss, while reducing GSM8K accuracy. We find no clear evidence that earlier RL makes subsequent NTP learning more efficient.
+
+<h2 id="why-bring-rl-earlier">Why bring RL earlier?</h2>
+
+Our earlier work found that pretraining loss predicts post-RL performance in the settings we studied, and that models pretrained for longer improve faster under RL. Here we ask about the reverse direction: can an RL-trained model learn better during further NTP training? [Understanding Reasoning from Pretraining to Post-Training](https://arxiv.org/abs/2607.16097)
+
+A model does not need to finish pretraining before it can solve useful tasks. RL on tasks it can already solve might develop strategies or representations that help it learn from later examples. The question is whether that benefit extends beyond the tasks used for RL.
+
+The two objectives can also pull the model in different directions. For a dataset $D$, NTP minimizes the average loss over supervised tokens:
+
+$$
+\mathcal{L}_{\mathrm{NTP}}(\theta;D)
+= -\frac{1}{N_D}\sum_{x\in D}\sum_t
+m_t(x)\log p_\theta(x_t\mid x_{\lt t}),
+\qquad N_D=\sum_{x\in D}\sum_t m_t(x).
+$$
+
+Here $\theta$ denotes the model parameters. The mask $m_t(x)$ is 1 when token $t$ contributes to the loss and 0 otherwise; $N_D$ counts those tokens. Pretraining uses text tokens as targets. SFT uses solution tokens, with prompts and any environment replies masked out. We use the same calculation on held-out data to measure loss.
+
+RL aims to increase the expected reward of generated responses:
+
+$$
+J(\theta)
+=\mathbb{E}_{q\sim Q,\;y\sim p_\theta(\cdot\mid q)}[r(q,y)].
+$$
+
+Here $Q$ is the training prompt distribution, $y$ is a sampled response, and $r(q,y)$ is its reward. This describes the task objective; the policy optimizer uses a separate update loss. Higher reward need not mean lower NTP loss. RL may favor successful responses that differ from the offline targets, and returning to NTP may undo some of those changes.
+
+We test two ways to use what RL produces: continue training from its weights, or train on its successful traces. With traces, we can also return to the earlier supervised checkpoint and transfer progress through the data alone.
+
+Recent work uses related forms of alternating training:
+
+- **MAI-Thinking-1** trains midtrained checkpoints on RL rollouts and then resumes RL. This helps recover from unstable runs and transfer progress to newer base checkpoints. It also mixes midtraining data with traces to preserve long-context behavior. [Report, §3.1.4](https://microsoft.ai/pdf/mai-thinking-1.pdf#page=34)
+- **Ring-Zero** selects and shortens successful RL trajectories, fine-tunes the original base model on them, and continues RL. The supervised stage aims to improve stability and control response length. [Paper, §3.1.2](https://arxiv.org/html/2607.12395v2#S3.SS1.SSS2)
+- **ReMiT** uses an RL-tuned reference model to change the weights on token losses during midtraining. It reports improvements in base-model evaluations and subsequent post-training. [Paper, §3](https://arxiv.org/html/2602.03075v1#S3)
+
+These methods use RL in different ways. Our experiments test simpler approaches: ordinary NTP continuation and training on successful traces. Success with the methods above does not guarantee that these simpler approaches will help with unfinished pretraining.
 
 <h2 id="what-we-compare">What we compare</h2>
 
-Our conventional baseline completes pretraining and then runs 3,000 RL updates. The interleaved PT experiments divide pretraining into two halves and place 1,500 RL updates between them, followed by another 1,500 RL updates at the end. Trace-only experiments complete pretraining before the first RL stage, then insert training on successful RL trajectories between the two RL stages.
+We ask two questions:
 
-There are two ways to transfer information from RL into supervised training. We can **continue from the RL weights**, or we can **train on traces generated during RL**. These choices can be combined. A trace-training stage can also restart from the earlier PT checkpoint, in which case the traces carry the information from RL while the RL weights are discarded.
+1. **Does earlier RL help the next NTP stage?** After training on the remaining data, we compare held-out loss and task performance with a model that has received no RL.
+2. **Does it improve the final model?** After all RL updates, we compare against a baseline that finishes supervised training before starting RL.
 
-<div class="interleave-table" markdown="1">
+At each stage, the differences from baseline are
 
-| Study         | Model / PT budget             | RL prompts × samples per update | RL data schedule                                    |
-| ------------- | ----------------------------- | ------------------------------- | --------------------------------------------------- |
-| Earlier chess | 47M parameters / 5B PT tokens | 256 × 8                         | Main final comparison: 28,419 prompts               |
-| Later chess   | 47M parameters / 5B PT tokens | 64 × 16                         | Full/full or disjoint A/B                           |
-| Math          | OLMo2 1B / 45B PT tokens      | 64 × 16                         | Full dataset for the three approaches reported here |
+$$
+\begin{aligned}
+\Delta\mathcal{L}_{\mathrm{NTP}}
+&=\mathcal{L}_{\mathrm{NTP}}(\theta_{\mathrm{interleaved}};D_{\mathrm{heldout}})
+-\mathcal{L}_{\mathrm{NTP}}(\theta_{\mathrm{baseline}};D_{\mathrm{heldout}}),\\
+\Delta P_k
+&=\operatorname{pass@}k(\theta_{\mathrm{interleaved}})
+-\operatorname{pass@}k(\theta_{\mathrm{baseline}}).
+\end{aligned}
+$$
+
+Negative $\Delta\mathcal{L}_{\mathrm{NTP}}$ means lower loss; positive $\Delta P_k$ means higher task success. Accuracy differences are in percentage points. We compare both before and after final RL because an intermediate gain may not survive the rest of training.
+
+NTP A and NTP B are the two parts of the supervised training. In the pretraining (PT) studies, they include pretraining data and the usual task-supervision mixture. In the SFT studies, they contain worked solutions and start from a fixed pretrained model.
+
+<div class="interleave-table interleave-text-table" markdown="1">
+
+| Route                      |                             Training sequence |                       What carries forward from RL |
+| -------------------------- | --------------------------------------------: | -------------------------------------------------: |
+| Baseline                   |                            NTP A → NTP B → RL |                                 No intermediate RL |
+| Direct continuation        |                     NTP A → RL₁ → NTP B → RL₂ |                                        RL₁ weights |
+| Trace mixing               | NTP A → RL₁ → NTP B + successful traces → RL₂ | Generated data; initialization specified per study |
+| Trace-only (earlier chess) |      Complete PT → RL₁ → trace training → RL₂ |           Generated data; no remaining ordinary PT |
 
 </div>
 
-Throughout the post, “PT” includes the ordinary supervised task data used by the experiment: chess SFT or math CoT data. Successful RL traces are additional data. Equal PT-token budgets and equal RL-update counts therefore do not make these comparisons equal in total compute.
+Training on traces can start from either the supervised checkpoint or the RL checkpoint. That choice matters. In the two SFT studies, direct continuation keeps the RL weights, while training on traces starts again from SFT A. We specify the starting checkpoint for each study below.
 
-We report held-out PT cross-entropy, or log loss, with lower values better. We also report sampled pass@k: the probability estimate of solving a problem in k attempts under the evaluation protocol. Pass@1 measures single-attempt success; pass@16 measures success within sixteen attempts. Neither should stand in for the other.
+The baseline receives 3,000 RL updates at the end. Interleaved runs receive 1,500 in the middle and 1,500 at the end. Before final RL, the interleaved model has therefore had 1,500 RL updates that the baseline has not. These intermediate comparisons do not use equal compute. Training on traces also adds tokens and updates, and some runs differ in optimizer resets and learning-rate schedules. **We match the stated data and RL update budgets, not total FLOPs.**
 
-<h2 id="first-chess-study">First chess study: what survives the return to PT?</h2>
+<div class="interleave-table interleave-text-table" markdown="1">
 
-We began with a broad investigation of the boundary between RL and pretraining. Beyond the conventional baseline, we tested two successive PT schedules without intervening RL; training on shuffled or chronological traces; traces followed by PT; traces mixed with PT; and direct continuation from RL weights. We also tested late trace replay and different choices for retaining or resetting AdamW state.
+| Study            |                            Model |           Supervised budget | RL prompts × samples |
+| ---------------- | -------------------------------: | --------------------------: | -------------------: |
+| Earlier chess PT |                              47M | 5B PT tokens + ordinary SFT |              256 × 8 |
+| Later chess PT   |                              47M | 5B PT tokens + ordinary SFT |              64 × 16 |
+| Math PT          |                         OLMo2 1B |         45B PT tokens + CoT |              64 × 16 |
+| Chess SFT        | 47M; fixed 9.18B-token PT parent |         77,717 SFT examples |              64 × 16 |
+| Math SFT         |                     Llama 3.2 3B | 823,505 Numina SFT examples |              64 × 16 |
 
-The split-PT control matters. Dividing PT into two schedules can itself change the result. Comparing an interleaved run only with one uninterrupted PT schedule would not isolate the contribution of RL.
+</div>
 
-Consider the direct-continuation experiment with fresh AdamW. It starts from 2.5B PT tokens, runs RL, and then trains on the remaining 2.5B PT tokens without adding RL traces. Before final RL, its results are:
+The two chess PT studies use **256 × 8** and **64 × 16** prompts × samples per RL update. We compare models within each study. Other differences in checkpoints, data, and evaluation mean that we cannot attribute differences between studies to the number of prompts or samples alone.
+
+We report cross-entropy, also called log loss, where lower is better. For task performance, we report sampled pass@k when multiple responses are available and label greedy evaluations separately. Pass@1 measures success in one sampled attempt; pass@k measures success within k attempts. The estimator is given below. Lower loss, higher pass@1, and higher pass@16 need not occur together.
+
+<h2 id="chess-interleaving-pretraining-and-rl">Chess: interleaving pretraining and RL</h2>
+
+<h3>First study: what survives a return to pretraining?</h3>
+
+We began by testing direct PT continuation, trace-only training, PT mixed with traces, different trace orders, and different ways to handle optimizer state. We also split PT into two schedules without inserting RL. This control lets us check whether a change comes from inserting RL or simply from splitting the PT schedule.
+
+The direct-continuation run trains on 2.5B PT tokens, runs RL, and then trains on the remaining 2.5B PT tokens with fresh AdamW and no RL traces. Before final RL:
 
 <div class="interleave-table" markdown="1">
 
 | Checkpoint                   | PT loss ↓ | Pass@1 (%) | Pass@2 (%) | Pass@4 (%) | Pass@8 (%) | Pass@16 (%) |
 | ---------------------------- | --------: | ---------: | ---------: | ---------: | ---------: | ----------: |
 | After first RL               |  0.540289 |      30.79 |      36.39 |      41.26 |      45.60 |       49.53 |
-| After direct PT2             |  0.507826 |      17.85 |      27.68 |      38.27 |      47.86 |       55.68 |
-| One 5B PT schedule, no RL    |  0.512429 |      19.11 |      29.06 |      39.58 |      49.21 |       57.30 |
-| Two 2.5B PT schedules, no RL |  0.507432 |      18.23 |      28.09 |      38.71 |      48.62 |       57.43 |
+| After direct PT continuation |  0.507826 |      17.85 |      27.68 |      38.27 |      47.86 |       55.68 |
+| One 5B PT schedule; no RL    |  0.512429 |      19.11 |      29.06 |      39.58 |      49.21 |       57.30 |
+| Two 2.5B PT schedules; no RL |  0.507432 |      18.23 |      28.09 |      38.71 |      48.62 |       57.43 |
 
 </div>
 
-Returning to PT reduces pass@1 from **30.79% to 17.85%**, a loss of **12.94 percentage points**. At the same time, PT loss improves from **0.540289 to 0.507826**, and pass@16 rises from **49.53% to 55.68%**.
+Returning to PT lowers pass@1 from **30.79% to 17.85%**, but improves loss and raises pass@16 from **49.53% to 55.68%**. The model becomes less likely to succeed in one attempt, yet more likely to succeed within sixteen attempts.
 
-<figure class="l-body interleave-figure"><img src="/assets/blog/interleaving-pt-rl/direct-continuation.svg" loading="lazy" alt="Pass@k curves for the first RL checkpoint, direct PT continuation, and the 5B PT baseline."><figcaption>Figure 1. Earlier chess, direct continuation: PT lowers single-attempt success but raises success at larger k relative to the RL parent. The 5B PT baseline is shown for context.</figcaption></figure>
+<figure class="l-body interleave-figure"><img src="/assets/blog/interleaving-pt-rl/direct-continuation.svg" loading="lazy" alt="Pass at k after the first RL stage, after direct PT continuation, and after uninterrupted PT."><figcaption>Figure 1. Returning to PT reduces pass@1 but raises pass@16 relative to the RL checkpoint. Uninterrupted PT still has higher pass@k than direct continuation at every displayed k.</figcaption></figure>
 
-It would be too broad to say that PT erases all of the RL improvement. The low-k and high-k results move in different directions. The supported observation is that direct PT continuation substantially reduces the preceding RL checkpoint’s single-attempt success while improving its PT loss and success within sixteen attempts.
+The no-RL controls give us a stricter comparison. Direct continuation has lower loss than uninterrupted 5B PT, but slightly higher loss than split PT without RL: **0.507826 versus 0.507432**. It also has lower pass@k than both controls at every displayed k. This comparison gives no evidence that RL improves the next PT stage.
 
-Does RL make the subsequent PT endpoint better? This example does not establish that. Direct continuation has slightly lower loss than the single-schedule 5B baseline, but the split-PT control without intervening RL already has slightly lower loss still: **0.507432 versus 0.507826**. Direct continuation also ends below both PT controls at the displayed pass@k values.
+Traces give higher intermediate pass@1. Trace-only training restarted from PT weights reaches **37.70%**; PT plus traces restarted from PT weights reaches **33.50%**. Continuing from RL weights with PT and all successful traces reaches **34.04%** with fresh AdamW. These runs differ in their data and optimization, so the differences cannot be assigned to one component alone.
 
-<h3>What changes when we include the traces?</h3>
+After final RL, baseline reaches **37.86% pass@1 and 54.80% pass@16**. Trace-only training reaches **38.49% / 53.85%**; direct continuation reaches **36.36% / 54.26%**; and RL weights followed by PT and all traces with fresh AdamW reaches **38.01% / 54.59%**.
 
-Adding successful trajectories gives a different intermediate result. We tested both trace training from PT weights and PT-plus-trace training from RL weights.
+Across all fifteen alternatives, the confidence intervals for final pass@1 and pass@16 differences include zero after adjustment for thirty comparisons. We cannot establish a final gain, though this does not prove that the runs are equivalent. The appendix includes all sixteen experiments.
 
-<div class="interleave-table" markdown="1">
+<h3>Second study: does the choice of RL data matter?</h3>
 
-| Checkpoint                                | PT loss ↓ | Pass@1 (%) | Pass@2 (%) | Pass@4 (%) | Pass@8 (%) | Pass@16 (%) |
-| ----------------------------------------- | --------: | ---------: | ---------: | ---------: | ---------: | ----------: |
-| 5B PT baseline                            |  0.512429 |      19.11 |      29.06 |      39.58 |      49.21 |       57.30 |
-| Trace-only; reset to PT weights           |  0.546131 |      37.70 |      43.32 |      47.97 |      52.03 |       55.88 |
-| PT + traces; reset to PT weights          |  0.510979 |      33.50 |      40.03 |      45.52 |      50.45 |       55.00 |
-| RL weights + PT + all traces; carry AdamW |  0.511704 |      34.08 |      40.40 |      45.72 |      50.67 |       55.61 |
-| RL weights + PT + all traces; fresh AdamW |  0.510470 |      34.04 |      40.55 |      45.99 |      50.95 |       55.41 |
+The second study uses 64 prompts × 16 samples. We test trace-only training and PT mixed with traces; both continue from RL weights with fresh AdamW. We compare **full/full**, where both RL stages use the same 53,156 prompts, and **A/B**, where they use disjoint sets of 26,578 prompts each.
 
-</div>
+The full/full PT-plus-trace stage improves all three metrics relative to its RL checkpoint: PT loss **0.536972 → 0.509888**, pass@1 **29.17% → 30.24%**, and pass@16 **52.43% → 59.12%**. It also beats uninterrupted 5B PT on those metrics. This is a positive intermediate result, though extra trace training and schedule differences prevent us from attributing it to the RL weights alone.
 
-These trace-trained checkpoints have much higher observed pass@1 than the ordinary PT baseline. Their pass@16 values, however, are lower. Continuing RL weights with all successful traces reaches roughly **34% pass@1** before final RL, compared with **17.85%** for direct PT continuation without traces. This is evidence that the tested recipes produce different intermediate behavior; the optimizer and trace-source differences prevent treating every row as a one-variable ablation.
-
-The final RL stage changes the comparison again. In the matched 28,419-prompt study, baseline ends at **37.86% pass@1 and 54.80% pass@16**. Chronological trace-only training ends at **38.49% and 53.85%**. Direct PT continuation ends at **36.36% and 54.26%**. Continuing RL weights through PT plus all traces with fresh AdamW ends at **38.01% and 54.59%**.
-
-Across the fifteen alternatives to baseline, none of the final pass@1/pass@16 differences excludes zero after adjustment for the thirty comparisons. That is not proof of equivalence. It means this evaluation does not establish a final improvement among those alternatives. All sixteen experiments, including the optimizer and replay variants, are retained in the appendix.
-
-<h2 id="second-chess-study">Second chess study: full data and disjoint RL stages</h2>
-
-The later study uses 64 prompts and 16 samples per prompt. It focuses on trace-only training and PT mixed with traces, with the intermediate stages continuing from RL weights and using fresh AdamW.
-
-We compare two data schedules. In **full/full**, both RL stages use the full set of 53,156 eligible prompts. In **A/B**, the first stage uses A and the second uses B. Each contains 26,578 prompts, and their canonical position groups are disjoint.
-
-The A/B experiments examine whether the recipes behave differently when final RL trains on a separate subset rather than returning to the same pool. They do not by themselves isolate the effect of traces: the study does not include every possible no-trace A/B control. We also do not attribute differences between the two chess studies to rollout geometry alone, because training data and some initialization choices changed as well.
-
-<h3>The middle-stage improvement is not the final outcome</h3>
-
-For the full/full PT-plus-trace experiment, the first RL checkpoint has PT loss **0.536972**, pass@1 **29.17%**, and pass@16 **52.43%**. After PT plus traces, these become **0.509888**, **30.24%**, and **59.12%**. Here the middle stage improves all three observed metrics relative to its own RL parent.
-
-Relative to the ordinary 5B PT baseline, the same checkpoint has lower PT loss, higher pass@1, and higher pass@16. That is a useful intermediate result. It does not isolate a benefit from RL itself: the earlier split-PT control has lower PT loss, and trace training adds supervised work.
-
-Final RL increases this run’s pass@1 to **36.09%**, raises PT loss to **0.520700**, and leaves pass@16 nearly unchanged at **59.05%**. The appropriate final comparison is now the conventional PT → RL baseline:
+After final RL:
 
 <div class="interleave-table" markdown="1">
 
@@ -145,87 +203,169 @@ Final RL increases this run’s pass@1 to **36.09%**, raises PT loss to **0.5207
 
 </div>
 
-<figure class="l-body interleave-figure"><img src="/assets/blog/interleaving-pt-rl/later-chess-final.svg" loading="lazy" alt="Three dot plots comparing final PT loss, pass@1 and pass@16 across all five later chess experiments."><figcaption>Figure 2. Later chess, after final RL. Dashed lines mark the conventional baseline. PT plus traces has lower PT loss but lower pass@1; pass@16 is mixed. These are point estimates.</figcaption></figure>
+<figure class="l-body interleave-figure"><img src="/assets/blog/interleaving-pt-rl/later-chess-final.svg" loading="lazy" alt="Final PT loss, pass at 1, and pass at 16 in the five later chess PT experiments."><figcaption>Figure 2. PT plus traces gives lower final PT loss but also lower pass@1. Dashed lines show baseline performance; dots show the measured results.</figcaption></figure>
 
-The trace-only variants finish close to baseline at pass@1, with higher PT loss. PT plus traces finishes with lower PT loss but about **two percentage points lower pass@1**. Its pass@16 outcome depends on the data schedule: **56.96%** for A/B and **59.05%** for full/full, compared with **58.58%** for baseline.
+For full/full PT plus traces, final pass@1 is **2.10 percentage points below baseline**, with an adjusted paired-bootstrap interval of **[−3.78, −0.39]**. Pass@16 is **0.47 points above baseline**, with an interval of **[−2.40, +3.24]**. These intervals support a pass@1 decrease but do not establish a pass@16 increase. Neither data schedule gives a consistent final advantage.
 
-For the full/full PT-plus-trace run, the pass@1 difference is **−2.10 points**, with a multiplicity-adjusted paired-bootstrap interval of **[−3.78, −0.39]**. The pass@16 difference is **+0.47 points**, with an adjusted interval of **[−2.40, +3.24]**. The saved evaluation supports a pass@1 deficit; it does not establish a pass@16 improvement.
+<h2 id="math-interleaving-pretraining-and-rl">Math: interleaving pretraining and RL</h2>
 
-The two data schedules therefore do not produce a consistent final advantage from interleaving. They do reinforce the distinction between lower PT loss and better task performance.
-
-<h2 id="math">Math: testing the main pattern in another domain</h2>
-
-We use the completed math experiments to ask whether these tradeoffs extend beyond chess. The comparison has three approaches: a 45B PT baseline followed by RL, PT plus traces between RL stages, and direct PT continuation from RL weights.
-
-For math PT plus traces, the middle stage restarts from PT1 weights and incorporates RL-generated traces. Direct continuation starts from RL1 weights. Both selected variants use fresh AdamW at stage boundaries. We keep these initialization choices explicit when interpreting the results.
-
-Before final RL, the results are:
+We next test OLMo2 1B with a 45B-token PT budget, followed by SkyEasy RL. We compare baseline, PT plus traces, and direct continuation. PT plus traces starts again from the first PT checkpoint; direct continuation keeps the first RL checkpoint. These runs use fresh AdamW at stage boundaries.
 
 <div class="interleave-table" markdown="1">
 
-| Approach            | PT loss ↓ | Pass@1 (%) | Pass@2 (%) | Pass@4 (%) | Pass@8 (%) | Pass@16 (%) |
-| ------------------- | --------: | ---------: | ---------: | ---------: | ---------: | ----------: |
-| Baseline            |  1.227608 |       9.28 |      15.08 |      22.82 |      32.05 |       42.20 |
-| PT + traces         |  1.234848 |      16.83 |      24.99 |      34.09 |      43.44 |       52.60 |
-| Direct continuation |  1.235861 |      10.25 |      16.50 |      24.45 |      33.52 |       43.20 |
+| Checkpoint                            | PT loss ↓ | Pass@1 (%) | Pass@2 (%) | Pass@4 (%) | Pass@8 (%) | Pass@16 (%) |
+| ------------------------------------- | --------: | ---------: | ---------: | ---------: | ---------: | ----------: |
+| Baseline · before final RL            |  1.227608 |       9.28 |      15.08 |      22.82 |      32.05 |       42.20 |
+| PT + traces · before final RL         |  1.234848 |      16.83 |      24.99 |      34.09 |      43.44 |       52.60 |
+| Direct continuation · before final RL |  1.235861 |      10.25 |      16.50 |      24.45 |      33.52 |       43.20 |
+| Baseline · after final RL             |  1.240630 |      28.94 |      38.03 |      46.90 |      55.55 |       64.20 |
+| PT + traces · after final RL          |  1.238009 |      24.89 |      34.39 |      43.76 |      52.72 |       61.60 |
+| Direct continuation · after final RL  |  1.242338 |      24.36 |      33.66 |      43.57 |      53.37 |       62.20 |
 
 </div>
 
-PT plus traces has substantially higher intermediate SkyEasy success than the ordinary PT checkpoint. Direct continuation is closer to baseline. Both have slightly higher PT loss than baseline, so the observed task gains do not amount to an improvement in the pretraining objective.
+PT plus traces raises intermediate pass@1 from **9.28% to 16.83%**, and pass@16 from **42.20% to 52.60%**, relative to baseline. Both interleaved runs have slightly higher PT loss, however. They improve task performance without improving the pretraining loss.
+
+After final RL, baseline has higher accuracy at every displayed SkyEasy k. It also leads on the greedy benchmarks: **42.53% GSM8K / 31.34% MATH**, compared with **31.31% / 28.98%** for PT plus traces and **35.63% / 28.52%** for direct continuation. Here MATH is the 5,000-question test set; the later Llama study uses MATH-500.
+
+As in chess, higher intermediate accuracy does not lead to higher final accuracy. This study has no matched control that splits PT without RL, so it cannot separate the effect of RL from the effect of splitting training.
+
+<h2 id="chess-interleaving-sft-and-rl">Chess: interleaving SFT and RL</h2>
+
+We then ask whether interleaving helps when the remaining supervised data consists entirely of task solutions. We hold pretraining fixed and insert RL into SFT. This tests whether RL helps further fine-tuning.
+
+All five runs start from the same 47M PT-only model, trained on **9.181735B PT target tokens**. We split **77,717 SFT examples** into groups A and B with no shared puzzle identities. RL uses 64 × 16 samples and either disjoint A/B prompt sets or the full prompt set. Each new SFT and RL stage uses fresh AdamW.
+
+The runs share SFT A, then follow these schedules:
+
+<div class="interleave-table interleave-text-table" markdown="1">
+
+| Approach                        |                          Remaining path after SFT A | SFT B initialization |
+| ------------------------------- | --------------------------------------------------: | -------------------: |
+| Baseline                        |                               SFT B → full RL 3,000 |                SFT A |
+| Direct continuation · A/B       |                     RL A 1,500 → SFT B → RL B 1,500 |                 RL A |
+| SFT + traces · A/B              |          RL A 1,500 → SFT B + A traces → RL B 1,500 |       Reset to SFT A |
+| Direct continuation · full/full |               Full RL 1,500 → SFT B → full RL 1,500 |        First full RL |
+| SFT + traces · full/full        | Full RL 1,500 → SFT B + full traces → full RL 1,500 |       Reset to SFT A |
+
+</div>
+
+The trace runs use extra supervised updates and carry information from RL through generated data. Direct continuation carries it through the model weights.
+
+<h3>After the second SFT stage</h3>
+
+After SFT B, before final RL:
+
+<div class="interleave-table" markdown="1">
+
+| Approach                        | PT loss ↓ | Pass@1 (%) | Pass@4 (%) | Pass@16 (%) |
+| ------------------------------- | --------: | ---------: | ---------: | ----------: |
+| Baseline                        |    0.7222 |      11.36 |      28.64 |       48.18 |
+| Direct continuation · A/B       |    0.7284 |      11.66 |      29.64 |       49.73 |
+| SFT + traces · A/B              |    0.8167 |      22.29 |      35.35 |       46.82 |
+| Direct continuation · full/full |    0.7277 |      11.60 |      29.24 |       50.14 |
+| SFT + traces · full/full        |    0.7966 |      26.74 |      41.93 |       55.34 |
+
+</div>
+
+Direct continuation gives slightly higher pass@1 than baseline: **+0.29 points for A/B** and **+0.24 points for full/full**. Training on traces gives much larger gains: **+10.93** and **+15.38 points**.
+
+Comparing with the first RL checkpoint shows what survives SFT. Full-data RL reaches **25.50% pass@1**. Ordinary SFT B then reduces it to **11.60%**, close to the SFT baseline. Training on traces instead reaches **26.74%**, even though it starts again from SFT-A weights. Successful traces can therefore transfer high single-attempt accuracy without retaining the RL weights.
+
+The loss column measures **held-out pretraining text**, not SFT solutions. All four interleaved runs have higher loss than the SFT baseline. Their higher task accuracy comes with worse predictions on the pretraining data.
+
+<h3>After final RL</h3>
+
+<div class="interleave-table" markdown="1">
+
+| Approach                        | PT loss ↓ | Pass@1 (%) | Pass@2 (%) | Pass@4 (%) | Pass@8 (%) | Pass@16 (%) |
+| ------------------------------- | --------: | ---------: | ---------: | ---------: | ---------: | ----------: |
+| Baseline                        |    0.7606 |      33.54 |      40.09 |      45.83 |      51.06 |       56.01 |
+| Direct continuation · A/B       |    0.8176 |      31.63 |      39.11 |      45.75 |      51.56 |       56.69 |
+| SFT + traces · A/B              |    0.7949 |      32.66 |      39.16 |      44.93 |      50.17 |       54.73 |
+| Direct continuation · full/full |    0.7789 |      31.11 |      38.80 |      45.70 |      51.66 |       57.16 |
+| SFT + traces · full/full        |    0.7928 |      32.97 |      39.47 |      45.24 |      50.42 |       55.00 |
+
+</div>
+
+<figure class="l-body interleave-figure"><img src="/assets/blog/interleaving-pt-rl/chess-sft-stages.svg" loading="lazy" alt="Chess pass at 1 and pass at 16 before and after final RL. Large intermediate trace gains do not become a final pass at 1 advantage."><figcaption>Figure 3. The trace runs enter final RL with much higher pass@1 than baseline but finish below it. Baseline receives 3,000 final RL updates; interleaved runs receive 1,500 after 1,500 earlier. Lines connect the two evaluations, not a measured learning curve.</figcaption></figure>
+
+Baseline finishes with the highest pass@1 and lowest PT loss. Direct full/full continuation has the highest pass@16, **1.15 points above baseline**, but lower pass@1. Both trace runs finish below baseline at pass@1 and pass@16. These are results from single runs; we have not established their statistical significance.
+
+All interleaved models improve during final RL. But once both schedules finish their RL budgets, none retains an advantage over baseline at pass@1.
+
+<h2 id="llama-interleaving-sft-and-rl">Llama: interleaving SFT and RL</h2>
+
+We use the same five schedules with **Llama 3.2 3B**, **823,505 NuminaMath-CoT SFT examples**, and **51,996 Polaris RL prompts**. SFT A and B contain 411,687 and 411,818 examples. RL A and B each contain 25,998 prompts. The context length is 8,192 tokens, and RL uses 64 × 16 samples.
+
+As in chess, direct continuation keeps the RL weights, while trace training starts again from SFT A. One optimizer detail differs: baseline completes SFT A and B with continuous Adam state and one full-epoch learning-rate schedule. Interleaved runs use fresh AdamW at the transitions. Small loss differences may therefore reflect these choices as well as the inserted RL.
+
+Before final RL, baseline Numina loss is **0.445460**. Direct continuation gives slightly lower loss: **0.444113** with A/B and **0.443960** with full/full. The trace runs give slightly higher loss: **0.453373** and **0.451987**. The lower losses are encouraging, but the optimizer differences prevent a clear claim that RL makes NTP learning more efficient.
+
+The A/B trace model also improves intermediate task performance. It reaches **71.49% GSM8K, 39.60% MATH-500, and 15.92% Polaris**, compared with baseline’s **70.58%, 39.00%, and 7.62%**. At this point, it has already received additional RL and trace training.
 
 After final RL:
 
 <div class="interleave-table" markdown="1">
 
-| Approach            | PT loss ↓ | Pass@1 (%) | Pass@2 (%) | Pass@4 (%) | Pass@8 (%) | Pass@16 (%) |
-| ------------------- | --------: | ---------: | ---------: | ---------: | ---------: | ----------: |
-| Baseline            |  1.240630 |      28.94 |      38.03 |      46.90 |      55.55 |       64.20 |
-| PT + traces         |  1.238009 |      24.89 |      34.39 |      43.76 |      52.72 |       61.60 |
-| Direct continuation |  1.242338 |      24.36 |      33.66 |      43.57 |      53.37 |       62.20 |
+| Approach                        | Numina SFT loss ↓ | GSM8K (%) | MATH-500 (%) | Polaris (%) |
+| ------------------------------- | ----------------: | --------: | -----------: | ----------: |
+| Baseline                        |            0.7440 |     76.27 |        37.20 |       16.70 |
+| Direct continuation · A/B       |            0.6246 |     74.83 |        40.00 |       16.11 |
+| SFT + traces · A/B              |            0.5363 |     72.86 |        40.60 |       17.29 |
+| Direct continuation · full/full |            0.6218 |     74.07 |        39.60 |       15.62 |
+| SFT + traces · full/full        |            0.5427 |     72.25 |        39.40 |       15.23 |
 
 </div>
 
-The conventional baseline finishes above both interleaved approaches at all five displayed SkyEasy pass@k values. The same direction appears in the additional greedy benchmarks:
+<figure class="l-body interleave-figure"><img src="/assets/blog/interleaving-pt-rl/llama-final-differences.svg" loading="lazy" alt="Final Llama accuracy differences from baseline on GSM8K, MATH-500, and Polaris. Every interleaved run improves MATH-500 and reduces GSM8K; only A/B trace training improves Polaris."><figcaption>Figure 4. Final greedy accuracy relative to baseline. All four interleaved runs improve MATH-500 and reduce GSM8K. The figure shows measured differences without uncertainty intervals.</figcaption></figure>
 
-<div class="interleave-table" markdown="1">
+Here, interleaving gives some final gains. All four runs have **lower Numina loss and higher MATH-500 accuracy**, but **lower GSM8K accuracy**. A/B trace training gives the best MATH-500 and Polaris scores: **+3.40 and +0.59 points** over baseline, with **−3.41 points on GSM8K**. No interleaved run improves all three benchmarks.
 
-| Approach            | Numina response loss ↓ | GSM8K greedy (%) | MATH greedy (%) |
-| ------------------- | ---------------------: | ---------------: | --------------: |
-| Baseline            |               0.616258 |            42.53 |           31.34 |
-| PT + traces         |               0.591252 |            31.31 |           28.98 |
-| Direct continuation |               0.603771 |            35.63 |           28.52 |
+The loss result also depends on when we measure it. A/B trace training has slightly _higher_ loss than baseline before final RL, but much _lower_ loss afterward: **0.5363 versus 0.7440**. This shows that the final model predicts the supervised data better. It does not show that the earlier NTP stage learned more efficiently. The starting model and the placement of RL updates can also affect how much final RL changes predictions on that data.
 
-</div>
+Polaris scores include all 1,024 held-out questions. There are 42 invalid references, counted as failures for every model. A/B trace training answers 177/1,024 correctly, compared with baseline’s 171/1,024. We have not tested this six-question difference for significance. All three benchmarks use greedy decoding; this study has no sampled pass@2–16 results.
 
-PT plus traces has lower final PT loss and lower held-out Numina response loss than baseline, but lower final task accuracy. The direct-continuation run also finishes below baseline on task performance. These are observed endpoint differences; we do not attach training-seed uncertainty to them.
+<h2 id="what-did-we-learn">What did we learn?</h2>
 
-The math comparison tests the main approaches without reproducing the full chess ablation matrix. These results show that intermediate gains do not necessarily translate into stronger final RL performance in a second domain. The absence of a matched no-RL split-PT control limits what we can attribute specifically to intervening RL.
+**We did not find a consistent final advantage from moving RL earlier.** There are useful intermediate gains and some final gains, but three distinctions matter when interpreting them.
 
-<h2 id="what-the-experiments-tell-us">What the experiments tell us</h2>
+**Learning from traces can help without retaining RL weights.** Training on successful traces raises intermediate accuracy, even when it starts from the checkpoint before RL. This shows that generated data can transfer useful behavior. It does not tell us whether RL-trained weights help the model learn from the remaining offline data.
 
-**First, returning to supervised training can change which metric looks better.** Direct PT continuation can improve loss and high-k success while reducing single-attempt success. Calling that entire transition a “washout” would hide part of the result.
+**A better intermediate model may not be a better final model.** The chess trace runs can start final RL well ahead at pass@1 and still finish below baseline. Before that final stage, baseline has received no RL. We need the final comparison to know whether moving part of the RL budget earlier helps the full training schedule.
 
-**Second, traces can improve the intermediate model without delivering a better final model.** We see useful intermediate pass@k results from trace training, including when training continues from RL weights. The full PT → RL endpoint remains the comparison that answers whether the recipe improves final performance.
+**The answer depends on what we measure.** Lower NTP loss can come with lower task accuracy, and higher pass@16 can come with lower pass@1. In Llama, MATH-500 improves while GSM8K gets worse. These are specific gains and tradeoffs, rather than a general improvement.
 
-**Third, lower PT loss is a real measured outcome, but it is not sufficient evidence for the broader recipe.** In the later chess study and the math PT-plus-trace run, lower final PT loss coexists with lower final pass@1. Before final RL, the no-RL PT controls also challenge the claim that inserting RL itself improves pretraining.
+To show that RL makes NTP learning more efficient, we would need to compare held-out loss throughout the next NTP stage: $\mathcal{L}_{\mathrm{heldout}}(u)$, where $u$ is the number of NTP tokens or the compute used after RL. That comparison needs the same data and controlled optimizer and learning-rate settings. A claim about total compute must also count intermediate RL and trace generation. Our before-and-after measurements do not answer that question fully.
 
-Our conclusion is bounded by the experiments: **the interleaving recipes tested here do not provide a consistent improvement over ordinary PT followed by RL.** They reveal tradeoffs between the objectives and between single-attempt and multiple-attempt success. Establishing a mechanism for those tradeoffs would require evidence beyond these endpoint metrics.
+These results apply to the schedules we tested. We insert RL halfway through PT or SFT and return to NTP once; trace-only runs add supervised replay after PT is complete. We do not test repeated alternation, adaptive task selection, or RL-guided token weighting. The result is a limitation of these simple continuation and trace-training approaches, not evidence that all forms of interleaving must fail.
 
 <h2 id="evaluation-and-limits">Evaluation and limits</h2>
 
-Chess evaluates 1,480 held-out puzzles with sixteen samples each, temperature 1 and top-p 1, using a 2,048-token context with a 512-token prompt cap and a 1,536-model-token response budget. Four overlength puzzles from the original 1,484 are excluded by the frozen admission rule. PT loss is token cross-entropy on 8,388,608 held-out targets.
+**Chess.** We evaluate on 1,480 held-out puzzles with sixteen samples per puzzle, temperature 1, and top-p 1. The context limit is 2,048 tokens, with at most 512 prompt tokens and 1,536 response tokens. Four puzzles from the original 1,484 exceed the prompt limit and are excluded. PT cross-entropy uses 8,388,608 held-out target tokens. The SFT study uses a separate PT model and a corrected rotary positional embedding (RoPE) configuration, so its results should be compared with its own baseline. We record compliance with the reasoning-tag format separately from move correctness.
 
-For c successful samples out of n = 16, we calculate pass@k per problem as <code>1 − C(n−c,k) / C(n,k)</code>, then average across problems. Pass@16 is success within the saved sixteen attempts; it is not a measure of unlimited capability or a direct diversity metric.
+For $N$ evaluation problems, let $c_i$ be the number of correct responses among $n=16$ samples for problem $i$. We estimate pass@k as
 
-Math SkyEasy evaluation uses 500 held-out questions and sixteen samples per question at temperature 1 and top-p 1, with native context 4,096. GSM8K and MATH results use separate greedy evaluations on 1,319 and 5,000 questions. Numina response loss uses 100 held-out questions with prompt tokens masked. PT loss aggregates the saved held-out PT components; its numerical scale is not comparable with chess loss.
+$$
+\widehat{\operatorname{pass@}k}
+=\frac{1}{N}\sum_{i=1}^{N}
+\left[1-\frac{\binom{n-c_i}{k}}{\binom{n}{k}}\right],
+\qquad 1\le k\le n,
+$$
 
-The chess final comparisons use 20,000 paired bootstrap replicates over puzzle identities. The reported adjusted intervals account for eight contrasts in the later study and thirty in the earlier study. These intervals are conditional on the trained checkpoints and saved generations. They do not include independent training-seed variation. We do not report corresponding intervals for the intermediate comparisons or math results here, or population confidence intervals for PT loss.
+with $\binom{n-c_i}{k}=0$ when $n-c_i<k$. The ratio is the probability that a set of $k$ responses drawn without replacement from the samples contains no correct answer. Pass@1 is the mean sampled accuracy. Pass@16 is the fraction of problems with at least one correct answer among all sixteen samples. Neither directly measures response diversity.
 
-All results here come from saved evaluations. The chess analysis uses the corrected evaluation lineage and preserves data-matched final endpoints. Experiments differ in trace data, learning-rate schedules, optimizer handling, and sometimes RL data; these are comparisons of specified training recipes, not a complete causal decomposition. Total FLOPs are not matched. Missing controls limit the claims but do not prevent reporting the completed results.
+**OLMo2 math.** SkyEasy uses 500 questions with sixteen samples each, temperature 1, and top-p 1, at the model’s native context length of 4,096. GSM8K and MATH use greedy decoding on 1,319 and 5,000 questions. PT loss combines the PT evaluation components. We also report Numina response loss on 100 questions, with prompts masked out.
+
+**Llama math.** We use the model’s native chat format and greedy decoding with an 8,192-token context. GSM8K has 1,319 questions, MATH-500 has 500, and Polaris has 1,024. Numina loss averages over 423,311 assistant tokens from 1,036 records. This measures SFT solution loss; the OLMo2 and chess PT losses use different data. The download includes Polaris accuracy both with and without invalid references. Losses and benchmark variants should not be compared directly across studies.
+
+**Uncertainty.** For the earlier chess studies, final comparisons use 20,000 paired bootstrap replicates, resampling puzzle identities. We adjust the intervals for thirty comparisons in the first study and eight in the second. These intervals describe uncertainty across puzzles for the trained models and sampled responses. They do not measure variation across training seeds. We do not report corresponding intervals for the SFT studies, math comparisons, or loss measurements, so small differences remain uncertain.
+
+**Training budgets.** Within the intended comparisons, we match total RL updates and the stated original-data budgets. Total FLOPs can differ because of trace generation and training, optimizer resets, learning-rate schedules, and RL data allocation. A/B runs also change which prompts each RL stage sees. These experiments compare whole training schedules; they do not isolate every change in those schedules.
 
 <h2 id="complete-results">Complete results</h2>
 
-The tables below retain every saved chess stage in the two studies, including the A/B variants and additional final-RL dataset variants. Main-text comparisons use final checkpoints matched to their study’s baseline. Values are rounded for display; the source files retain full precision.
+The first five tables report the two chess pretraining studies, including A/B variants and alternative final-RL datasets. The main text compares final checkpoints with the matching baseline in each study. Tables show rounded values; the data files keep full precision.
 
 <details><summary>Earlier chess: all 16 experiments, before and after final RL</summary><div class="interleave-table"><table>
 <thead>
@@ -635,7 +775,7 @@ The tables below retain every saved chess stage in the two studies, including th
 </tr>
 </tbody>
 </table></div></details>
-<details><summary>Earlier chess: six additional final endpoints on the larger RL set</summary><p>These endpoints use 53,225 RL training prompts and are not substituted for the 28,419-prompt main comparison.</p><div class="interleave-table"><table>
+<details><summary>Earlier chess: six additional final endpoints on the larger RL set</summary><p>These runs use 53,225 RL training prompts. The main comparison uses 28,419 prompts, so we report these results separately.</p><div class="interleave-table"><table>
 <thead>
 <tr>
 <th>Checkpoint</th>
@@ -704,7 +844,7 @@ The tables below retain every saved chess stage in the two studies, including th
 </tr>
 </tbody>
 </table></div></details>
-<details><summary>Every saved 256x8 chess checkpoint · full pass@1–16</summary><div class="interleave-table"><table>
+<details><summary>Chess pretraining, 256 × 8: all evaluated checkpoints · full pass@1–16</summary><div class="interleave-table"><table>
 <thead>
 <tr>
 <th>Checkpoint</th>
@@ -1610,7 +1750,7 @@ The tables below retain every saved chess stage in the two studies, including th
 </tr>
 </tbody>
 </table></div></details>
-<details><summary>Every saved 64x16 chess checkpoint · full pass@1–16</summary><div class="interleave-table"><table>
+<details><summary>Chess pretraining, 64 × 16: all evaluated checkpoints · full pass@1–16</summary><div class="interleave-table"><table>
 <thead>
 <tr>
 <th>Checkpoint</th>
@@ -1937,10 +2077,18 @@ The tables below retain every saved chess stage in the two studies, including th
 </tbody>
 </table></div></details>
 
+<details><summary>OLMo2 math: selected three approaches, before and after final RL</summary><div class="interleave-table"><table><thead><tr><th>Checkpoint</th><th>PT loss ↓</th><th>Numina response loss ↓</th><th>SkyEasy pass@1 (%)</th><th>SkyEasy pass@2 (%)</th><th>SkyEasy pass@3 (%)</th><th>SkyEasy pass@4 (%)</th><th>SkyEasy pass@5 (%)</th><th>SkyEasy pass@6 (%)</th><th>SkyEasy pass@7 (%)</th><th>SkyEasy pass@8 (%)</th><th>SkyEasy pass@9 (%)</th><th>SkyEasy pass@10 (%)</th><th>SkyEasy pass@11 (%)</th><th>SkyEasy pass@12 (%)</th><th>SkyEasy pass@13 (%)</th><th>SkyEasy pass@14 (%)</th><th>SkyEasy pass@15 (%)</th><th>SkyEasy pass@16 (%)</th><th>GSM8K greedy (%)</th><th>MATH 5,000 greedy (%)</th></tr></thead><tbody><tr><td>Baseline · before final RL</td><td>1.227608</td><td>0.578258</td><td>9.28</td><td>15.08</td><td>19.39</td><td>22.82</td><td>25.66</td><td>28.08</td><td>30.19</td><td>32.05</td><td>33.72</td><td>35.23</td><td>36.61</td><td>37.89</td><td>39.07</td><td>40.17</td><td>41.21</td><td>42.20</td><td>21.00</td><td>23.78</td></tr><tr><td>PT + traces · before final RL</td><td>1.234848</td><td>0.583262</td><td>16.83</td><td>24.99</td><td>30.24</td><td>34.09</td><td>37.10</td><td>39.57</td><td>41.65</td><td>43.44</td><td>45.02</td><td>46.42</td><td>47.69</td><td>48.84</td><td>49.89</td><td>50.86</td><td>51.76</td><td>52.60</td><td>28.35</td><td>25.38</td></tr><tr><td>Direct continuation · before final RL</td><td>1.235861</td><td>0.582820</td><td>10.25</td><td>16.50</td><td>20.98</td><td>24.45</td><td>27.28</td><td>29.66</td><td>31.71</td><td>33.52</td><td>35.13</td><td>36.58</td><td>37.90</td><td>39.12</td><td>40.25</td><td>41.29</td><td>42.27</td><td>43.20</td><td>22.37</td><td>24.38</td></tr><tr><td>Baseline · after final RL</td><td>1.240630</td><td>0.616258</td><td>28.94</td><td>38.03</td><td>43.26</td><td>46.90</td><td>49.70</td><td>51.98</td><td>53.90</td><td>55.55</td><td>57.01</td><td>58.31</td><td>59.49</td><td>60.57</td><td>61.57</td><td>62.50</td><td>63.38</td><td>64.20</td><td>42.53</td><td>31.34</td></tr><tr><td>PT + traces · after final RL</td><td>1.238009</td><td>0.591252</td><td>24.89</td><td>34.39</td><td>39.92</td><td>43.76</td><td>46.68</td><td>49.04</td><td>51.01</td><td>52.72</td><td>54.22</td><td>55.57</td><td>56.78</td><td>57.90</td><td>58.92</td><td>59.87</td><td>60.76</td><td>61.60</td><td>31.31</td><td>28.98</td></tr><tr><td>Direct continuation · after final RL</td><td>1.242338</td><td>0.603771</td><td>24.36</td><td>33.66</td><td>39.41</td><td>43.57</td><td>46.78</td><td>49.38</td><td>51.54</td><td>53.37</td><td>54.96</td><td>56.35</td><td>57.59</td><td>58.70</td><td>59.70</td><td>60.61</td><td>61.44</td><td>62.20</td><td>35.63</td><td>28.52</td></tr></tbody></table></div></details>
+
+<details><summary>Chess SFT–RL: all thirteen checkpoints, full pass@1–16</summary><div class="interleave-table"><table><thead><tr><th>Checkpoint</th><th>PT loss ↓</th><th>Pass@1 (%)</th><th>Pass@2 (%)</th><th>Pass@3 (%)</th><th>Pass@4 (%)</th><th>Pass@5 (%)</th><th>Pass@6 (%)</th><th>Pass@7 (%)</th><th>Pass@8 (%)</th><th>Pass@9 (%)</th><th>Pass@10 (%)</th><th>Pass@11 (%)</th><th>Pass@12 (%)</th><th>Pass@13 (%)</th><th>Pass@14 (%)</th><th>Pass@15 (%)</th><th>Pass@16 (%)</th><th>Strict format (%)</th></tr></thead><tbody><tr><td>Shared SFT A</td><td>0.672537</td><td>2.81</td><td>5.24</td><td>7.36</td><td>9.22</td><td>10.87</td><td>12.35</td><td>13.68</td><td>14.89</td><td>16.00</td><td>17.02</td><td>17.97</td><td>18.85</td><td>19.68</td><td>20.46</td><td>21.20</td><td>21.89</td><td>60.20</td></tr><tr><td>Baseline · SFT B</td><td>0.722182</td><td>11.36</td><td>19.02</td><td>24.50</td><td>28.64</td><td>31.90</td><td>34.56</td><td>36.78</td><td>38.69</td><td>40.34</td><td>41.81</td><td>43.12</td><td>44.31</td><td>45.39</td><td>46.39</td><td>47.31</td><td>48.18</td><td>91.08</td></tr><tr><td>Shared first RL · A</td><td>0.763008</td><td>19.35</td><td>24.87</td><td>27.85</td><td>29.86</td><td>31.38</td><td>32.60</td><td>33.64</td><td>34.54</td><td>35.34</td><td>36.06</td><td>36.71</td><td>37.30</td><td>37.85</td><td>38.35</td><td>38.82</td><td>39.26</td><td>3.85</td></tr><tr><td>Shared first RL · full</td><td>0.730352</td><td>25.50</td><td>31.93</td><td>35.47</td><td>37.92</td><td>39.80</td><td>41.31</td><td>42.57</td><td>43.66</td><td>44.60</td><td>45.42</td><td>46.16</td><td>46.82</td><td>47.42</td><td>47.96</td><td>48.46</td><td>48.92</td><td>1.88</td></tr><tr><td>Baseline · final RL</td><td>0.760608</td><td>33.54</td><td>40.09</td><td>43.53</td><td>45.83</td><td>47.55</td><td>48.93</td><td>50.08</td><td>51.06</td><td>51.92</td><td>52.69</td><td>53.37</td><td>53.99</td><td>54.55</td><td>55.07</td><td>55.56</td><td>56.01</td><td>4.93</td></tr><tr><td>Direct continuation · A/B · SFT B</td><td>0.728390</td><td>11.66</td><td>19.58</td><td>25.30</td><td>29.64</td><td>33.06</td><td>35.83</td><td>38.15</td><td>40.12</td><td>41.83</td><td>43.33</td><td>44.66</td><td>45.87</td><td>46.96</td><td>47.96</td><td>48.88</td><td>49.73</td><td>91.23</td></tr><tr><td>Direct continuation · A/B · final RL</td><td>0.817552</td><td>31.63</td><td>39.11</td><td>43.11</td><td>45.75</td><td>47.70</td><td>49.24</td><td>50.50</td><td>51.56</td><td>52.47</td><td>53.28</td><td>53.99</td><td>54.63</td><td>55.22</td><td>55.75</td><td>56.24</td><td>56.69</td><td>0.99</td></tr><tr><td>SFT + traces · A/B · SFT B</td><td>0.816657</td><td>22.29</td><td>29.10</td><td>32.83</td><td>35.35</td><td>37.25</td><td>38.76</td><td>40.03</td><td>41.12</td><td>42.09</td><td>42.95</td><td>43.73</td><td>44.44</td><td>45.10</td><td>45.72</td><td>46.29</td><td>46.82</td><td>18.84</td></tr><tr><td>SFT + traces · A/B · final RL</td><td>0.794882</td><td>32.66</td><td>39.16</td><td>42.60</td><td>44.93</td><td>46.67</td><td>48.06</td><td>49.20</td><td>50.17</td><td>51.00</td><td>51.72</td><td>52.37</td><td>52.94</td><td>53.45</td><td>53.92</td><td>54.34</td><td>54.73</td><td>0.35</td></tr><tr><td>Direct continuation · full/full · SFT B</td><td>0.727651</td><td>11.60</td><td>19.38</td><td>24.97</td><td>29.24</td><td>32.64</td><td>35.44</td><td>37.80</td><td>39.85</td><td>41.63</td><td>43.22</td><td>44.65</td><td>45.95</td><td>47.13</td><td>48.21</td><td>49.21</td><td>50.14</td><td>91.27</td></tr><tr><td>Direct continuation · full/full · final RL</td><td>0.778875</td><td>31.11</td><td>38.80</td><td>42.96</td><td>45.70</td><td>47.70</td><td>49.27</td><td>50.56</td><td>51.66</td><td>52.61</td><td>53.45</td><td>54.21</td><td>54.89</td><td>55.52</td><td>56.11</td><td>56.65</td><td>57.16</td><td>1.34</td></tr><tr><td>SFT + traces · full/full · SFT B</td><td>0.796639</td><td>26.74</td><td>34.66</td><td>38.98</td><td>41.93</td><td>44.18</td><td>45.99</td><td>47.49</td><td>48.78</td><td>49.90</td><td>50.89</td><td>51.78</td><td>52.60</td><td>53.35</td><td>54.05</td><td>54.71</td><td>55.34</td><td>17.15</td></tr><tr><td>SFT + traces · full/full · final RL</td><td>0.792758</td><td>32.97</td><td>39.47</td><td>42.92</td><td>45.24</td><td>46.98</td><td>48.35</td><td>49.47</td><td>50.42</td><td>51.23</td><td>51.95</td><td>52.59</td><td>53.16</td><td>53.68</td><td>54.16</td><td>54.59</td><td>55.00</td><td>0.47</td></tr></tbody></table></div></details>
+
+<details><summary>Llama SFT–RL: all thirteen checkpoints, held-out loss and greedy accuracy</summary><div class="interleave-table"><table><thead><tr><th>Checkpoint</th><th>Numina SFT loss ↓</th><th>GSM8K (%)</th><th>MATH-500 (%)</th><th>Polaris raw (%)</th><th>Polaris valid-reference (%)</th></tr></thead><tbody><tr><td>Shared SFT A</td><td>0.4770</td><td>65.66</td><td>33.20</td><td>7.81</td><td>8.15</td></tr><tr><td>Baseline · complete SFT</td><td>0.4455</td><td>70.58</td><td>39.00</td><td>7.62</td><td>7.94</td></tr><tr><td>Shared first RL · A</td><td>0.6346</td><td>68.31</td><td>31.80</td><td>14.45</td><td>15.07</td></tr><tr><td>Shared first RL · full</td><td>0.6161</td><td>70.51</td><td>30.60</td><td>13.96</td><td>14.56</td></tr><tr><td>Baseline · final RL</td><td>0.7440</td><td>76.27</td><td>37.20</td><td>16.70</td><td>17.41</td></tr><tr><td>Direct continuation · A/B · SFT B</td><td>0.4441</td><td>69.52</td><td>38.80</td><td>9.86</td><td>10.29</td></tr><tr><td>Direct continuation · A/B · final RL</td><td>0.6246</td><td>74.83</td><td>40.00</td><td>16.11</td><td>16.80</td></tr><tr><td>SFT + traces · A/B · SFT B</td><td>0.4534</td><td>71.49</td><td>39.60</td><td>15.92</td><td>16.60</td></tr><tr><td>SFT + traces · A/B · final RL</td><td>0.5363</td><td>72.86</td><td>40.60</td><td>17.29</td><td>18.02</td></tr><tr><td>Direct continuation · full/full · SFT B</td><td>0.4440</td><td>70.43</td><td>39.40</td><td>9.38</td><td>9.78</td></tr><tr><td>Direct continuation · full/full · final RL</td><td>0.6218</td><td>74.07</td><td>39.60</td><td>15.62</td><td>16.29</td></tr><tr><td>SFT + traces · full/full · SFT B</td><td>0.4520</td><td>69.60</td><td>38.40</td><td>15.23</td><td>15.89</td></tr><tr><td>SFT + traces · full/full · final RL</td><td>0.5427</td><td>72.25</td><td>39.40</td><td>15.23</td><td>15.89</td></tr></tbody></table></div></details>
+
 <h2 id="data-and-results">Data and results</h2>
 
-The complete chess tables are included above. These downloads preserve the numerical results used in this post, including full pass@1–16 values and the final chess comparison intervals. Results reflect saved evaluations collected through September 10, 2026.
+The files below contain the loss, accuracy, and paired comparisons used in this post. Each SFT–RL study has five training schedules and thirteen evaluated checkpoints, counting shared checkpoints once.
 
-- [Chess checkpoint metrics](/assets/blog/interleaving-pt-rl/chess-results.json)
-- [Chess final paired comparisons](/assets/blog/interleaving-pt-rl/chess-comparisons.json)
-- [Selected math checkpoint metrics](/assets/blog/interleaving-pt-rl/math-results.json)
+- [Earlier chess checkpoint metrics](/assets/blog/interleaving-pt-rl/chess-results.json)
+- [Earlier chess paired comparisons and intervals](/assets/blog/interleaving-pt-rl/chess-comparisons.json)
+- [Selected OLMo2 math checkpoint metrics](/assets/blog/interleaving-pt-rl/math-results.json)
+- [Chess SFT–RL: all thirteen checkpoints](/assets/blog/interleaving-pt-rl/chess-sft-results.json)
+- [Llama SFT–RL: all thirteen checkpoints](/assets/blog/interleaving-pt-rl/numina-sft-results.json)

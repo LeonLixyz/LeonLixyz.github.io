@@ -1,0 +1,106 @@
+<figure class="fig l-body-outset static" id="fig-update-family">
+  <div class="fig-head">
+    <span class="fig-tag">Figure</span>
+    <p class="fig-title">The recurrent-update family</p>
+  </div>
+  <div class="fig-body">
+    <p>
+      Most efficient long-context alternatives replace the unbounded attention cache with a fixed recurrent state. The common template is: erase some
+      old state, read what is stored for a key, write a correction, then read with the query.
+    </p>
+    <p>$$S_t = A_t S_{t-1} + B_t\,\Delta_t,\qquad \Delta_t \in \{v_tk_t^\top,\;(v_t-S_{t-1}k_t)k_t^\top,\;-\nabla\ell_t\}$$</p>
+    <table class="data update-data">
+      <thead>
+        <tr>
+          <th>Model</th>
+          <th>State that changes at token $t$</th>
+          <th>Update sketch</th>
+          <th>What the signal is</th>
+          <th>Durable?</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Linear attention</strong></td>
+          <td>Matrix state $S$</td>
+          <td>$S_t=S_{t-1}+v_tk_t^\top$</td>
+          <td>Blind Hebbian add; no read-before-write correction</td>
+          <td>No, reset per sequence</td>
+        </tr>
+        <tr>
+          <td><strong>DeltaNet</strong></td>
+          <td>Matrix state $S$</td>
+          <td>$S_t=S_{t-1}+\beta_t(v_t-S_{t-1}k_t)k_t^\top$</td>
+          <td>Delta rule: write only the prediction error for key $k_t$</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td><strong>Gated DeltaNet</strong></td>
+          <td>Matrix state $S$</td>
+          <td>$S_t=\alpha_tS_{t-1}+\beta_t(v_t-S_{t-1}k_t)k_t^\top$</td>
+          <td>Delta correction plus adaptive erasure gate</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td><strong>Mamba</strong></td>
+          <td>SSM hidden state $h$</td>
+          <td>$h_t=\bar A_t h_{t-1}+\bar B_t x_t$</td>
+          <td>Input-dependent selective copy/forget, not a key-value delta rule</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td><strong>Mamba-2 / SSD</strong></td>
+          <td>Structured SSM state</td>
+          <td>SSM recurrence with semiseparable / attention-dual form</td>
+          <td>Bridges SSM decay with attention-like mixing</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td><strong>Kimi Delta Attention</strong></td>
+          <td>DeltaNet-style state with DPLR transition</td>
+          <td>Gated delta rule + finer channel-wise decay</td>
+          <td>Extends Gated DeltaNet; better finite-state memory management</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td><strong>Gated DeltaNet-2</strong></td>
+          <td>DeltaNet-style state</td>
+          <td>Separate erase gate $b_t$ and write gate $w_t$</td>
+          <td>Decouples how much old key content to erase from how much new value to commit</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td><strong>TTT-Linear</strong></td>
+          <td>Fast weights $W$ of a linear inner model</td>
+          <td>$W_t=W_{t-1}+\eta(v_t-W_{t-1}k_t)k_t^\top$</td>
+          <td>Gradient step on $\tfrac12\|Wk_t-v_t\|^2$; algebraically DeltaNet</td>
+          <td>No, reset fast weights</td>
+        </tr>
+        <tr>
+          <td><strong>TTT-MLP</strong></td>
+          <td>Fast weights $\theta$ of a small MLP</td>
+          <td>$\theta_t=\theta_{t-1}-\eta\nabla_\theta\ell(f_\theta(x_t))$</td>
+          <td>Self-supervised gradient update; nonlinear and more expressive</td>
+          <td>No</td>
+        </tr>
+        <tr>
+          <td><strong>TTT-E2E</strong></td>
+          <td>Selected model weights during inference</td>
+          <td>$\theta_t=\theta_{t-1}-\eta\nabla_\theta[-\log p_\theta(x_t\mid x_{\lt t})]$</td>
+          <td>Next-token learning on the actual context, meta-learned to adapt</td>
+          <td>Context-local unless explicitly saved</td>
+        </tr>
+      </tbody>
+    </table>
+    <p>
+      The important distinction is not whether the variable is called <em>state</em> or <em>weights</em>. It is whether the write survives the
+      sequence and can be consolidated without damaging old knowledge. These methods mostly improve long-context computation; they do not by
+      themselves solve durable learning.
+    </p>
+  </div>
+  <figcaption>
+    Linear attention, DeltaNet, Gated DeltaNet, KDA, Gated DeltaNet-2, and TTT-Linear share a read-correct-write core. Mamba is a selective SSM cousin
+    rather than a delta-rule model. TTT-MLP and TTT-E2E generalize the write into ordinary gradient descent on a richer inner model or selected model
+    weights.
+  </figcaption>
+</figure>
