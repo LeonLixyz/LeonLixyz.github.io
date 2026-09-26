@@ -1,5 +1,6 @@
 ---
 layout: distill
+published: false
 title: Language Models Can Think, But Not Learn
 date: 2026-06-15
 description: Language models can reason over what is in the context window, but they do not have a reliable way to turn new data or new experience into lasting memory.

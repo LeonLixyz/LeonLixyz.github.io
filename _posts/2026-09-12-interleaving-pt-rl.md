@@ -1,5 +1,6 @@
 ---
 layout: distill
+published: false
 title: "Beyond Pretraining Followed by Post-Training: An Exploration of Interleaving NTP and RL"
 description: Can earlier RL help a model learn from the data it sees next? We test this in five chess and math studies, before and after final RL.
 date: 2026-09-12
