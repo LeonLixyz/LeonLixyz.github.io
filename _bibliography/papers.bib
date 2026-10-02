@@ -7,11 +7,12 @@
   title={Understanding Reasoning from Pretraining to Post-Training},
   author={Shen*, Jingyan and Li*, Ang and Rahman, Salman and Sun, Yifan and Goldblum, Micah and Telgarsky, Matus and Izmailov, Pavel},
   year={2026},
+  journal={Advances in Neural Information Processing Systems (NeurIPS)},
   arxiv={2607.16097},
   url={https://arxiv.org/abs/2607.16097},
   abstract={Reinforcement learning (RL) has become central to improving large language models (LLMs) on complex reasoning tasks, yet RL post-training is largely studied in isolation from the pretraining that precedes it. As a result, two basic questions remain open: (1) how do pretraining choices (model size, data) shape the returns to RL compute, and (2) what does RL actually do to the model? These questions are difficult to study in the standard LLM setting: pretraining corpora are vast and uncontrolled, making it hard to attribute behaviors to pretraining versus RL, and systematic compute sweeps across both stages are prohibitively expensive. To address these challenges, we use chess as a controlled testbed for studying reasoning across the full pretraining-to-post-training pipeline. We follow the standard LLM training pipeline by pretraining language models from 5M to 1B parameters on human chess games, supervised fine-tuning on synthetic reasoning traces, and running RL on chess puzzles with verifiable rewards. Using this framework, we find that the post-RL performance at given RL compute level is well-predicted from the pretraining loss, and slope of the RL reward curves improves approximately linearly with the pretraining tokens. Beyond scaling, we find that RL does not simply sharpen the SFT policy: on easy puzzles it amplifies correct moves the SFT policy already preferred, while on hard puzzles it surfaces correct moves that were nearly absent under SFT. We further test whether our findings transfer beyond chess by training a 1B language model on math-domain text, where the same predictive pattern emerges: longer-pretrained checkpoints reach higher post-RL performance and improve faster under RL. In sum, we provide a quantitative account of the pretraining-to-RL interface and a controlled testbed for studying the science of reasoning across the full pretraining-to-post-training pipeline.},
   selected={true},
-  category={preprint},
+  category={publication},
   preview={pretraining-to-posttraining.png},
 }
 
@@ -34,14 +35,15 @@
   topics={Reasoning},
   title={Teaching Pretrained Language Models to Think Deeper with Retrofitted Recurrence},
   author={McLeish, Sean and Li, Ang and Kirchenbauer, John and Kalra, Dayal Singh and Bartoldson, Brian R. and Kailkhura, Bhavya and Schwarzschild, Avi and Geiping, Jonas and Goldstein, Tom and Goldblum, Micah},
-  year={2025},
+  year={2026},
+  journal={Conference on Language Modeling (COLM)},
   arxiv={2511.07384},
   url={https://arxiv.org/abs/2511.07384},
   abstract={Recent advances in depth-recurrent language models show that recurrence can decouple train-time compute and parameter count from test-time compute. In this work, we study how to convert existing pretrained non-recurrent language models into depth-recurrent models. We find that using a curriculum of recurrences to increase the effective depth of the model over the course of training preserves performance while reducing total computational cost. In our experiments, on mathematics, we observe that converting pretrained models to recurrent ones results in better performance at a given compute budget than simply post-training the original non-recurrent language model.},
   code={https://github.com/mcleish7/retrofitting-recurrence},
   huggingface_models={https://huggingface.co/collections/tomg-group-umd/retrofitting-recurrence},
   selected={true},
-  category={preprint},
+  category={publication},
   preview={retrofitting.png},
 }
 
@@ -49,7 +51,8 @@
   topics={Reasoning},
   title={Zebra-CoT: A Dataset for Interleaved Vision Language Reasoning},
   author={Li*, Ang and Wang*, Charles and Fu*, Deqing and Yue*, Kaiyu and Cai*, Zikui and Zhu*, Wang Bill and Liu*, Ollie and Guo*, Peng and and Neiswanger, Willie and Huang, Furong and Goldstein, Tom and Goldblum, Micah},
-  year={2025},
+  year={2026},
+  journal={International Conference on Learning Representations (ICLR)},
   arxiv={2507.16746},
   url={https://arxiv.org/abs/2507.16746},
   abstract={Humans often use visual aids, for example diagrams or sketches, when solving complex problems. Training multimodal models to do the same, known as Visual Chain of Thought (Visual CoT), is challenging due to: (1) poor off-the-shelf visual CoT performance, which hinders reinforcement learning, and (2) the lack of high-quality visual CoT training data. We introduce Zebra-CoT, a diverse large-scale dataset with 182,384 samples, containing logically coherent interleaved text-image reasoning traces. We focus on four categories of tasks where sketching or visual reasoning is especially natural, spanning scientific questions such as geometry, physics, and algorithms; 2D visual reasoning tasks like visual search and jigsaw puzzles; 3D reasoning tasks including 3D multi-hop inference, embodied and robot planning; visual logic problems and strategic games like chess. Fine-tuning the Anole-7B model on the Zebra-CoT training corpus results in an improvement of +12% in our test-set accuracy and yields up to +13% performance gain on standard VLM benchmark evaluations. Fine-tuning Bagel-7B yields a model that generates high-quality interleaved visual reasoning chains, underscoring Zebra-CoT's effectiveness for developing multimodal reasoning abilities. We open-source our dataset and models to support development and evaluation of visual CoT.},
@@ -57,7 +60,7 @@
   huggingface_datasets={https://huggingface.co/datasets/multimodal-reasoning-lab/Zebra-CoT},
   huggingface_models={https://huggingface.co/multimodal-reasoning-lab/Bagel-Zebra-CoT},
   selected={true},
-  category={preprint},
+  category={publication},
   preview={zebra-cot.png},
 }
 
