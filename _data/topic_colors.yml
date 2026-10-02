@@ -1,3 +1,14 @@
+# Publication topics
+"Alignment": "#2563eb"
+"Reasoning": "#7c3aed"
+"Post-training": "#b45309"
+"Long context": "#0f766e"
+"Agents": "#0369a1"
+"Multimodal": "#be185d"
+"Safety": "#b91c1c"
+"Uncertainty": "#475569"
+"Reinforcement learning": "#b45309"
+
 # AI alignment and safety (Blue family)
 "AI Alignment": "#2196f3" # Light blue
 "AI Safety": "#2196f3" # Light blue

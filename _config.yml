@@ -367,6 +367,7 @@ filtered_bibtex_keywords:
     selected,
     slides,
     supp,
+    topics,
     video,
     website,
   ]

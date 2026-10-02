@@ -220,16 +220,16 @@
 
     <!-- Topics section -->
     {% if entry.topics %}
-      <div class="topics">
+      <div class="topics" aria-label="Research topics">
         {% assign topics = entry.topics | split: ',' %}
         {% for topic in topics %}
           {% assign topic_clean = topic | strip %}
           {% assign topic_color = site.data.topic_colors[topic_clean] | default: '#757575' %}
           <span
-            class="badge badge-pill"
-            style="background-color: {{ topic_color }}FF; color: #000000; margin: 0 2px; padding: 3px 7px; border-radius: 8px;"
+            class="topic-tag"
+            style="--topic-background: {{ topic_color }}14; --topic-border: {{ topic_color }}55;"
           >
-            {{ topic_clean }}
+            {{ topic_clean | escape }}
           </span>
         {% endfor %}
       </div>
