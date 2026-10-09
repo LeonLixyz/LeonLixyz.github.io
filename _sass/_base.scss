@@ -518,6 +518,7 @@ a[href^="https://huggingface.co/"]
   --link-hover-bg: rgba(255, 140, 0, 0.12);
 }
 
+.modal-link,
 a[href^="https://modal.com/"],
 a[title="CV"] {
   --link-color: var(--global-modal-link-color);

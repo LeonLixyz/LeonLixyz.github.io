@@ -28,7 +28,7 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: false # includes social icons at the bottom of the page
 ---
 
-Hi, I am Leon (Ang Li 李昂), a second year PhD student at New York University, advised by [Prof. Pavel Izmailov](https://izmailovpavel.github.io/) and [Prof. Micah Goldblum](https://goldblum.github.io/). I am also a researcher at [Modal](https://modal.com/). Previously, I completed my B.S. and M.S. in Computer Science at Columbia University, where I graduated magna cum laude and was fortunate to be advised by Tianyi Peng, Jing Dong, and Hongseok Namkoong.
+Hi, I am Leon (Ang Li 李昂), a second year PhD student at New York University, advised by [Prof. Pavel Izmailov](https://izmailovpavel.github.io/) and [Prof. Micah Goldblum](https://goldblum.github.io/). I am also a researcher at <a href="https://modal.com/" class="modal-link">Modal</a>. Previously, I completed my B.S. and M.S. in Computer Science at Columbia University, where I graduated magna cum laude and was fortunate to be advised by Tianyi Peng, Jing Dong, and Hongseok Namkoong.
 
 I study how to build AI systems that learn, improve themselves, and operate safely in the real world. My research interests include:
 
