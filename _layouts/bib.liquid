@@ -1,5 +1,11 @@
 ---
 ---
+{% capture topic_labels %}
+  {% assign topics = entry.topics | split: ',' %}
+  {% for topic in topics %}
+    <span class="topic-tag">{{ topic | strip | escape }}</span>
+  {% endfor %}
+{% endcapture %}
 <div class="row">
   {% if site.enable_publication_thumbnails %}
     <div class="col col-sm-2 abbr">
@@ -74,6 +80,9 @@
             %}
           {% endif %}
         {% endif %}
+      {% endif %}
+      {% if entry.preview and entry.topics %}
+        <div class="topics topics-thumbnail" aria-label="Research topics">{{ topic_labels }}</div>
       {% endif %}
     </div>
   {% endif %}
@@ -213,27 +222,15 @@
     {% capture periodical %}{{ entrytype }}{% if entrytype_text != "" and entryyear != "" %}, {% endif %}{{ entrymonth }}{{ entryyear }}{% endcapture %}
     <div class="periodical">
       {{ periodical | strip }}
+      {% if entry.topics %}
+        {% unless site.enable_publication_thumbnails and entry.preview %}
+          <div class="topics" aria-label="Research topics">{{ topic_labels }}</div>
+        {% endunless %}
+      {% endif %}
     </div>
     <div class="periodical">
       {{ entry.note | strip }}
     </div>
-
-    <!-- Topics section -->
-    {% if entry.topics %}
-      <div class="topics" aria-label="Research topics">
-        {% assign topics = entry.topics | split: ',' %}
-        {% for topic in topics %}
-          {% assign topic_clean = topic | strip %}
-          {% assign topic_color = site.data.topic_colors[topic_clean] | default: '#757575' %}
-          <span
-            class="topic-tag"
-            style="--topic-background: {{ topic_color }}14; --topic-border: {{ topic_color }}55;"
-          >
-            {{ topic_clean | escape }}
-          </span>
-        {% endfor %}
-      </div>
-    {% endif %}
 
     <!-- Links/Buttons -->
     <div class="links">

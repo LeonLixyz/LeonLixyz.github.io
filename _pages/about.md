@@ -33,6 +33,5 @@ Hi, I am Leon (Ang Li 李昂), a second year PhD student at New York University,
 I study how to build AI systems that learn, improve themselves, and operate safely in the real world. My research interests include:
 
 - Automated AI research and RSI
-- Continual learning in the real world
-- Science of post-training
+- Science and scaling of RL
 - Safety and alignment of superintelligence
