@@ -1,0 +1,374 @@
+{
+ "method": "Greedy pass@1 rescored with the evaluation scorer (eval_score.py, math-verify 0.9.0, antlr4 4.9.3, as in the eval image). Responses the scorer could not parse were rescored after removing percent signs; no other change.",
+ "stages": {
+  "sft_a": {
+   "gsm8k": {
+    "n": 1319,
+    "correct": 866,
+    "recovered": 10,
+    "pass_at_1": 0.6565579984836998,
+    "corrected_pass_at_1": 0.6641394996209249
+   },
+   "math500": {
+    "n": 500,
+    "correct": 166,
+    "recovered": 1,
+    "pass_at_1": 0.332,
+    "corrected_pass_at_1": 0.334
+   },
+   "polaris_heldout": {
+    "n": 1024,
+    "correct": 80,
+    "recovered": 0,
+    "pass_at_1": 0.078125,
+    "corrected_pass_at_1": 0.078125
+   }
+  },
+  "sft_full": {
+   "gsm8k": {
+    "n": 1319,
+    "correct": 931,
+    "recovered": 16,
+    "pass_at_1": 0.7058377558756633,
+    "corrected_pass_at_1": 0.7179681576952237
+   },
+   "math500": {
+    "n": 500,
+    "correct": 195,
+    "recovered": 1,
+    "pass_at_1": 0.39,
+    "corrected_pass_at_1": 0.392
+   },
+   "polaris_heldout": {
+    "n": 1024,
+    "correct": 78,
+    "recovered": 0,
+    "pass_at_1": 0.076171875,
+    "corrected_pass_at_1": 0.076171875
+   }
+  },
+  "rl_a": {
+   "gsm8k": {
+    "n": 1319,
+    "correct": 901,
+    "recovered": 9,
+    "pass_at_1": 0.6830932524639879,
+    "corrected_pass_at_1": 0.6899166034874905
+   },
+   "math500": {
+    "n": 500,
+    "correct": 159,
+    "recovered": 1,
+    "pass_at_1": 0.318,
+    "corrected_pass_at_1": 0.32
+   },
+   "polaris_heldout": {
+    "n": 1024,
+    "correct": 148,
+    "recovered": 0,
+    "pass_at_1": 0.14453125,
+    "corrected_pass_at_1": 0.14453125
+   }
+  },
+  "rl_full": {
+   "gsm8k": {
+    "n": 1319,
+    "correct": 930,
+    "recovered": 5,
+    "pass_at_1": 0.7050796057619408,
+    "corrected_pass_at_1": 0.7088703563305534
+   },
+   "math500": {
+    "n": 500,
+    "correct": 153,
+    "recovered": 1,
+    "pass_at_1": 0.306,
+    "corrected_pass_at_1": 0.308
+   },
+   "polaris_heldout": {
+    "n": 1024,
+    "correct": 143,
+    "recovered": 0,
+    "pass_at_1": 0.1396484375,
+    "corrected_pass_at_1": 0.1396484375
+   }
+  },
+  "exp2_sft_b": {
+   "gsm8k": {
+    "n": 1319,
+    "correct": 917,
+    "recovered": 16,
+    "pass_at_1": 0.6952236542835482,
+    "corrected_pass_at_1": 0.7073540561031084
+   },
+   "math500": {
+    "n": 500,
+    "correct": 194,
+    "recovered": 1,
+    "pass_at_1": 0.388,
+    "corrected_pass_at_1": 0.39
+   },
+   "polaris_heldout": {
+    "n": 1024,
+    "correct": 101,
+    "recovered": 0,
+    "pass_at_1": 0.0986328125,
+    "corrected_pass_at_1": 0.0986328125
+   }
+  },
+  "exp3_sft_b": {
+   "gsm8k": {
+    "n": 1319,
+    "correct": 943,
+    "recovered": 15,
+    "pass_at_1": 0.7149355572403336,
+    "corrected_pass_at_1": 0.7263078089461713
+   },
+   "math500": {
+    "n": 500,
+    "correct": 198,
+    "recovered": 1,
+    "pass_at_1": 0.396,
+    "corrected_pass_at_1": 0.398
+   },
+   "polaris_heldout": {
+    "n": 1024,
+    "correct": 163,
+    "recovered": 0,
+    "pass_at_1": 0.1591796875,
+    "corrected_pass_at_1": 0.1591796875
+   }
+  },
+  "exp4_sft_b": {
+   "gsm8k": {
+    "n": 1319,
+    "correct": 929,
+    "recovered": 15,
+    "pass_at_1": 0.7043214556482184,
+    "corrected_pass_at_1": 0.7156937073540561
+   },
+   "math500": {
+    "n": 500,
+    "correct": 197,
+    "recovered": 1,
+    "pass_at_1": 0.394,
+    "corrected_pass_at_1": 0.396
+   },
+   "polaris_heldout": {
+    "n": 1024,
+    "correct": 96,
+    "recovered": 0,
+    "pass_at_1": 0.09375,
+    "corrected_pass_at_1": 0.09375
+   }
+  },
+  "exp5_sft_b": {
+   "gsm8k": {
+    "n": 1319,
+    "correct": 918,
+    "recovered": 16,
+    "pass_at_1": 0.6959818043972706,
+    "corrected_pass_at_1": 0.7081122062168309
+   },
+   "math500": {
+    "n": 500,
+    "correct": 192,
+    "recovered": 1,
+    "pass_at_1": 0.384,
+    "corrected_pass_at_1": 0.386
+   },
+   "polaris_heldout": {
+    "n": 1024,
+    "correct": 156,
+    "recovered": 0,
+    "pass_at_1": 0.15234375,
+    "corrected_pass_at_1": 0.15234375
+   }
+  },
+  "exp1_final_rl": {
+   "gsm8k": {
+    "n": 1319,
+    "correct": 1006,
+    "recovered": 2,
+    "pass_at_1": 0.7626990144048522,
+    "corrected_pass_at_1": 0.7642153146322972
+   },
+   "math500": {
+    "n": 500,
+    "correct": 186,
+    "recovered": 0,
+    "pass_at_1": 0.372,
+    "corrected_pass_at_1": 0.372
+   },
+   "polaris_heldout": {
+    "n": 1024,
+    "correct": 171,
+    "recovered": 0,
+    "pass_at_1": 0.1669921875,
+    "corrected_pass_at_1": 0.1669921875
+   }
+  },
+  "exp2_final_rl": {
+   "gsm8k": {
+    "n": 1319,
+    "correct": 987,
+    "recovered": 12,
+    "pass_at_1": 0.7482941622441244,
+    "corrected_pass_at_1": 0.7573919636087946
+   },
+   "math500": {
+    "n": 500,
+    "correct": 200,
+    "recovered": 1,
+    "pass_at_1": 0.4,
+    "corrected_pass_at_1": 0.402
+   },
+   "polaris_heldout": {
+    "n": 1024,
+    "correct": 165,
+    "recovered": 0,
+    "pass_at_1": 0.1611328125,
+    "corrected_pass_at_1": 0.1611328125
+   }
+  },
+  "exp3_final_rl": {
+   "gsm8k": {
+    "n": 1319,
+    "correct": 961,
+    "recovered": 13,
+    "pass_at_1": 0.7285822592873389,
+    "corrected_pass_at_1": 0.7384382107657316
+   },
+   "math500": {
+    "n": 500,
+    "correct": 203,
+    "recovered": 0,
+    "pass_at_1": 0.406,
+    "corrected_pass_at_1": 0.406
+   },
+   "polaris_heldout": {
+    "n": 1024,
+    "correct": 177,
+    "recovered": 0,
+    "pass_at_1": 0.1728515625,
+    "corrected_pass_at_1": 0.1728515625
+   }
+  },
+  "exp4_final_rl": {
+   "gsm8k": {
+    "n": 1319,
+    "correct": 977,
+    "recovered": 16,
+    "pass_at_1": 0.7407126611068992,
+    "corrected_pass_at_1": 0.7528430629264594
+   },
+   "math500": {
+    "n": 500,
+    "correct": 198,
+    "recovered": 1,
+    "pass_at_1": 0.396,
+    "corrected_pass_at_1": 0.398
+   },
+   "polaris_heldout": {
+    "n": 1024,
+    "correct": 160,
+    "recovered": 0,
+    "pass_at_1": 0.15625,
+    "corrected_pass_at_1": 0.15625
+   }
+  },
+  "exp5_final_rl": {
+   "gsm8k": {
+    "n": 1319,
+    "correct": 953,
+    "recovered": 11,
+    "pass_at_1": 0.7225170583775588,
+    "corrected_pass_at_1": 0.7308567096285065
+   },
+   "math500": {
+    "n": 500,
+    "correct": 197,
+    "recovered": 1,
+    "pass_at_1": 0.394,
+    "corrected_pass_at_1": 0.396
+   },
+   "polaris_heldout": {
+    "n": 1024,
+    "correct": 156,
+    "recovered": 0,
+    "pass_at_1": 0.15234375,
+    "corrected_pass_at_1": 0.15234375
+   }
+  }
+ },
+ "final_differences": {
+  "exp2": {
+   "gsm8k": {
+    "diff": -0.6823351023502654,
+    "ci95": 2.2393921134510033,
+    "z": -0.5972052828861502
+   },
+   "math500": {
+    "diff": 3.0,
+    "ci95": 4.088233666147036,
+    "z": 1.4382739540280773
+   },
+   "polaris_heldout": {
+    "diff": -0.5859375,
+    "ci95": 2.097467656065069,
+    "z": -0.5475352607603559
+   }
+  },
+  "exp3": {
+   "gsm8k": {
+    "diff": -2.577710386656558,
+    "ci95": 2.3650605787274723,
+    "z": -2.1362295762272883
+   },
+   "math500": {
+    "diff": 3.4000000000000004,
+    "ci95": 4.160508848176086,
+    "z": 1.6017271548217984
+   },
+   "polaris_heldout": {
+    "diff": 0.5859375,
+    "ci95": 2.0081456411911924,
+    "z": 0.5718895464767035
+   }
+  },
+  "exp4": {
+   "gsm8k": {
+    "diff": -1.1372251705837757,
+    "ci95": 2.335470717948874,
+    "z": -0.9543948965893198
+   },
+   "math500": {
+    "diff": 2.6,
+    "ci95": 4.01435070605227,
+    "z": 1.2694456396938543
+   },
+   "polaris_heldout": {
+    "diff": -1.07421875,
+    "ci95": 2.10546875,
+    "z": -1.0
+   }
+  },
+  "exp5": {
+   "gsm8k": {
+    "diff": -3.3358605003790753,
+    "ci95": 2.4630466109195366,
+    "z": -2.654552517096714
+   },
+   "math500": {
+    "diff": 2.4,
+    "ci95": 4.110057166003367,
+    "z": 1.144509628457111
+   },
+   "polaris_heldout": {
+    "diff": -1.46484375,
+    "ci95": 1.978854170383185,
+    "z": -1.4508869794301424
+   }
+  }
+ }
+}
