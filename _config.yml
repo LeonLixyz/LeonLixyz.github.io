@@ -130,12 +130,12 @@ bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 # Blog
 # -----------------------------------------------------------------------------
 
-blog_name: Beyond the Cave # blog_name will be displayed in your blog page
-blog_description:
-blog_quote: "Will he not fancy that the shadows which he formerly saw are truer than the objects which are now shown to him?"
-blog_quote_source: "Plato, The Republic, Book VII, 515d"
-blog_quote_translation: "Translated by Benjamin Jowett"
-blog_quote_url: https://classics.mit.edu/Plato/republic.8.vii.html
+blog_name: Leviathan # blog_name will be displayed in your blog page
+blog_description: "Notes on building AI systems that improve themselves, from the science of RL to automated research, and on keeping them safe."
+blog_quote: "Why may we not say that all automata (engines that move themselves by springs and wheels as doth a watch) have an artificial life?"
+blog_quote_source: "Thomas Hobbes, Leviathan, Introduction"
+blog_quote_translation: ""
+blog_quote_url: https://www.gutenberg.org/ebooks/3207
 permalink: /blog/:year/:title/
 lsi: false # produce an index for related posts
 
