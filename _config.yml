@@ -131,11 +131,11 @@ bing_site_verification: # out your bing-site-verification ID (Bing Webmaster)
 # -----------------------------------------------------------------------------
 
 blog_name: Clip-Higher # blog_name will be displayed in your blog page
-blog_description: Making room for low-probability ideas
-blog_quote:
-blog_quote_source:
-blog_quote_translation:
-blog_quote_url:
+blog_description: Making room for high-entropy research
+blog_quote: "It would be madness and inconsistency to suppose that things which have never yet been performed can be performed without employing some hitherto untried means."
+blog_quote_source: "Francis Bacon, Novum Organum, Book I, Aphorism VI"
+blog_quote_translation: "Edited by Joseph Devey"
+blog_quote_url: https://www.gutenberg.org/ebooks/45988
 permalink: /blog/:year/:title/
 lsi: false # produce an index for related posts
 
