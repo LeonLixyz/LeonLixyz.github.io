@@ -51,7 +51,7 @@ _styles: |
   d-byline a:not(.navbar-brand):not(.nav-link):not(.publication-link) { --link-color: var(--global-text-color); --link-hover-bg: transparent; color: var(--global-text-color) !important; }
   d-byline a:not(.navbar-brand):not(.nav-link):not(.publication-link):hover { color: var(--global-text-color) !important; text-decoration: underline !important; box-shadow: none; transform: none; }
   html body d-article a[href], html body d-appendix a[href], html body d-title a[href] { --link-color: var(--global-theme-color); --link-hover-bg: rgba(0, 119, 200, 0.1); }
-  d-article .interleave-setup-table th:last-child, d-article .interleave-setup-table td:last-child { white-space: nowrap !important; }
+  d-article .interleave-setup-table th:last-child, d-article .interleave-setup-table td:last-child, d-article .interleave-setup-table td:nth-last-child(2) { white-space: nowrap !important; }
   d-article .interleave-note { font-size: 0.85rem; color: var(--global-text-color-light, #6c757d); margin-top: -0.6rem; }
 ---
 
@@ -98,10 +98,10 @@ We run two pretraining experiments, chess PT and math PT. In both, we mix SFT da
 
 <div class="interleave-table interleave-text-table interleave-setup-table" markdown="1">
 
-| Experiment | Model | Pretraining data | RL task · prompts × group size |
-| --- | --- | --- | --- |
-| Chess PT | 47M | 5B pretraining tokens + 77,717 worked puzzle solutions, each included 3 times | Chess puzzles · 256 × 8 |
-| Math PT | OLMo2 1B | 45B pretraining tokens + the NuminaMath-CoT solutions, each included once | SkyEasy math · 64 × 16 |
+| Experiment | Model | Pretraining data | RL task · prompts × group size | Peak learning rate · PT / RL |
+| --- | --- | --- | --- | --- |
+| Chess PT | 47M | 5B pretraining tokens + 77,717 worked puzzle solutions, each included 3 times | Chess puzzles · 256 × 8 | 1e-3 / 1e-5 |
+| Math PT | OLMo2 1B | 45B pretraining tokens + the NuminaMath-CoT solutions, each included once | SkyEasy math · 64 × 16 | 4e-4 / 1e-6 |
 
 </div>
 
@@ -165,22 +165,22 @@ Pretraining data and RL responses are very different, in both the distribution o
 
 <div class="interleave-table interleave-text-table interleave-setup-table" markdown="1">
 
-| Experiment | Model | SFT data | RL task · prompts × group size |
-| --- | --- | --- | --- |
-| Chess SFT | 47M, pretrained on 9.18B tokens | 77,717 worked puzzle solutions | Chess puzzles · 64 × 16 |
-| Math SFT | Llama 3.2 3B | 823,505 NuminaMath-CoT solutions | Polaris math · 64 × 16 |
+| Experiment | Model | SFT data | RL task · prompts × group size | Peak learning rate · SFT / RL |
+| --- | --- | --- | --- | --- |
+| Chess SFT | 47M, pretrained on 9.18B tokens | 77,717 worked puzzle solutions | Chess puzzles · 64 × 16 | 1e-4 / 1e-5 |
+| Math SFT | Llama 3.2 3B | 823,505 NuminaMath-CoT solutions | Polaris math · 64 × 16 | 2e-5 / 1e-6 |
 
 </div>
 
 <h3>Chess SFT</h3>
 
-The closer distribution does not prevent forgetting. RL 1 raises pass@1 from 2.8% to 25.5%, but at the end of SFT 2, inter-RL is at 11.6%, against 11.4% for the baseline, so SFT 2 erases the entire RL gain ([Figure 9](#figure-9)). Although SFT data share the format of RL responses, they are still off-policy, since they are sampled from other models rather than from the current model, so next-token training on them moves the policy away from the responses that RL reinforced, as pretraining does. With replay, pass@1 stays at 26.7%; however, the held-out pretraining loss rises to 0.7966, against 0.7222 for the baseline. After RL 2, the baseline has the highest pass@1, 33.5%, while inter-RL finishes 2.4 points below it and replay 0.6 points below it ([Figures 2](#figure-2) and [9](#figure-9)). The training reward ends lower as well, at 41.6% for inter-RL and 44.1% for replay against 45.2% for the baseline, averaged over the last 50 updates.
+The closer distribution does not prevent forgetting. RL 1 raises pass@1 from 2.8% to 25.5%, but at the end of SFT 2, inter-RL is at 11.6%, against 11.4% for the baseline, so SFT 2 erases the entire RL gain ([Figure 9](#figure-9)). Although SFT data share the format of RL responses, they are still off-policy, since they are sampled from other models rather than from the current model, so next-token training on them moves the policy away from the responses that RL reinforced, as pretraining does. Moreover, SFT 2 trains with a learning rate ten times that of RL 1 (1e-4 against 1e-5), so even though it runs only 304 updates against the 1,500 of RL 1, it can override the comparatively small change that RL 1 makes. With replay, pass@1 stays at 26.7%; however, the held-out pretraining loss rises to 0.7966, against 0.7222 for the baseline. After RL 2, the baseline has the highest pass@1, 33.5%, while inter-RL finishes 2.4 points below it and replay 0.6 points below it ([Figures 2](#figure-2) and [9](#figure-9)). The training reward ends lower as well, at 41.6% for inter-RL and 44.1% for replay against 45.2% for the baseline, averaged over the last 50 updates.
 
 <figure id="figure-9" class="l-page interleave-figure"><a href="/assets/blog/interleaving-pt-rl/sft-chess.svg" target="_blank" aria-label="Open the figure at full size"><img src="/assets/blog/interleaving-pt-rl/sft-chess.svg" loading="lazy" alt="Chess SFT at the end of SFT 1, RL 1, SFT 2 and RL 2 for the standard baseline, inter-RL and inter-RL plus replay: pretraining loss, pass@1 and pass@16, plus the RL training reward against the number of RL updates used so far. Inter-RL rises in RL 1 and falls back to the baseline in SFT 2; replay keeps the RL gain."></a><figcaption>Figure 9. Chess SFT at the end of each stage, and the RL training reward against the number of RL updates a schedule has used so far (50-update moving average). The standard baseline has no RL 1, so its stage line runs directly from SFT 1 to SFT 2. Both interleaved schedules use the same prompts in RL 1 and RL 2 and share RL 1. The pretraining loss is measured on held-out pretraining text.</figcaption></figure>
 
 <h3>Math SFT (Llama 3.2 3B)</h3>
 
-RL 1 raises Polaris accuracy from 7.8% to 14.0%, and SFT 2 erases most of the gain, leaving inter-RL at 9.4% against 7.6% for the baseline ([Figure 10](#figure-10)). With replay, Polaris accuracy stays at 15.9%; however, the held-out NuminaMath loss is higher than the baseline's, 0.4534 vs. 0.4455. Without replay, the loss is 0.0015 lower than the baseline's (0.4440 vs. 0.4455), but these runs reinitialize the optimizer between SFT 1 and SFT 2 while the baseline does not, so we do not read this as an improvement.
+RL 1 raises Polaris accuracy from 7.8% to 14.0%, and SFT 2, which runs about 3,200 updates at twenty times the learning rate of RL 1 (2e-5 against 1e-6), erases most of the gain, leaving inter-RL at 9.4% against 7.6% for the baseline ([Figure 10](#figure-10)). With replay, Polaris accuracy stays at 15.9%; however, the held-out NuminaMath loss is higher than the baseline's, 0.4534 vs. 0.4455. Without replay, the loss is 0.0015 lower than the baseline's (0.4440 vs. 0.4455), but these runs reinitialize the optimizer between SFT 1 and SFT 2 while the baseline does not, so we do not read this as an improvement.
 
 The final models differ only slightly. On Polaris, inter-RL finishes 1.1 points below the baseline and replay 0.6 points above it. On GSM8K and MATH-500, all three schedules are within 2 points of each other at the end of SFT 2, and the final RL stage separates them. It raises GSM8K by 4.6 points in the baseline but by only 1.2 points in the replay run, likely because its SFT 2 already trained on the correct responses of RL 1. It also lowers MATH-500 in the baseline, from 39.2% to 37.2%, whereas RL 2 does not lower it in either interleaved schedule; we did not evaluate intermediate RL checkpoints, so we cannot say why. As a result, inter-RL and replay finish 2.6 and 3.4 points above the baseline on MATH-500 and 1.1 and 2.6 points below it on GSM8K. To check whether these differences exceed the sampling noise of a finite benchmark, we compute a 95% confidence interval for each difference by comparing the two models question by question. Only the replay run's GSM8K deficit has an interval that does not contain zero; every other interval contains zero, so those differences could be noise. Each schedule is also a single training run.
 
